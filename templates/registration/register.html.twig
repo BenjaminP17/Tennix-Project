@@ -13,6 +13,11 @@
 
     {{ form_start(registrationForm) }}
         {{ form_row(registrationForm.email) }}
+        {{ form_row(registrationForm.firstname) }}
+        {{ form_row(registrationForm.name) }}
+        {{ form_row(registrationForm.ranking) }}
+        {{ form_row(registrationForm.club) }}
+        {{ form_row(registrationForm.licence) }}
         {{ form_row(registrationForm.plainPassword, {
             label: 'Password'
         }) }}
