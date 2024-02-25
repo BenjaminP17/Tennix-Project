@@ -1,0 +1,138 @@
+{# {% extends 'base.html.twig' %}
+
+{% block title %}Register{% endblock %}
+
+{% block body %}
+    {% for flash_error in app.flashes('verify_email_error') %}
+        <div class="alert alert-danger" role="alert">{{ flash_error }}</div>
+    {% endfor %}
+
+    <h1>Register</h1>
+
+    {{ form_errors(registrationForm) }}
+
+    {{ form_start(registrationForm) }}
+        {{ form_row(registrationForm.email) }}
+        {{ form_row(registrationForm.firstname) }}
+        {{ form_row(registrationForm.name) }}
+        {{ form_row(registrationForm.club) }}
+        {{ form_row(registrationForm.licence) }}
+        {{ form_row(registrationForm.ranking) }}
+        {{ form_row(registrationForm.plainPassword, {
+            label: 'Password'
+        }) }}
+        {{ form_row(registrationForm.agreeTerms) }}
+
+        <button type="submit" class="btn">Register</button>
+    {{ form_end(registrationForm) }}
+{% endblock %}
+
+{% extends 'base.html.twig' %}
+
+{% block title %}Register{% endblock %}
+
+{% block body %}
+    {% for flash_error in app.flashes('verify_email_error') %}
+        <div class="alert alert-danger" role="alert">{{ flash_error }}</div>
+    {% endfor %}
+      <script src="https://cdn.tailwindcss.com"></script>
+        <body class="bg-gray-100">
+            <div class="container mx-auto py-8">
+                <h1 class="text-2xl font-bold mb-6 text-center">S'inscrire</h1>
+                    <form class="w-full max-w-sm mx-auto bg-white p-8 rounded-md shadow-md" method="post">
+    
+                        {{ form_errors(registrationForm) }}
+    
+                            {{ form_start(registrationForm) }}
+                                
+                                <div class="mb-4">
+                                {{ form_row(registrationForm.email, {
+                                    'attr': {
+                                        'class': 'w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500',
+                                        'placeholder': 'Entrez votre adresse e-mail',
+                                    },
+                                    'label_attr': {
+                                        'class': 'block text-gray-700 text-sm font-bold mb-2'
+                                }
+                                }) }}
+                                </div>
+                                <div class="mb-4">
+                                {{ form_row(registrationForm.firstname, {
+                                    'attr': {
+                                        'class': 'w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500',
+                                        'placeholder': 'Pete',
+                                    },
+                                    'label_attr': {
+                                        'class': 'block text-gray-700 text-sm font-bold mb-2'
+                                }
+                                }) }}
+                                </div>
+                                <div class="mb-4">
+                                {{ form_row(registrationForm.name, {
+                                    'attr': {
+                                        'class': 'w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500',
+                                        'placeholder': 'Sampras',
+                                    },
+                                    'label_attr': {
+                                        'class': 'block text-gray-700 text-sm font-bold mb-2'
+                                }
+                                }) }}
+                                </div>
+                                <div class="mb-4">
+                                {{ form_row(registrationForm.ranking, {
+                                    'attr': {
+                                        'class': 'w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500',
+                                        'placeholder': 'Entrez votre adresse e-mail',
+                                    },
+                                    'label_attr': {
+                                        'class': 'block text-gray-700 text-sm font-bold mb-2'
+                                }
+                                }) }}
+                                </div>
+                                <div class="mb-4">
+                                {{ form_row(registrationForm.club, {
+                                    'attr': {
+                                        'class': 'w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500',
+                                        'placeholder': 'TC Lillois',
+                                    },
+                                    'label_attr': {
+                                        'class': 'block text-gray-700 text-sm font-bold mb-2'
+                                }
+                                }) }}
+                                </div>
+                                <div class="mb-4">
+                                {{ form_row(registrationForm.licence, {
+                                    'attr': {
+                                        'class': 'w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500',
+                                        'placeholder': 'Entrez votre n° de licence',
+                                    },
+                                    'label_attr': {
+                                        'class': 'block text-gray-700 text-sm font-bold mb-2'
+                                }
+                                }) }}
+                                </div>
+                                <div class="mb-4">
+                                {{ form_row(registrationForm.plainPassword, {
+                                    'label': 'Password',
+                                    'attr': {
+                                        'class': 'w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500',
+                                        'placeholder': 'Entrez votre mot de passe',
+                                    },
+                                    'label_attr': {
+                                        'class': 'block text-gray-700 text-sm font-bold mb-2'
+                                }
+                                }) }}
+                                </div>
+                                <div class="mb-4">
+                                {{ form_row(registrationForm.agreeTerms) }}
+                                </div>
+                                <button type="submit" class="btn w-full bg-green-800 text-white text-sm font-bold py-2 px-4 rounded-md hover:bg-indigo-600 transition duration-300">Register</button>
+        
+                            {{ form_end(registrationForm) }}
+
+                    </form>
+            </div>
+        </body>
+    
+
+    {% endblock %} #}

@@ -6,140 +6,122 @@
     {% for flash_error in app.flashes('verify_email_error') %}
         <div class="alert alert-danger" role="alert">{{ flash_error }}</div>
     {% endfor %}
-      <script src="https://cdn.tailwindcss.com"></script>
-        <body class="bg-gray-100">
-            <div class="container mx-auto py-8">
-                <h1 class="text-2xl font-bold mb-6 text-center">S'inscrire</h1>
-                    <form class="w-full max-w-sm mx-auto bg-white p-8 rounded-md shadow-md">
-    
-                        {{ form_errors(registrationForm) }}
-    
-                            {{ form_start(registrationForm) }}
-                                {# {{ form_row(registrationForm.email) }} #}
-                                <div class="mb-4">
-                                {{ form_row(registrationForm.email, {
-                                    'attr': {
-                                        'class': 'w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500',
-                                        'placeholder': 'Entrez votre adresse e-mail',
-                                    },
-                                    'label_attr': {
-                                        'class': 'block text-gray-700 text-sm font-bold mb-2'
-                                }
-                                }) }}
-                                </div>
-                                <div class="mb-4">
-                                {{ form_row(registrationForm.firstname, {
-                                    'attr': {
-                                        'class': 'w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500',
-                                        'placeholder': 'Pete',
-                                    },
-                                    'label_attr': {
-                                        'class': 'block text-gray-700 text-sm font-bold mb-2'
-                                }
-                                }) }}
-                                </div>
-                                <div class="mb-4">
-                                {{ form_row(registrationForm.name, {
-                                    'attr': {
-                                        'class': 'w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500',
-                                        'placeholder': 'Sampras',
-                                    },
-                                    'label_attr': {
-                                        'class': 'block text-gray-700 text-sm font-bold mb-2'
-                                }
-                                }) }}
-                                </div>
-                                <div class="mb-4">
-                                {{ form_row(registrationForm.ranking, {
-                                    'attr': {
-                                        'class': 'w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500',
-                                        'placeholder': 'Entrez votre adresse e-mail',
-                                    },
-                                    'label_attr': {
-                                        'class': 'block text-gray-700 text-sm font-bold mb-2'
-                                }
-                                }) }}
-                                </div>
-                                <div class="mb-4">
-                                {{ form_row(registrationForm.club, {
-                                    'attr': {
-                                        'class': 'w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500',
-                                        'placeholder': 'TC Lillois',
-                                    },
-                                    'label_attr': {
-                                        'class': 'block text-gray-700 text-sm font-bold mb-2'
-                                }
-                                }) }}
-                                </div>
-                                <div class="mb-4">
-                                {{ form_row(registrationForm.licence, {
-                                    'attr': {
-                                        'class': 'w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500',
-                                        'placeholder': 'Entrez votre n° de licence',
-                                    },
-                                    'label_attr': {
-                                        'class': 'block text-gray-700 text-sm font-bold mb-2'
-                                }
-                                }) }}
-                                </div>
-                                <div class="mb-4">
-                                {{ form_row(registrationForm.plainPassword, {
-                                    label: 'Password',
-                                    'attr': {
-                                        'class': 'w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500',
-                                        'placeholder': 'Entrez votre mot de passe',
-                                    },
-                                    'label_attr': {
-                                        'class': 'block text-gray-700 text-sm font-bold mb-2'
-                                }
-                                }) }}
-                                </div>
-                                <div class="mb-4">
-                                {{ form_row(registrationForm.agreeTerms) }}
-                                </div>
-                                <button type="submit" class="btn w-full bg-green-800 text-white text-sm font-bold py-2 px-4 rounded-md hover:bg-indigo-600 transition duration-300">Register</button>
+<body class="bg-gray-100 min-h-screen flex items-center justify-center ">
+    <div class="bg-white p-8 rounded shadow-md max-w-md w-full mx-auto">
+
+        <h2 class="text-2xl font-semibold mb-4">Inscription</h2>
+
+        <form action="#" method="POST">
+
+                    {{ form_errors(registrationForm) }}
+                    <script src="https://cdn.tailwindcss.com"></script>
+                    {{ form_start(registrationForm) }}
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            {{ form_row(registrationForm.firstname, {
+                            'attr': {
+                                'class': 'w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500',
+                                'placeholder': 'Entrez votre prénom',
+                            },
+                            'label_attr': {
+                                'class': 'block text-gray-700 text-sm font-bold mb-2'
+                            }
+                            }) }}
+                        </div>
+                        <div>
+                        {{ form_row(registrationForm.name, {
+                            'attr': {
+                                'class': 'w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500',
+                                'placeholder': 'Entrez votre nom',
+                            },
+                            'label_attr': {
+                                'class': 'block text-gray-700 text-sm font-bold mb-2'
+                            }
+                        }) }}
+                        </div>
         
-                                {{ form_end(registrationForm) }}
-
-                                {{ form_errors(registrationForm) }}
-                    </form>
-            </div>
-        </body>
+                    </div>
+                    <div>
+                    {{ form_row(registrationForm.email, {
+                            'attr': {
+                                'class': 'w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500',
+                                'placeholder': 'Entrez votre email',
+                            },
+                            'label_attr': {
+                                'class': 'block text-gray-700 text-sm font-bold mb-2'
+                            }
+                        }) }}
+                    </div>
+                    <div>
+                    {{ form_row(registrationForm.club, {
+                            'attr': {
+                                'class': 'w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500',
+                                'placeholder': 'Entrez votre email',
+                            },
+                            'label_attr': {
+                                'class': 'block text-gray-700 text-sm font-bold mb-2'
+                            }
+                        }) }}
+                    </div>
+                    <div>
+                    {{ form_row(registrationForm.licence, {
+                            'attr': {
+                                'class': 'w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500',
+                                'placeholder': 'Entrez votre email',
+                            },
+                            'label_attr': {
+                                'class': 'block text-gray-700 text-sm font-bold mb-2'
+                            }
+                        }) }}
+                    </div>
+                    <div>
+                    {{ form_row(registrationForm.ranking, {
+                            'attr': {
+                                'class': 'w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500',
+                                'placeholder': 'Entrez votre email',
+                            },
+                            'label_attr': {
+                                'class': 'block text-gray-700 text-sm font-bold mb-2'
+                            }
+                        }) }}
+                    </div>
+                    <div>
+                    {{ form_row(registrationForm.plainPassword, {
+                            'label':'Password',
+                            'attr': {
+                                'class': 'w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500',
+                                'placeholder': 'Entrez votre email',
+                            },
+                            'label_attr': {
+                                'class': 'block text-gray-700 text-sm font-bold mb-2'
+                            }
+                        }) }}
+                    </div>
+                    
+                    {{ form_row(registrationForm.agreeTerms) }}
+                    <div class="mt-6">
+                        <button type="submit" class="w-full p-3 bg-green-800 text-white rounded-md hover:bg-blue-600">Register</button>
+                    </div>
+                {{ form_end(registrationForm) }}
+        </form>
     </div>
+</body>
 
-    <!-- component -->
-{# <script src="https://cdn.tailwindcss.com"></script>
-<body class="bg-gray-100">
-  <div class="container mx-auto py-8">
-    <h1 class="text-2xl font-bold mb-6 text-center">Registration Form</h1>
-    <form class="w-full max-w-sm mx-auto bg-white p-8 rounded-md shadow-md">
-      <div class="mb-4">
-        <label class="block text-gray-700 text-sm font-bold mb-2" for="name">Name</label>
-        <input class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500"
-          type="text" id="name" name="name" placeholder="John Doe">
-      </div>
-      <div class="mb-4">
-        <label class="block text-gray-700 text-sm font-bold mb-2" for="email">Email</label>
-        <input class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500"
-          type="email" id="email" name="email" placeholder="john@example.com">
-      </div>
-      <div class="mb-4">
-        <label class="block text-gray-700 text-sm font-bold mb-2" for="password">Password</label>
-        <input class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500"
-          type="password" id="password" name="password" placeholder="********">
-      </div>
-      <div class="mb-4">
-        <label class="block text-gray-700 text-sm font-bold mb-2" for="confirm-password">Confirm Password</label>
-        <input class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500"
-          type="password" id="confirm-password" name="confirm-password" placeholder="********">
-      </div>
-      <button
-        class="w-full bg-green-800 text-white text-sm font-bold py-2 px-4 rounded-md hover:bg-indigo-600 transition duration-300"
-        type="submit">Register</button>
-    </form>
-  </div>
-</body> #}
+
+
+
+
+    <!-- Bouton d'inscription -->
+    {# <div class="mt-6">
+        <button type="submit" class="w-full p-3 bg-blue-500 text-white rounded-md hover:bg-blue-600">S'inscrire</button>
+    </div> #}
+        
+    
 
 
 
 {% endblock %}
+
+
+
+

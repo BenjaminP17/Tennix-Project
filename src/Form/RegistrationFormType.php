@@ -19,7 +19,7 @@ class RegistrationFormType extends AbstractType
     {
         $builder
             ->add('email')
-            ->add('firstname')
+            ->add('firstname')  
             ->add('name')
             ->add('ranking', ChoiceType::class, [
                 'choices' => [
@@ -27,7 +27,6 @@ class RegistrationFormType extends AbstractType
                     '30/2' => '30/2',
                     '30/3' => '30/3',
                 ],
-                
             ])
             ->add('club')
             ->add('licence')
