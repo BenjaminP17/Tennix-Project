@@ -163,10 +163,10 @@
 
   <main>
 
-    <div class="mx-auto grid grid-cols-1 md:grid-cols-2 grid-rows-2 gap-4">
+    <div class="mx-auto max-w-6xl mb-5 grid grid-cols-1 md:grid-cols-2 grid-rows-2 gap-4">
 
-      <!-- Carte de profil -->
-      <div class="px-10 py-4 mt-16 row-span-2 bg-white shadow-lg rounded-xl">
+      <!-- 1er block - Carte de profil -->
+      <div class="px-10 py-4 mt-16 row-span-2 bg-white shadow-lg rounded-xl md:ml-5">
 
         <div class="px-6">
           <div class="flex flex-wrap justify-center">
@@ -181,11 +181,11 @@
               <div class="flex justify-center lg:pt-4 pt-8 pb-0">
                 <div class="p-3 text-center">
                   <span class="text-xl font-bold block uppercase tracking-wide text-slate-700">30/1</span>
-                  <span class="text-sm text-slate-400">Classement Actuel</span>
+                  <span class="text-sm text-slate-400">Classement</span>
                 </div>
                 <div class="p-3 text-center">
                   <span class="text-xl font-bold block uppercase tracking-wide text-slate-700">15/4</span>
-                  <span class="text-sm text-slate-400">Meilleur Class.</span>
+                  <span class="text-sm text-slate-400">Top Class.</span>
                 </div>
               </div>
             </div>
@@ -207,21 +207,30 @@
             </div>
 
           </div>
+
+          <div class="bg-gray-200 p-4 rounded-lg shadow-md">
+            <h2 class="text-xl font-bold mb-2">Prochain Tournoi</h2>
+            <div class="flex flex-col">
+                <p class="text-gray-700"><span class="font-bold">Nom du tournoi:</span> Wimbledon</p>
+                <p class="text-gray-700"><span class="font-bold">Date:</span> 15 Juillet 2024</p>
+                <p class="text-gray-700"><span class="font-bold">Type:</span> Grand Chelem</p>
+            </div>
+        </div>
         </div>
       </div>
 
-      <!-- 2eme bloc -->
-      <div class="md:col-span-1 shadow-lg rounded-xl bg-white shadow-lg">
+      <!-- 2eme bloc - Stats -->
+      <div class="md:col-span-1 shadow-lg rounded-xl bg-white shadow-lg md:mt-10">
 
-        <div class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
+        <div class="mx-auto max-w-7xl px-4 py-6">
           <h2 class="tracking-tight text-2xl font-bold"> Stats </h2>
         </div>
 
-        {# circular bar #}
+        <!-- circular bar  -->
         <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.7.3/dist/alpine.min.js" defer></script>
-        <div class="min-w-screen py-20 px-10 bg-gray-100 rounded-b-xl">
-          <div class="grid grid-cols-1 gap-20 lg:grid-cols-2 lg:gap-10">
-            <div class="flex items-center flex-wrap max-w-md px-10 bg-white shadow-xl rounded-2xl h-20"
+        <div class="py-20 px-10 bg-gray-100 rounded-b-xl">
+          <div>
+            <div class="flex items-center flex-wrap px-10 bg-white shadow-xl rounded-2xl h-20"
               x-data="{ circumference: 50 * 2 * Math.PI, percent: 80 }">
               <div class="flex items-center justify-center -m-6 overflow-hidden bg-white rounded-full">
                 <svg class="w-32 h-32 transform translate-x-1 translate-y-1" x-cloak aria-hidden="true">
@@ -233,7 +242,7 @@
                 </svg>
                 <span class="absolute text-2xl text-blue-700" x-text="`${percent}%`"></span>
               </div>
-              <p class="ml-10 font-medium text-gray-600 sm:text-xl">% Victoire</p>
+              <p class="ml-10 font-medium text-gray-600">% de victoire</p>
             </div>
           </div>
 
@@ -244,29 +253,29 @@
         </div>
       </div>
 
-      <!-- 3eme bloc -->
-      <div class="mb-4  md:col-span-1 shadow-lg rounded-xl bg-white shadow-lg">
+      <!-- 3eme bloc - dernière rencontre -->
+      <div class="md:col-span-1 shadow-lg rounded-xl bg-white shadow-lg">
 
-        <div class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8 border-b border-gray-600">
-          <h2 class="tracking-tight text-2xl font-bold "> Dernière rencontre </h2>
+        <div class="mx-auto max-w-7xl px-4 py-6 border-b border-gray-300">
+          <h2 class="tracking-tight text-2xl font-bold "> Dernier match </h2>
         </div>
-        <div class="bg-white p-4 rounded-lg shadow-md">
-          <div class="flex justify-between items-center mb-2">
+        <div class="bg-white p-4 md:mt-10">
+          <div class="flex justify-between mb-2">
             <div class="text-gray-600 underline">26/03/2024</div>
           </div>
-          <div class="flex justify-between items-center mb-2">
+          <div class="flex justify-between  mb-2">
             <div class="text-gray-600">Adversaire :</div>
             <div class="text-gray-800 font-bold">Roger Federer</div>
           </div>
-          <div class="flex justify-between items-center mb-2">
+          <div class="flex justify-between  mb-2">
             <div class="text-gray-600">Classement :</div>
             <div class="text-gray-800 font-bold">#3</div>
           </div>
-          <div class="flex justify-between items-center mb-2">
+          <div class="flex justify-between  mb-2">
             <div class="text-gray-600">Score :</div>
             <div class="text-gray-800 font-bold">6-4, 7-6</div>
           </div>
-          <div class="flex justify-between items-center mb-2">
+          <div class="flex justify-between  mb-2">
             <div class="text-gray-600">Résultat :</div>
             <div class="text-green-600 font-bold">Victoire</div>
           </div>
