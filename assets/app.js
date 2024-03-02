@@ -7,4 +7,14 @@
  */
 import './styles/app.css';
 
-console.log('This log comes from assets/app.js - welcome to AssetMapper! 🎉');
+
+const photo = document.getElementById('photo');
+        const menu = document.getElementById('menu');
+
+        photo.addEventListener('click', () => {
+            if (menu.style.display === 'none') {
+                menu.style.display = 'block';
+            } else {
+                menu.style.display = 'none';
+            }
+        });
