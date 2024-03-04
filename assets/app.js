@@ -7,8 +7,8 @@
  */
 import './styles/app.css';
 
-
-const photo = document.getElementById('photo');
+        // affiche la popup au clik de la navbar sur desktop
+        const photo = document.getElementById('photo');
         const menu = document.getElementById('menu');
 
         photo.addEventListener('click', () => {
@@ -16,5 +16,17 @@ const photo = document.getElementById('photo');
                 menu.style.display = 'block';
             } else {
                 menu.style.display = 'none';
+            }
+        });
+
+        // déroule le menu sur mobile
+        const button = document.getElementById('btn');
+        const menu2 = document.getElementById('mobile-menu');
+
+        button.addEventListener('click', () => {
+            if (menu2.style.display === 'none') {
+                menu2.style.display = 'block';
+            } else {
+                menu2.style.display = 'none';
             }
         });
