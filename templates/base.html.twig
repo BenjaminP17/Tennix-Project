@@ -6,7 +6,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		
 		<!-- logo onglet  -->
-		<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text><text y=%221.3em%22 x=%220.2em%22 font-size=%2276%22 fill=%22%23fff%22>sf</text></svg>">
+		<link rel="shortcut icon" type="image/png" href="{{ asset('images/logo.png') }}">
 		{% block stylesheets %}
 			{{ encore_entry_link_tags('app') }}
 		{% endblock %}
@@ -26,8 +26,7 @@
 				<div class="flex h-16 items-center justify-between">
 				<div class="flex items-center">
 					<div class="flex-shrink-0">
-					<img class="h-8 w-8" src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500"
-						alt="Your Company">
+						<img class="h-20 w-20" src="{{ asset('images/logo.png') }}" alt="Logo">
 					</div>
 					<div class="hidden md:block">
 					<div class="ml-10 flex items-baseline space-x-4">
