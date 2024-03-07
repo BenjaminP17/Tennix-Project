@@ -2,12 +2,12 @@
 
 namespace App\Entity;
 
-use App\Repository\PalmaresRepository;
+use App\Repository\RencontreRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: PalmaresRepository::class)]
-class Palmares
+#[ORM\Entity(repositoryClass: RencontreRepository::class)]
+class Rencontre
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -18,19 +18,22 @@ class Palmares
     private ?string $compétition = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $adversaire = null;
+    private ?string $Adversaire = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $type = null;
+    private ?string $Type = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $resultat = null;
+    private ?string $Résultat = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $score = null;
+    private ?string $Score = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $date = null;
+
+    #[ORM\ManyToOne(inversedBy: 'rencontre')]
+    private ?User $user = null;
 
     public function getId(): ?int
     {
@@ -51,48 +54,48 @@ class Palmares
 
     public function getAdversaire(): ?string
     {
-        return $this->adversaire;
+        return $this->Adversaire;
     }
 
-    public function setAdversaire(string $adversaire): static
+    public function setAdversaire(string $Adversaire): static
     {
-        $this->adversaire = $adversaire;
+        $this->Adversaire = $Adversaire;
 
         return $this;
     }
 
     public function getType(): ?string
     {
-        return $this->type;
+        return $this->Type;
     }
 
-    public function setType(string $type): static
+    public function setType(string $Type): static
     {
-        $this->type = $type;
+        $this->Type = $Type;
 
         return $this;
     }
 
-    public function getResultat(): ?string
+    public function getRésultat(): ?string
     {
-        return $this->resultat;
+        return $this->Résultat;
     }
 
-    public function setResultat(string $resultat): static
+    public function setRésultat(string $Résultat): static
     {
-        $this->resultat = $resultat;
+        $this->Résultat = $Résultat;
 
         return $this;
     }
 
     public function getScore(): ?string
     {
-        return $this->score;
+        return $this->Score;
     }
 
-    public function setScore(string $score): static
+    public function setScore(string $Score): static
     {
-        $this->score = $score;
+        $this->Score = $Score;
 
         return $this;
     }
@@ -105,6 +108,18 @@ class Palmares
     public function setDate(\DateTimeInterface $date): static
     {
         $this->date = $date;
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): static
+    {
+        $this->user = $user;
 
         return $this;
     }
