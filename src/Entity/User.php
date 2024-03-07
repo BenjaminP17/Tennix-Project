@@ -52,7 +52,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: 'boolean')]
     private $isVerified = false;
 
-    #[ORM\OneToMany(targetEntity: rencontre::class, mappedBy: 'user')]
+    #[ORM\OneToMany(targetEntity: Rencontre::class, mappedBy: 'user')]
     private Collection $rencontre;
 
     public function __construct()
