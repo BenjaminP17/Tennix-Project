@@ -19,6 +19,7 @@
                 </thead>
                 <tbody class="divide-y divide-gray-200 bg-white">
                     {% for rencontre in rencontres %}
+                    {% if rencontre.user == app.user %}
                     <tr>
                         <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-semibold text-gray-900 sm:pl-6">{{ rencontre.date|date("d/m/Y", "Europe/Paris") }}</td>
                         <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ rencontre.compétition }}</td>
@@ -42,18 +43,19 @@
                                 <div x-show="menu" x-on:click.away="menu = false" class="origin-top-right absolute right-32 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 divide-y divide-gray-100 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabindex="-1">
                                     <div class="" role="none">
                                         <a href="#" class="text-gray-500 font-medium hover:text-gray-900 hover:bg-gray-50 block px-4 py-2 text-sm" role="menuitem" tabindex="-1" id="menu-item-0">
-                                            Detalle
+                                            Modifier
                                         </a>
                                     </div>
                                     <div class="" role="none">
                                         <a href="#" class="text-gray-500 font-medium hover:text-gray-900 hover:bg-gray-50 block px-4 py-2 text-sm" role="menuitem" tabindex="-1" id="menu-item-0">
-                                            Editar
+                                            Supprimer
                                         </a>
                                     </div>
                                 </div>
                             </div>
                         </td>
                     </tr>
+                    {% endif %}
                     {% endfor %}
                 </tbody>
             </table>
