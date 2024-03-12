@@ -24,7 +24,8 @@ class ActivityController extends AbstractController
         $rencontres = $paginator->paginate(
             $data,
             $request->query->getInt('page', 1),
-            2
+            // nombre de matchs affichés par page
+            8
         );
         
 
