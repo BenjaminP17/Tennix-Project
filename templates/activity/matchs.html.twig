@@ -22,15 +22,15 @@
                     {% if rencontre.user == app.user %}
                     <tr>
                         <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-semibold text-gray-900 sm:pl-6">{{ rencontre.date|date("d/m/Y", "Europe/Paris") }}</td>
-                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ rencontre.compétition }}</td>
+                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ rencontre.competition }}</td>
                         <td class="whitespace-nowrap px-3 py-4 text-sm">
                             {{ rencontre.adversaire }}
                         </td>
                         <td class="whitespace-nowrap px-3 py-4 text-sm">
                             {{ rencontre.score }}
                         </td>
-                        <td class="whitespace-nowrap px-3 py-4 text-sm text-green-300 font-semibold {% if rencontre.résultat == 'Victoire' %}text-green-500{% elseif rencontre.résultat == 'Défaite' %}text-red-500{% endif %}">
-                            {{ rencontre.résultat }}
+                        <td class="whitespace-nowrap px-3 py-4 text-sm text-green-300 font-semibold {% if rencontre.resultat == 'Victoire' %}text-green-500{% elseif rencontre.resultat == 'Défaite' %}text-red-500{% endif %}">
+                            {{ rencontre.resultat }}
                         </td>
                         <td class="py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
                             <div class="inline-block text-left" x-data="{ menu: false }">

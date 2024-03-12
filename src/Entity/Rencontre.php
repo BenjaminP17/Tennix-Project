@@ -15,7 +15,7 @@ class Rencontre
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $compétition = null;
+    private ?string $competition = null;
 
     #[ORM\Column(length: 255)]
     private ?string $Adversaire = null;
@@ -24,7 +24,7 @@ class Rencontre
     private ?string $Type = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $Résultat = null;
+    private ?string $resultat = null;
 
     #[ORM\Column(length: 255)]
     private ?string $Score = null;
@@ -40,14 +40,14 @@ class Rencontre
         return $this->id;
     }
 
-    public function getCompétition(): ?string
+    public function getCompetition(): ?string
     {
-        return $this->compétition;
+        return $this->competition;
     }
 
-    public function setCompétition(string $compétition): static
+    public function setCompetition(string $competition): static
     {
-        $this->compétition = $compétition;
+        $this->competition = $competition;
 
         return $this;
     }
@@ -76,14 +76,14 @@ class Rencontre
         return $this;
     }
 
-    public function getRésultat(): ?string
+    public function getResultat(): ?string
     {
-        return $this->Résultat;
+        return $this->resultat;
     }
 
-    public function setRésultat(string $Résultat): static
+    public function setResultat(string $resultat): static
     {
-        $this->Résultat = $Résultat;
+        $this->resultat = $resultat;
 
         return $this;
     }
