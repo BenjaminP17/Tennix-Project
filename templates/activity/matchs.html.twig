@@ -1,7 +1,15 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
+
+
+
 <div class="max-w-7xl mx-auto mt-10">
+
+    <button title ='Ajouter un match' onclick="window.location.href = '{{ path('app_matchs_add') }}'" class="btn overflow-hidden relative bg-green-700 text-white mt-5 p-3 rounded-xl font-bold -- before:block before:absolute before:h-full before:w-full before:bg-green-600 before:left-0 before:top-0 before:-translate-y-full hover:before:translate-y-0 before:transition-transform">
+        <span class="relative">+</span>
+    </button>
+
     <div class="inline-block min-w-full py-2 align-middle">
         <div class="overflow-hidden shadow ring-1 ring-black ring-opacity-5 md:rounded-lg">
             <table class="min-w-full divide-y divide-gray-300">
@@ -61,13 +69,16 @@
             </table>
         </div>
     </div>
+
     {# pagination #}
     <div class="navigation flex justify-center">
         {{ knp_pagination_render(rencontres) }}
     </div>
-    <button class="btn overflow-hidden relative bg-green-700 text-white mt-5 p-3 rounded-xl font-bold -- before:block before:absolute before:h-full before:w-full before:bg-green-600 before:left-0 before:top-0 before:-translate-y-full hover:before:translate-y-0 before:transition-transform">
-        <span class="relative">Ajouter</span>
-    </button>
+
+    
+
+    
+
 </div>
 <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.8.2/dist/alpine.min.js" defer></script>
   

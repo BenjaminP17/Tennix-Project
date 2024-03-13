@@ -37,7 +37,7 @@ class ActivityController extends AbstractController
     }
 
     // Ajouter un match au palmarès à l'utilisateur connecté
-    #[Route('/matchs/ajout', name: 'app_matchs_ajout')]
+    #[Route('/matchs/ajout', name: 'app_matchs_add')]
     public function add (
         Request $request,
         EntityManagerInterface $em
