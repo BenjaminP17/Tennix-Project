@@ -36,7 +36,7 @@ class ActivityController extends AbstractController
         ]);
     }
 
-    // Ajouter un match au palmarès à l'utilisateur connecté
+    // Ajouter un match au palmarès de l'utilisateur connecté
     #[Route('/matchs/ajout', name: 'app_matchs_add')]
     public function add (
         Request $request,
@@ -65,9 +65,28 @@ class ActivityController extends AbstractController
             return $this->redirectToRoute('app_matchs');
         }
 
-        
         return $this->render('partials/_add_match_form.html.twig', [
             'matchForm' => $form->createView(),
         ]);
     }
+
+    // Supprimer un match
+
+    #[Route('/matchs/supprimer/{id}', name: 'app_matchs_delete')]
+    public function delete (
+        Rencontre $rencontre,
+        EntityManagerInterface $em
+        ): Response
+    {
+        
+        
+        $em->remove($rencontre);
+        $em->flush();
+
+        // $this->addFlash('success', 'Votre match est désormais consultable dans votre palmarès');
+
+        return $this->redirectToRoute('app_matchs');
+
+    }
+
 }
