@@ -60,7 +60,7 @@ class ActivityController extends AbstractController
             $em->persist($rencontre);
             $em->flush();
 
-            $this->addFlash('success', 'Match ajouté à votre palmarès');
+            $this->addFlash('success', 'Votre match est désormais consultable dans votre palmarès');
 
             return $this->redirectToRoute('app_matchs');
         }
