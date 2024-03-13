@@ -83,7 +83,7 @@ class ActivityController extends AbstractController
         $em->remove($rencontre);
         $em->flush();
 
-        // $this->addFlash('success', 'Votre match est désormais consultable dans votre palmarès');
+        $this->addFlash('success', 'Votre match à bien été supprimé');
 
         return $this->redirectToRoute('app_matchs');
 
