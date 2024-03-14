@@ -89,4 +89,39 @@ class ActivityController extends AbstractController
 
     }
 
+    // Modifier un match dans le palmarès
+
+    #[Route('/matchs/edit/{id}', name: 'app_matchs_edit')]
+    public function edit (
+        Rencontre $rencontre,
+        Request $request,
+        EntityManagerInterface $em
+        ): Response
+    {
+
+        if ($rencontre === null) {
+            throw $this->createNotFoundException('Match non trouvé.');
+        }
+        
+        $form = $this->createForm(NewMatchFormType::class, $rencontre);
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid()) {
+
+            $rencontre = $form->getData();
+
+            $em->persist($rencontre);
+            $em->flush();
+
+            $this->addFlash('success', 'Votre match à bien été modifié');
+
+            return $this->redirectToRoute('app_matchs');
+        }
+
+        return $this->render('partials/_edit_match_form.html.twig', [
+            'matchForm' => $form->createView(),
+        ]);
+
+    }
+
 }

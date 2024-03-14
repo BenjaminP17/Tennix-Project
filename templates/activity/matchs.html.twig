@@ -13,7 +13,7 @@
     </button>
 
     {# !! TODO !! modifier ce link #}
-    {# <a href ="{{ path('app_matchs_add') }}" input type="button" class="btn overflow-hidden relative bg-green-700 text-white mt-5 p-3 rounded-xl font-bold -- before:block before:absolute before:h-full before:w-full before:bg-green-600 before:left-0 before:top-0 before:-translate-y-full hover:before:translate-y-0 before:transition-transform"  >+</a> #}
+    {# <a href ="{{ path('app_matchs_add') }}" input type="button" class="btn relative bg-green-700 text-black mt-5 p-3 rounded-xl font-bold">+</a> #}
 
 
 
@@ -27,8 +27,9 @@
                         <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Adversaire</th>
                         <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Score</th>
                         <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Résultat</th>
-                        <th scope="col" class="relative py-3.5 pl-3 pr-4 sm:pr-6">
-                            <span class="sr-only">Actions</span>
+                        <th scope="col" class="relative text-right py-3.5 pl-3 pr-4 sm:pr-6">
+                            {# <span class="sr-only">Actions</span> #}
+                            <a href ="{{ path('app_matchs_add') }}" input type="button" class="btn relative bg-green-700 text-black rounded-xl font-bold">+</a>
                         </th>
                     </tr>
                 </thead>
@@ -57,7 +58,7 @@
                                 </button>
                                 <div x-show="menu" x-on:click.away="menu = false" class="origin-top-right absolute right-32 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 divide-y divide-gray-100 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabindex="-1">
                                     <div class="" role="none">
-                                        <a href="#" class="text-gray-500 font-medium hover:text-gray-900 hover:bg-gray-50 block px-4 py-2 text-sm" role="menuitem" tabindex="-1" id="menu-item-0">
+                                        <a href="{{ path('app_matchs_edit', {'id':rencontre.id}) }}" class="text-gray-500 font-medium hover:text-gray-900 hover:bg-gray-50 block px-4 py-2 text-sm" role="menuitem" tabindex="-1" id="menu-item-0">
                                             Modifier
                                         </a>
                                     </div>
