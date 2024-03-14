@@ -36,13 +36,13 @@ class RencontreRepository extends ServiceEntityRepository
 //        ;
 //    }
 
-//    public function findOneBySomeField($value): ?Rencontre
-//    {
-//        return $this->createQueryBuilder('r')
-//            ->andWhere('r.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
+   public function findAllByDateDESC(): array
+   {
+       return $this->createQueryBuilder('r')
+           
+           ->orderBy('r.date', 'DESC')
+           ->getQuery()
+           ->getResult();
+       ;
+   }
 }

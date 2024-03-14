@@ -22,7 +22,7 @@ class ActivityController extends AbstractController
     ): Response
     {
 
-        $data = $RencontreRepository->findAll();
+        $data = $RencontreRepository->findAllByDateDESC();
         $rencontres = $paginator->paginate(
             $data,
             $request->query->getInt('page', 1),
