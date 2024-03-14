@@ -35,6 +35,9 @@ class Rencontre
     #[ORM\ManyToOne(inversedBy: 'rencontre')]
     private ?User $user = null;
 
+    #[ORM\Column(length: 10)]
+    private ?string $classement = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -120,6 +123,18 @@ class Rencontre
     public function setUser(?User $user): static
     {
         $this->user = $user;
+
+        return $this;
+    }
+
+    public function getClassement(): ?string
+    {
+        return $this->classement;
+    }
+
+    public function setClassement(string $classement): static
+    {
+        $this->classement = $classement;
 
         return $this;
     }

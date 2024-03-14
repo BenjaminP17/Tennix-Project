@@ -25,6 +25,7 @@
                         <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">Date</th>
                         <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900">Compétition</th>
                         <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Adversaire</th>
+                        <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Classement</th>
                         <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Score</th>
                         <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Résultat</th>
                         <th scope="col" class="relative text-right py-3.5 pl-3 pr-4 sm:pr-6">
@@ -41,6 +42,9 @@
                         <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ rencontre.competition }}</td>
                         <td class="whitespace-nowrap px-3 py-4 text-sm">
                             {{ rencontre.adversaire }}
+                        </td>
+                        <td class="whitespace-nowrap px-3 py-4 text-sm">
+                            {{ rencontre.classement }}
                         </td>
                         <td class="whitespace-nowrap px-3 py-4 text-sm">
                             {{ rencontre.score }}
