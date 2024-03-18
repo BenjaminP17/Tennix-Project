@@ -71,7 +71,6 @@ class ActivityController extends AbstractController
     }
 
     // Supprimer un match
-
     #[Route('/matchs/supprimer/{id}', name: 'app_matchs_delete')]
     public function delete (
         Rencontre $rencontre,
@@ -90,7 +89,6 @@ class ActivityController extends AbstractController
     }
 
     // Modifier un match dans le palmarès
-
     #[Route('/matchs/edit/{id}', name: 'app_matchs_edit')]
     public function edit (
         Rencontre $rencontre,
