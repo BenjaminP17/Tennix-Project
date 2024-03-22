@@ -36,6 +36,7 @@ class RencontreRepository extends ServiceEntityRepository
 //        ;
 //    }
 
+    // Liste des rencontres par dates, ordre décroissant
    public function findAllByDateDESC(): array
    {
        return $this->createQueryBuilder('r')
@@ -45,4 +46,6 @@ class RencontreRepository extends ServiceEntityRepository
            ->getResult();
        ;
    }
+
+    
 }

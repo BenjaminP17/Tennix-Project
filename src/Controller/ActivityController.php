@@ -14,6 +14,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class ActivityController extends AbstractController
 {
+    // Matchs affichés par dates décroissantes
     #[Route('/matchs', name: 'app_matchs', methods: ['GET'])]
     public function index(
         RencontreRepository $RencontreRepository,
@@ -21,16 +22,14 @@ class ActivityController extends AbstractController
         Request $request
     ): Response
     {
-
         $data = $RencontreRepository->findAllByDateDESC();
         $rencontres = $paginator->paginate(
-            $data,
-            $request->query->getInt('page', 1),
-            // nombre de matchs affichés par page
-            8
+        $data,
+        $request->query->getInt('page', 1),
+        // nombre de matchs affichés par page
+        8
         );
         
-
         return $this->render('activity/matchs.html.twig', [
             'rencontres'=> $rencontres,
         ]);

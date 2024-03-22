@@ -3,8 +3,10 @@
 namespace App\Controller;
 
 use App\Entity\User;
-use App\Repository\UserRepository;
 use App\Form\UserType;
+use App\Entity\Rencontre;
+use App\Repository\UserRepository;
+use App\Repository\RencontreRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -13,6 +15,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class DashboardController extends AbstractController
 {
+    // Dashboard utilisateur
     #[Route('/dashboard', name: 'dashboard')]
     public function index(): Response
     {
@@ -50,5 +53,22 @@ class DashboardController extends AbstractController
             'userForm' => $form->createView(),
         ]);
     }
+
+    // Affichage du nombre de victoire/défaite de l'utilisateur
+    #[Route('/dashboard', name: 'dashboard', methods: ['GET'])]
+    public function stats(
+        RencontreRepository $rencontreRepository,
+    ): Response
+    {
+        $victoires = count($rencontreRepository->findBy(['user'=> $this->getUser(), 'resultat'=> 'Victoire']));
+        $defaites = count($rencontreRepository->findBy(['user'=> $this->getUser(), 'resultat'=> 'Défaite']));
+
+    // Affichage du nombre de victoires de l'utilisateur connecté
+    return $this->render('home/dashboard.html.twig', [
+        'victoires' => $victoires,
+        'défaites' => $defaites,
+    ]);
+    }
+
     
 }
