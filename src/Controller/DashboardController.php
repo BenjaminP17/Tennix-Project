@@ -70,5 +70,28 @@ class DashboardController extends AbstractController
     ]);
     }
 
+    // Calcul du pourcentage de victoire de l'utilisateur
+    #[Route('/dashboard', name: 'dashboard', methods: ['GET'])]
+    public function pourcentage(
+        RencontreRepository $rencontreRepository,
+    ): Response
+    {
+        $victoires = count($rencontreRepository->findBy(['user'=> $this->getUser(), 'resultat'=> 'Victoire']));
+        $defaites = count($rencontreRepository->findBy(['user'=> $this->getUser(), 'resultat'=> 'Défaite']));
+
+        $totalMatches = $victoires + $defaites;
+        $victoryPercentage = ($victoires / $totalMatches) * 100;
+
+        $formattedPercentage = number_format($victoryPercentage, 1);
+
+        // dd($formattedPercentage);
+
+    // Affichage du nombre de victoires de l'utilisateur connecté
+    return $this->render('home/dashboard.html.twig', [
+        'pourcentage' => $formattedPercentage,
+        'victoires' => $victoires,
+        'défaites' => $defaites,
+    ]);
+    }
     
 }
