@@ -93,7 +93,8 @@
           </div>
 
           <div class="text-center mt-12">
-            <p class="text-xl font-medium"> {{victoires}} Victoires -  {{défaites}} Défaite</p>
+            {# Victoire et Défaite sont mis au pluriel au delà de 1 #}
+            <p class="text-xl font-medium">{{victoires}} Victoire{{victoires > 1 ? 's' : ''}} - {{défaites}} Défaite{{défaites > 1 ? 's' : ''}}</p>
           </div>
 
         </div>
