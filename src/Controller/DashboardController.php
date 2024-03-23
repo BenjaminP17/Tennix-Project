@@ -17,10 +17,37 @@ class DashboardController extends AbstractController
 {
     // Dashboard utilisateur
     #[Route('/dashboard', name: 'dashboard')]
-    public function index(): Response
+    public function index(
+        RencontreRepository $rencontreRepository,
+    ): Response
     {
+        // Récupération du nombre de victoire/defaite 
+
+        $victoires = count($rencontreRepository->findBy(['user'=> $this->getUser(), 'resultat'=> 'Victoire']));
+        $defaites = count($rencontreRepository->findBy(['user'=> $this->getUser(), 'resultat'=> 'Défaite']));
+
+        // Calcul du pourcentage de victoire 
+
+        $nbrVictoires = count($rencontreRepository->findBy(['user'=> $this->getUser(), 'resultat'=> 'Victoire']));
+        $nbrDefaites = count($rencontreRepository->findBy(['user'=> $this->getUser(), 'resultat'=> 'Défaite']));
+
+        $totalMatches = $nbrVictoires + $nbrDefaites;
+        $victoryPercentage = ($nbrVictoires / $totalMatches) * 100;
+
+        $formattedPercentage = number_format($victoryPercentage, 1);
+
+        // Dernière rencontre de l'utilisateur 
+
+        $lastMatch = ($rencontreRepository->findBy(['user'=> $this->getUser()], ['date'=>'DESC'], 1));
+
+        // dd($lastMatch);
+
         return $this->render('home/dashboard.html.twig', [
-            'controller_name' => 'DashboardController',
+            'victoires' => $victoires,
+            'défaites' => $defaites,
+            'pourcentage' => $formattedPercentage,
+            'lastMatch' => $lastMatch,
+
         ]);
     }
 
@@ -54,44 +81,20 @@ class DashboardController extends AbstractController
         ]);
     }
 
-    // Affichage du nombre de victoire/défaite de l'utilisateur
-    #[Route('/dashboard', name: 'dashboard', methods: ['GET'])]
-    public function stats(
-        RencontreRepository $rencontreRepository,
-    ): Response
-    {
-        $victoires = count($rencontreRepository->findBy(['user'=> $this->getUser(), 'resultat'=> 'Victoire']));
-        $defaites = count($rencontreRepository->findBy(['user'=> $this->getUser(), 'resultat'=> 'Défaite']));
-
-    // Affichage du nombre de victoires de l'utilisateur connecté
-    return $this->render('home/dashboard.html.twig', [
-        'victoires' => $victoires,
-        'défaites' => $defaites,
-    ]);
-    }
-
-    // Calcul du pourcentage de victoire de l'utilisateur
-    #[Route('/dashboard', name: 'dashboard', methods: ['GET'])]
-    public function pourcentage(
-        RencontreRepository $rencontreRepository,
-    ): Response
-    {
-        $victoires = count($rencontreRepository->findBy(['user'=> $this->getUser(), 'resultat'=> 'Victoire']));
-        $defaites = count($rencontreRepository->findBy(['user'=> $this->getUser(), 'resultat'=> 'Défaite']));
-
-        $totalMatches = $victoires + $defaites;
-        $victoryPercentage = ($victoires / $totalMatches) * 100;
-
-        $formattedPercentage = number_format($victoryPercentage, 1);
-
-        // dd($formattedPercentage);
-
-    // Affichage du nombre de victoires de l'utilisateur connecté
-    return $this->render('home/dashboard.html.twig', [
-        'pourcentage' => $formattedPercentage,
-        'victoires' => $victoires,
-        'défaites' => $defaites,
-    ]);
-    }
     
+    // Affichage de la dernière rencontre joué par l'utilisateur
+
+    // #[Route('/dashboard', name: 'dashboard', methods: ['GET'])]
+    // public function lastMatch(
+    //     RencontreRepository $rencontreRepository,
+    // ): Response
+    // {
+    //     $lastMatch = ($rencontreRepository->findBy(['user'=> $this->getUser()], ['date'=>'DESC'], 1));
+        
+    //     // dd($lastMatch);
+
+    // return $this->render('home/dashboard.html.twig', [
+    //     'lastMatch' => $lastMatch,
+    // ]);
+    // }
 }
