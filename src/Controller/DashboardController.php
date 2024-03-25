@@ -81,20 +81,4 @@ class DashboardController extends AbstractController
         ]);
     }
 
-    
-    // Affichage de la dernière rencontre joué par l'utilisateur
-
-    // #[Route('/dashboard', name: 'dashboard', methods: ['GET'])]
-    // public function lastMatch(
-    //     RencontreRepository $rencontreRepository,
-    // ): Response
-    // {
-    //     $lastMatch = ($rencontreRepository->findBy(['user'=> $this->getUser()], ['date'=>'DESC'], 1));
-        
-    //     // dd($lastMatch);
-
-    // return $this->render('home/dashboard.html.twig', [
-    //     'lastMatch' => $lastMatch,
-    // ]);
-    // }
 }
