@@ -7,6 +7,7 @@ use App\Form\UserType;
 use App\Entity\Rencontre;
 use App\Repository\UserRepository;
 use App\Repository\RencontreRepository;
+use App\Repository\TournamentRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -19,6 +20,7 @@ class DashboardController extends AbstractController
     #[Route('/dashboard', name: 'dashboard')]
     public function index(
         RencontreRepository $rencontreRepository,
+        TournamentRepository $tournamentRepo
     ): Response
     {
         // Récupération du nombre de victoire/defaite 
@@ -40,13 +42,18 @@ class DashboardController extends AbstractController
 
         $lastMatch = ($rencontreRepository->findBy(['user'=> $this->getUser()], ['date'=>'DESC'], 1));
 
-        // dd($lastMatch);
+        // Prochaine compétition de l'utilisateur 
+
+        $nextTournament = ($tournamentRepo->findBy(['user'=> $this->getUser()], ['date'=>'DESC'], 1));
+
+        // dd($nextTournament);
 
         return $this->render('home/dashboard.html.twig', [
             'victoires' => $victoires,
             'défaites' => $defaites,
             'pourcentage' => $formattedPercentage,
             'lastMatch' => $lastMatch,
+            'nextTournament' => $nextTournament
 
         ]);
     }
