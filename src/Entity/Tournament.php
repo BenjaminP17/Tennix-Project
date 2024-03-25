@@ -26,6 +26,9 @@ class Tournament
     #[ORM\Column(length: 255)]
     private ?string $saison = null;
 
+    #[ORM\ManyToOne(inversedBy: 'tournament')]
+    private ?User $user = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -75,6 +78,18 @@ class Tournament
     public function setSaison(string $saison): static
     {
         $this->saison = $saison;
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): static
+    {
+        $this->user = $user;
 
         return $this;
     }
