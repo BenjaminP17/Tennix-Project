@@ -29,6 +29,9 @@ class Tournament
     #[ORM\ManyToOne(inversedBy: 'tournament')]
     private ?User $user = null;
 
+    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
+    private ?\DateTimeInterface $echeance = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -90,6 +93,18 @@ class Tournament
     public function setUser(?User $user): static
     {
         $this->user = $user;
+
+        return $this;
+    }
+
+    public function getEcheance(): ?\DateTimeInterface
+    {
+        return $this->echeance;
+    }
+
+    public function setEcheance(\DateTimeInterface $echeance): static
+    {
+        $this->echeance = $echeance;
 
         return $this;
     }
