@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Tournament;
 use App\Form\TournamentFormType;
+use App\Repository\TournamentRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -12,12 +13,17 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class TournamentController extends AbstractController
 {
-
+    // Affichage des tournois par date, ordre décroissant. 
     #[Route('/tournament', name: 'app_tournament')]
-    public function index(): Response
+    public function index(
+        TournamentRepository $tournamentRepo,
+        Request $request
+    ): Response
     {
+        $tournamentsList = ($tournamentRepo->findBy(['user'=> $this->getUser()], ['date'=>'ASC']));
+
         return $this->render('tournament/tournaments.html.twig', [
-            'controller_name' => 'TournamentController',
+            'tournamentsList' => $tournamentsList,
         ]);
     }
 
