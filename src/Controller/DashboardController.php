@@ -44,7 +44,7 @@ class DashboardController extends AbstractController
 
         // Prochaine compétition de l'utilisateur 
 
-        $nextTournament = ($tournamentRepo->findBy(['user'=> $this->getUser()], ['date'=>'DESC'], 1));
+        $nextTournament = ($tournamentRepo->findBy(['user'=> $this->getUser()]));
 
         // dd($nextTournament);
 
