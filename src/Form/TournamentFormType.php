@@ -20,8 +20,8 @@ class TournamentFormType extends AbstractType
             ->add('type', ChoiceType::class, [
                 'choices' => [
                     '-' => '-',
-                    'Simple' => 'Simple',
-                    'Double' => 'Double',
+                    'Tournoi' => 'Tournoi',
+                    'Interclub' => 'Interclub',
                 ],
             ])
             ->add('saison', ChoiceType::class, [
