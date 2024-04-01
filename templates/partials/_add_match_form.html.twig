@@ -1,14 +1,7 @@
 
-{# {{ form_start(matchForm) }}
-    {{form_row(matchForm.competition)}}
-    {{form_row(matchForm.Adversaire)}}
-    {{form_row(matchForm.Type)}}
-    {{form_row(matchForm.resultat)}}
-    {{form_row(matchForm.Score)}}
-    {{form_row(matchForm.date)}}
-    <button type="submit">Ajouter</button>
-{{ form_end(matchForm) }} #}
-    <div class="bg-white p-8 rounded shadow-md max-w-md w-full mx-auto">
+
+    <div class="bg-white p-8 rounded shadow-md max-w-md w-full mx-auto mt-10">
+        <h2 class="text-2xl font-semibold mb-4">Ajouter une rencontre</h2>
                     {{ form_errors(matchForm) }}
                     <script src="https://cdn.tailwindcss.com"></script>
 
@@ -16,9 +9,10 @@
                     <div class="grid grid-cols-2 gap-4">
                         <div>
                             {{ form_row(matchForm.competition, {
+                                'label':'Compétition',
                             'attr': {
                                 'class': 'w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500',
-                                'placeholder': 'Entrez votre prénom',
+                                'placeholder': 'Nom du tournoi',
                             },
                             'label_attr': {
                                 'class': 'block text-gray-700 text-sm font-bold mb-2'
@@ -29,7 +23,7 @@
                         {{ form_row(matchForm.Adversaire, {
                             'attr': {
                                 'class': 'w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500',
-                                'placeholder': 'Entrez votre nom',
+                                'placeholder': 'Nom',
                             },
                             'label_attr': {
                                 'class': 'block text-gray-700 text-sm font-bold mb-2'
@@ -45,18 +39,19 @@
                                 'placeholder': 'Entrez votre email',
                             },
                             'label_attr': {
-                                'class': 'block text-gray-700 text-sm font-bold mb-2'
+                                'class': 'block text-gray-700 text-sm font-bold mb-2 mt-2'
                             }
                         }) }}
                     </div>
                     <div>
                     {{ form_row(matchForm.resultat, {
+                            'label':'Résultat',
                             'attr': {
                                 'class': 'w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500',
                                 'placeholder': 'Entrez votre email',
                             },
                             'label_attr': {
-                                'class': 'block text-gray-700 text-sm font-bold mb-2'
+                                'class': 'block text-gray-700 text-sm font-bold mb-2 mt-2'
                             }
                         }) }}
                     </div>
@@ -67,7 +62,7 @@
                                 'placeholder': '',
                             },
                             'label_attr': {
-                                'class': 'block text-gray-700 text-sm font-bold mb-2'
+                                'class': 'block text-gray-700 text-sm font-bold mb-2 mt-2'
                             }
                         }) }}
                     </div>

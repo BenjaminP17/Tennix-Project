@@ -17,6 +17,7 @@
                     <div class="grid grid-cols-2 gap-4">
                         <div>
                             {{ form_row(userForm.firstname, {
+                                'label':'Prénom',
                             'attr': {
                                 'class': 'w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500',
                                 'placeholder': 'Entrez votre prénom',
@@ -28,6 +29,7 @@
                         </div>
                         <div>
                         {{ form_row(userForm.name, {
+                            'label':'Nom',
                             'attr': {
                                 'class': 'w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500',
                                 'placeholder': 'Entrez votre nom',
@@ -46,7 +48,7 @@
                                 'placeholder': 'Entrez votre email',
                             },
                             'label_attr': {
-                                'class': 'block text-gray-700 text-sm font-bold mb-2'
+                                'class': 'block text-gray-700 text-sm font-bold mb-2 mt-2'
                             }
                         }) }}
                     </div>
@@ -57,7 +59,7 @@
                                 'placeholder': 'Entrez votre email',
                             },
                             'label_attr': {
-                                'class': 'block text-gray-700 text-sm font-bold mb-2'
+                                'class': 'block text-gray-700 text-sm font-bold mb-2 mt-2'
                             }
                         }) }}
                     </div>
@@ -65,21 +67,22 @@
                     {{ form_row(userForm.licence, {
                             'attr': {
                                 'class': 'w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500',
-                                'placeholder': 'Entrez votre email',
+                                'placeholder': 'n° de licence',
                             },
                             'label_attr': {
-                                'class': 'block text-gray-700 text-sm font-bold mb-2'
+                                'class': 'block text-gray-700 text-sm font-bold mb-2 mt-2'
                             }
                         }) }}
                     </div>
                     <div>
                     {{ form_row(userForm.ranking, {
+                        'label':'Classement',
                             'attr': {
                                 'class': 'w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500',
-                                'placeholder': 'Entrez votre email',
+                                'placeholder': 'Classement',
                             },
                             'label_attr': {
-                                'class': 'block text-gray-700 text-sm font-bold mb-2'
+                                'class': 'block text-gray-700 text-sm font-bold mb-2 mt-2'
                             }
                         }) }}
                     </div>
