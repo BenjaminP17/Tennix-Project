@@ -25,9 +25,7 @@ class ActivityController extends AbstractController
         $data = $RencontreRepository->findAllByDateDESC();
         $rencontres = $paginator->paginate(
         $data,
-        $request->query->getInt('page', 1),
-        // nombre de matchs affichés par page
-        8
+        $request->query->getInt('page', 1)
         );
         
         return $this->render('activity/matchs.html.twig', [

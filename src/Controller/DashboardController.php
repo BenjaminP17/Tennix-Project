@@ -19,6 +19,7 @@ class DashboardController extends AbstractController
     // Dashboard utilisateur
     #[Route('/dashboard', name: 'dashboard')]
     public function index(
+        UserRepository $userRepo,
         RencontreRepository $rencontreRepository,
         TournamentRepository $tournamentRepo
     ): Response
@@ -34,10 +35,18 @@ class DashboardController extends AbstractController
         $nbrDefaites = count($rencontreRepository->findBy(['user'=> $this->getUser(), 'resultat'=> 'Défaite']));
 
         $totalMatches = $nbrVictoires + $nbrDefaites;
-        $victoryPercentage = ($nbrVictoires / $totalMatches) * 100;
+//         $victoryPercentage = ($nbrVictoires / $totalMatches) * 100;
+// // ----- 
+//         $formattedPercentage = number_format($victoryPercentage, 1);
 
-        $formattedPercentage = number_format($victoryPercentage, 1);
-
+//!! condition, si le joueur n'a aucun match dans son palmarès
+        if ($totalMatches != 0) {
+            $victoryPercentage = ($nbrVictoires / $totalMatches) * 100;
+            $formattedPercentage = number_format($victoryPercentage, 1);
+        } else {
+            $formattedPercentage = 0;
+        }
+// ---- 
         // Dernière rencontre de l'utilisateur 
 
         $lastMatch = ($rencontreRepository->findBy(['user'=> $this->getUser()], ['date'=>'DESC'], 1));
@@ -46,15 +55,18 @@ class DashboardController extends AbstractController
 
         $nextTournament = ($tournamentRepo->findBy(['user'=> $this->getUser()]));
 
-        // dd($nextTournament);
+        // Récupération de l'utilisateur connecté
+
+        // $userPhoto = ($userRepo->findBy(['imageName'=> $this->getUser()])); 
+
+        // dd($userPhoto);
 
         return $this->render('home/dashboard.html.twig', [
             'victoires' => $victoires,
             'défaites' => $defaites,
             'pourcentage' => $formattedPercentage,
             'lastMatch' => $lastMatch,
-            'nextTournament' => $nextTournament
-
+            'nextTournament' => $nextTournament,
         ]);
     }
 
