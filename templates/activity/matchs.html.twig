@@ -6,13 +6,11 @@
     <h1 class="text-3xl text-center font-bold mt-10">Palmarès</h1>
 </div>
 
-<div class="max-w-7xl mx-auto mt-10">
+<div class="max-w-7xl mx-auto overflow-auto">
 
     {{ include('components/_flash_message.html.twig') }}
 
     <a href ="{{ path('app_matchs_add') }}" input type="button" class="btn relative bg-green-700 text-black mt-5 p-3 rounded-xl font-bold">Ajouter un match</a>
-
-
 
     <div class="inline-block min-w-full py-2 align-middle">
         <div class="overflow-hidden shadow ring-1 ring-black ring-opacity-5 md:rounded-lg">
@@ -84,9 +82,9 @@
     <div class="navigation flex justify-center mt-5">
         {{ knp_pagination_render(rencontres) }}
     </div>
-
-        
+ 
 </div>
+
 <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.8.2/dist/alpine.min.js" defer></script>
   
 {% endblock %}

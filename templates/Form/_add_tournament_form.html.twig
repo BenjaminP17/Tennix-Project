@@ -1,71 +1,77 @@
-<div class="bg-white p-8 rounded shadow-md max-w-md w-full mx-auto">
-    {{ form_errors(tournamentForm) }}
-    <script src="https://cdn.tailwindcss.com"></script>
+<div class="bg-gray-100 min-h-screen pt-20">
+    <div class="flex justify-center items-center mb-5">
+        <h1 class="text-2xl font-bold">Ajoutez un tournoi à votre calendrier</h1>
+    </div>
+    
+    <div class="bg-white p-8 rounded shadow-md max-w-md w-full mx-auto">
+        {{ form_errors(tournamentForm) }}
+        <script src="https://cdn.tailwindcss.com"></script>
 
-    {{ form_start(tournamentForm) }}
-    <div class="grid grid-cols-2 gap-4">
+        {{ form_start(tournamentForm) }}
+        <div class="grid grid-cols-2 gap-4">
+            <div>
+                {{ form_row(tournamentForm.name, {
+                'attr': {
+                    'class': 'w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500',
+                    'placeholder': 'Nom du tournoi',
+                },
+                'label_attr': {
+                    'class': 'block text-gray-700 text-sm font-bold mb-2'
+                }
+                }) }}
+            </div>
+            <div>
+            {{ form_row(tournamentForm.date, {
+                'attr': {
+                    'class': 'w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500',
+                    'placeholder': 'Entrez votre nom',
+                },
+                'label_attr': {
+                    'class': 'block text-gray-700 text-sm font-bold mb-2'
+                }
+            }) }}
+            </div>
+
+        </div>
         <div>
-            {{ form_row(tournamentForm.name, {
-            'attr': {
-                'class': 'w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500',
-                'placeholder': 'Nom du tournoi',
-            },
-            'label_attr': {
-                'class': 'block text-gray-700 text-sm font-bold mb-2'
-            }
+        {{ form_row(tournamentForm.type, {
+                'attr': {
+                    'class': 'w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500',
+                    'placeholder': 'Entrez votre email',
+                },
+                'label_attr': {
+                    'class': 'block text-gray-700 text-sm font-bold mb-2'
+                }
             }) }}
         </div>
         <div>
-        {{ form_row(tournamentForm.date, {
-            'attr': {
-                'class': 'w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500',
-                'placeholder': 'Entrez votre nom',
-            },
-            'label_attr': {
-                'class': 'block text-gray-700 text-sm font-bold mb-2'
-            }
-        }) }}
+        {{ form_row(tournamentForm.saison, {
+                'attr': {
+                    'class': 'w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500',
+                    'placeholder': 'Entrez votre email',
+                },
+                'label_attr': {
+                    'class': 'block text-gray-700 text-sm font-bold mb-2'
+                }
+            }) }}
         </div>
-
+        <div>
+        {{ form_row(tournamentForm.echeance, {
+                'attr': {
+                    'class': 'w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500',
+                    'placeholder': '',
+                },
+                'label_attr': {
+                    'class': 'block text-gray-700 text-sm font-bold mb-2'
+                }
+            }) }}
+        </div>
     </div>
-    <div>
-    {{ form_row(tournamentForm.type, {
-            'attr': {
-                'class': 'w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500',
-                'placeholder': 'Entrez votre email',
-            },
-            'label_attr': {
-                'class': 'block text-gray-700 text-sm font-bold mb-2'
-            }
-        }) }}
+        
+        <div class="mt-6 max-w-md w-full mx-auto">
+            <button type="submit" class="w-full p-3 bg-green-800 text-white rounded-md hover:bg-blue-600">Ajouter</button>
+        </div>
+    {{ form_end(tournamentForm) }}
+    </form>
     </div>
-    <div>
-    {{ form_row(tournamentForm.saison, {
-            'attr': {
-                'class': 'w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500',
-                'placeholder': 'Entrez votre email',
-            },
-            'label_attr': {
-                'class': 'block text-gray-700 text-sm font-bold mb-2'
-            }
-        }) }}
-    </div>
-    <div>
-    {{ form_row(tournamentForm.echeance, {
-            'attr': {
-                'class': 'w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500',
-                'placeholder': '',
-            },
-            'label_attr': {
-                'class': 'block text-gray-700 text-sm font-bold mb-2'
-            }
-        }) }}
-    </div>
-</div>
-    
-    <div class="mt-6 max-w-md w-full mx-auto">
-        <button type="submit" class="w-full p-3 bg-green-800 text-white rounded-md hover:bg-blue-600">Ajouter</button>
-    </div>
-{{ form_end(tournamentForm) }}
-</form>
 </div>
