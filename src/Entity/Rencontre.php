@@ -38,6 +38,9 @@ class Rencontre
     #[ORM\Column(length: 10)]
     private ?string $classement = null;
 
+    #[ORM\Column(length: 100)]
+    private ?string $saison = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -135,6 +138,18 @@ class Rencontre
     public function setClassement(string $classement): static
     {
         $this->classement = $classement;
+
+        return $this;
+    }
+
+    public function getSaison(): ?string
+    {
+        return $this->saison;
+    }
+
+    public function setSaison(string $saison): static
+    {
+        $this->saison = $saison;
 
         return $this;
     }

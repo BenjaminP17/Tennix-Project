@@ -62,7 +62,7 @@ class ActivityController extends AbstractController
             return $this->redirectToRoute('app_matchs');
         }
 
-        return $this->render('partials/_add_match_form.html.twig', [
+        return $this->render('Form/_add_match_form.html.twig', [
             'matchForm' => $form->createView(),
         ]);
     }
@@ -113,7 +113,7 @@ class ActivityController extends AbstractController
             return $this->redirectToRoute('app_matchs');
         }
 
-        return $this->render('partials/_edit_match_form.html.twig', [
+        return $this->render('Form/_edit_match_form.html.twig', [
             'matchForm' => $form->createView(),
         ]);
 

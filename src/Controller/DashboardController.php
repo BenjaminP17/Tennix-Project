@@ -95,7 +95,7 @@ class DashboardController extends AbstractController
             return $this->redirectToRoute('dashboard');
         }
 
-        return $this->render('partials/edit_profil_form.html.twig', [
+        return $this->render('Form/edit_profil_form.html.twig', [
             'userForm' => $form->createView(),
         ]);
     }

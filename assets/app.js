@@ -9,7 +9,7 @@ import './styles/app.css';
 
         // affiche la popup au clik de la navbar sur desktop
         const photo = document.getElementById('photo');
-        const menu = document.getElementById('menu');
+        const menu = document.getElementById('menu1');
 
         photo.addEventListener('click', () => {
             if (menu.style.display === 'none') {
@@ -20,7 +20,7 @@ import './styles/app.css';
         });
 
         // déroule le menu sur mobile
-        const button = document.getElementById('btn');
+        const button = document.getElementById('btn1');
         const menu2 = document.getElementById('mobile-menu');
 
         button.addEventListener('click', () => {

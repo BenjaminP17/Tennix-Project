@@ -52,6 +52,12 @@ class NewMatchFormType extends AbstractType
                     'Double' => 'Double',
                 ],
             ])
+            ->add('saison', ChoiceType::class, [
+                'choices' => [
+                    '-' => '-',
+                    '2023/2024' => '2023/2024',
+                ],
+            ])
             ->add('resultat', ChoiceType::class, [
                 'choices' => [
                     'Victoire' => 'Victoire',

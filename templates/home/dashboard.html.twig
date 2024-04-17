@@ -60,8 +60,10 @@
 
           </div>
 
+          <h2 class="text-2xl font-semibold mb-2 text-gray-800 text-center mb-5">Prochaine(s) Compétition(s)</h2>
+
           <div class="bg-gray-200 p-4 mb-5 rounded-lg shadow-md overflow-y-scroll max-h-80">
-            <h2 class="text-2xl font-semibold mb-2 text-gray-800">Prochaine(s) Compétition(s)</h2>
+            
             {% for key in nextTournament %}
             {# Si la date actuelle est supérieur à echeance, la compétition ne s'affiche pas, on affiche les compétitions non jouées #}
             {% if key.echeance|date("U") > "now"|date("U") %}
@@ -104,10 +106,19 @@
             </div>
           </div>
 
+          {# <div class="text-center mt-12">
+            Victoire et Défaite sont mis au pluriel au delà de 1
+            <p class="text-xl font-medium">{{victoires}}<span class="text-green-600 font-bold"> Victoire{{victoires > 1 ? 's' : ''}}</span> - {{défaites}} <span class="text-red-600 font-bold">Défaite{{défaites > 1 ? 's' : ''}}</span></p>
+          </div> #}
+
           <div class="text-center mt-12">
             {# Victoire et Défaite sont mis au pluriel au delà de 1 #}
-            <p class="text-xl font-medium">{{victoires}}<span class="text-green-600 font-bold"> Victoire{{victoires > 1 ? 's' : ''}}</span> - {{défaites}} <span class="text-red-600 font-bold">Défaite{{défaites > 1 ? 's' : ''}}</span></p>
-          </div>
+            <p class="text-xl font-medium">
+                <span class="text-green-600 font-bold">{{victoires}}</span><span> Victoire{{victoires > 1 ? 's' : ''}}</span> - 
+                <span class="text-red-600 font-bold">{{défaites}}</span><span> Défaite{{défaites > 1 ? 's' : ''}}</span>
+            </p>
+        </div>
+        
 
         </div>
       </div>
