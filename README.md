@@ -1,6 +1,6 @@
 # Projet Tennix
 
-![Logo](https://https://github.com/BenjaminP17/Tennix-Project/blob/main/public/images/illustration_dashboard.png)
+![Logo](https://github.com/BenjaminP17/Tennix-Project/blob/main/public/images/illustration_dashboard.png)
 
 Suivez votre palmarès tennis au fil des années, vos rencontres, compétitions jouées et l'évolution de votre classement.
 
