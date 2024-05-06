@@ -89,6 +89,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(targetEntity: Tournament::class, mappedBy: 'user')]
     private Collection $tournament;
 
+    #[ORM\OneToOne(inversedBy: 'user', cascade: ['persist', 'remove'])]
+    private ?Avatar $avatar = null;
+
     public function __construct()
     {
         $this->rencontre = new ArrayCollection();
@@ -360,6 +363,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
             $this->email,
             $this->password,
         ] = unserialize($serialized);
+    }
+
+    public function getAvatar(): ?Avatar
+    {
+        return $this->avatar;
+    }
+
+    public function setAvatar(?Avatar $avatar): static
+    {
+        $this->avatar = $avatar;
+
+        return $this;
     }
    
 }
