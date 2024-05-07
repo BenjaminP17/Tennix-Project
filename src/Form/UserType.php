@@ -3,6 +3,7 @@
 namespace App\Form;
 
 use App\Entity\User;
+use App\Entity\Avatar;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Vich\UploaderBundle\Form\Type\VichImageType;
@@ -19,9 +20,11 @@ class UserType extends AbstractType
             ->add('email')
             ->add('firstname')  
             ->add('name')
-            ->add('imageFile', VichImageType::class, [
+            ->add('avatar', EntityType::class, [
+                'class' => Avatar::class,
+                'choice_label' => 'imageFile', // Remplacez 'imageName' par le nom de la propriété qui contient le nom de l'image dans votre entité Avatar
                 'label' => 'Image de profil',
-                'required'=> true,
+                'required' => true,
             ])
             ->add('ranking', ChoiceType::class, [
                 'choices' => [
