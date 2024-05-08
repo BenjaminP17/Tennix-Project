@@ -19,7 +19,7 @@ use Serializable;
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[Vich\Uploadable]
 #[UniqueEntity(fields: ['email'], message: 'There is already an account with this email')]
-class User implements UserInterface, PasswordAuthenticatedUserInterface
+class User implements UserInterface, PasswordAuthenticatedUserInterface, \Serializable
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -40,7 +40,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @var string The hashed password
      */
     #[ORM\Column]
-    #[Assert\NotBlank]
     private ?string $password = null;
 
     #[ORM\Column(length: 255)]
@@ -51,23 +50,20 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[Assert\NotBlank]
     private ?string $name = null;
 
-    #[ORM\Column(length: 255)]
-    #[Assert\NotBlank]
+    #[ORM\Column(length: 255, nullable: true)]
     private ?string $ranking = null;
 
-    #[ORM\Column(length: 255)]
-    #[Assert\NotBlank]
+    #[ORM\Column(length: 255, nullable: true)]
     private ?string $club = null;
 
-    #[ORM\Column(length: 255)]
-    #[Assert\NotBlank]
+    #[ORM\Column(length: 255, nullable: true)]
     private ?string $licence = null;
 
     #[Vich\UploadableField(mapping: 'user', fileNameProperty: 'imageName', size: 'imageSize')]
     #[Assert\File(
         maxSize: '1024k',
         extensions: ['jpeg','png'],
-        extensionsMessage: 'format jpeg et png uniquement, 1000k max',
+        extensionsMessage: 'format jpeg et png uniquement, 1000Mo max',
     )]
     private ?File $imageFile = null;
 
@@ -343,7 +339,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     }
 
     // permet de corriger l'erreur : "file/file is not allowed"
-    // ne pas oublier d'ajouter \Serializable à la class user (en haut de la page, ligne 19)
+    // ne pas oublier d'ajouter Serializable à la class user (en haut de la page, ligne 19)
     public function serialize(): string
     {
         return serialize([

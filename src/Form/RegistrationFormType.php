@@ -52,7 +52,7 @@ class RegistrationFormType extends AbstractType
             //     ],
             // ])
             // ->add('club')
-            ->add('licence')
+            // ->add('licence')
             // ->add('imageFile', VichImageType::class, [
             //     'label' => 'Image de profil',
             // ])
