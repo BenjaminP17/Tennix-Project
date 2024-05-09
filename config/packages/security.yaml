@@ -36,8 +36,9 @@ security:
 
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
+    
     access_control:
-    !! ne pas demander la connexion sur /dashboard car deco à chaque fois
+    #  ne pas demander la l'authentification sur /dashboard, car deco à chaque fois.
         # - { path: ^/dashboard, roles: IS_AUTHENTICATED_FULLY }
         
 
