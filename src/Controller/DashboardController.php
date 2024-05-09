@@ -90,7 +90,7 @@ class DashboardController extends AbstractController
             $em->persist($user);
             $em->flush();
 
-            $this->addFlash('success', 'Vos informations ont bien été modifiées');
+            // $this->addFlash('success', 'Vos informations ont bien été modifiées');
 
             return $this->redirectToRoute('dashboard');
         }

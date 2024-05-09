@@ -49,9 +49,9 @@ class TournamentController extends AbstractController
             $em->persist($tournament);
             $em->flush();
 
-            $this->addFlash('success', 'Votre match est désormais consultable dans votre palmarès');
+            $this->addFlash('success', 'Compétition ajoutée à votre calendrier');
 
-            return $this->redirectToRoute('app_matchs');
+            return $this->redirectToRoute('app_tournament');
         }
 
         return $this->render('Form/_add_tournament_form.html.twig', [
