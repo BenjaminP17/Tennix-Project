@@ -85,10 +85,17 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, \Serial
     #[ORM\OneToMany(targetEntity: Tournament::class, mappedBy: 'user')]
     private Collection $tournament;
 
+    /**
+     * @var Collection<int, Classement>
+     */
+    #[ORM\OneToMany(targetEntity: Classement::class, mappedBy: 'user')]
+    private Collection $classement;
+
     public function __construct()
     {
         $this->rencontre = new ArrayCollection();
         $this->tournament = new ArrayCollection();
+        $this->classement = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -356,6 +363,36 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, \Serial
             $this->email,
             $this->password,
         ] = unserialize($serialized);
+    }
+
+    /**
+     * @return Collection<int, Classement>
+     */
+    public function getClassement(): Collection
+    {
+        return $this->classement;
+    }
+
+    public function addClassement(Classement $classement): static
+    {
+        if (!$this->classement->contains($classement)) {
+            $this->classement->add($classement);
+            $classement->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeClassement(Classement $classement): static
+    {
+        if ($this->classement->removeElement($classement)) {
+            // set the owning side to null (unless already changed)
+            if ($classement->getUser() === $this) {
+                $classement->setUser(null);
+            }
+        }
+
+        return $this;
     }
    
 }
