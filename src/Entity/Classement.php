@@ -14,40 +14,40 @@ class Classement
     private ?int $id = null;
 
     #[ORM\Column(length: 255, nullable: true)]
-    private ?string $classJanv = null;
+    private ?int $classJanv = null;
 
     #[ORM\Column(length: 255, nullable: true)]
-    private ?string $classFev = null;
+    private ?int $classFev = null;
 
     #[ORM\Column(length: 255, nullable: true)]
-    private ?string $classMar = null;
+    private ?int $classMar = null;
 
     #[ORM\Column(length: 255, nullable: true)]
-    private ?string $classAvr = null;
+    private ?int $classAvr = null;
 
     #[ORM\Column(length: 255, nullable: true)]
-    private ?string $classMai = null;
+    private ?int $classMai = null;
 
     #[ORM\Column(length: 255, nullable: true)]
-    private ?string $classJui = null;
+    private ?int $classJui = null;
 
     #[ORM\Column(length: 255, nullable: true)]
-    private ?string $classJuil = null;
+    private ?int $classJuil = null;
 
     #[ORM\Column(length: 255, nullable: true)]
-    private ?string $classAout = null;
+    private ?int $classAout = null;
 
     #[ORM\Column(length: 255, nullable: true)]
-    private ?string $classSept = null;
+    private ?int $classSept = null;
 
     #[ORM\Column(length: 255, nullable: true)]
-    private ?string $classOct = null;
+    private ?int $classOct = null;
 
     #[ORM\Column(length: 255, nullable: true)]
-    private ?string $classNov = null;
+    private ?int $classNov = null;
 
     #[ORM\Column(length: 255, nullable: true)]
-    private ?string $classDec = null;
+    private ?int $classDec = null;
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $saison = null;
@@ -60,144 +60,144 @@ class Classement
         return $this->id;
     }
 
-    public function getClassJanv(): ?string
+    public function getClassJanv(): ?int
     {
         return $this->classJanv;
     }
 
-    public function setClassJanv(?string $classJanv): static
+    public function setClassJanv(?int $classJanv): static
     {
         $this->classJanv = $classJanv;
 
         return $this;
     }
 
-    public function getClassFev(): ?string
+    public function getClassFev(): ?int
     {
         return $this->classFev;
     }
 
-    public function setClassFev(?string $classFev): static
+    public function setClassFev(?int $classFev): static
     {
         $this->classFev = $classFev;
 
         return $this;
     }
 
-    public function getClassMar(): ?string
+    public function getClassMar(): ?int
     {
         return $this->classMar;
     }
 
-    public function setClassMar(?string $classMar): static
+    public function setClassMar(?int $classMar): static
     {
         $this->classMar = $classMar;
 
         return $this;
     }
 
-    public function getClassAvr(): ?string
+    public function getClassAvr(): ?int
     {
         return $this->classAvr;
     }
 
-    public function setClassAvr(?string $classAvr): static
+    public function setClassAvr(?int $classAvr): static
     {
         $this->classAvr = $classAvr;
 
         return $this;
     }
 
-    public function getClassMai(): ?string
+    public function getClassMai(): ?int
     {
         return $this->classMai;
     }
 
-    public function setClassMai(?string $classMai): static
+    public function setClassMai(?int $classMai): static
     {
         $this->classMai = $classMai;
 
         return $this;
     }
 
-    public function getClassJui(): ?string
+    public function getClassJui(): ?int
     {
         return $this->classJui;
     }
 
-    public function setClassJui(?string $classJui): static
+    public function setClassJui(?int $classJui): static
     {
         $this->classJui = $classJui;
 
         return $this;
     }
 
-    public function getClassJuil(): ?string
+    public function getClassJuil(): ?int
     {
         return $this->classJuil;
     }
 
-    public function setClassJuil(?string $classJuil): static
+    public function setClassJuil(?int $classJuil): static
     {
         $this->classJuil = $classJuil;
 
         return $this;
     }
 
-    public function getClassAout(): ?string
+    public function getClassAout(): ?int
     {
         return $this->classAout;
     }
 
-    public function setClassAout(?string $classAout): static
+    public function setClassAout(?int $classAout): static
     {
         $this->classAout = $classAout;
 
         return $this;
     }
 
-    public function getClassSept(): ?string
+    public function getClassSept(): ?int
     {
         return $this->classSept;
     }
 
-    public function setClassSept(?string $classSept): static
+    public function setClassSept(?int $classSept): static
     {
         $this->classSept = $classSept;
 
         return $this;
     }
 
-    public function getClassOct(): ?string
+    public function getClassOct(): ?int
     {
         return $this->classOct;
     }
 
-    public function setClassOct(?string $classOct): static
+    public function setClassOct(?int $classOct): static
     {
         $this->classOct = $classOct;
 
         return $this;
     }
 
-    public function getClassNov(): ?string
+    public function getClassNov(): ?int
     {
         return $this->classNov;
     }
 
-    public function setClassNov(?string $classNov): static
+    public function setClassNov(?int $classNov): static
     {
         $this->classNov = $classNov;
 
         return $this;
     }
 
-    public function getClassDec(): ?string
+    public function getClassDec(): ?int
     {
         return $this->classDec;
     }
 
-    public function setClassDec(?string $classDec): static
+    public function setClassDec(?int $classDec): static
     {
         $this->classDec = $classDec;
 

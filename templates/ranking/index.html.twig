@@ -7,22 +7,26 @@
         google.charts.load('current', {'packages':['corechart']});
         google.charts.setOnLoadCallback(drawChart);
   
+        {% for key in classementList %}
+        {% if key.user == app.user %}
         function drawChart() {
           var data = google.visualization.arrayToDataTable([
             ['Mois', 'Classement'],
-            ['Janvier',  4],
-            ['Février',  5],
-            ['Mars',  6],
-            ['Avril',  7],
-            ['Mai',  7],
-            ['Juin',  7],
-            ['Juillet',  7],
-            ['Aout',  7],
-            ['Septembre',  7],
-            ['Octobre',  7],
-            ['Novembre',  7],
-            ['Décembre',  7],
+            ['Janvier',  {{ key.classJanv }}],
+            ['Février',  {{ key.classFev }}],
+            ['Mars',  {{ key.classMar }}],
+            ['Avril',  {{ key.classAvr }}],
+            ['Mai',  {{ key.classMai }}],
+            ['Juin',  {{ key.classJui }}],
+            ['Juillet',  {{ key.classJuil }}],
+            ['Août',  {{ key.classAout }}],
+            ['Septembre',  {{ key.classSept }}],
+            ['Octobre',  {{ key.classOct }}],
+            ['Novembre',  {{ key.classNov }}],
+            ['Décembre',  {{ key.classDec }}],
           ]);
+        {% endif %}
+        {% endfor %}
   
           var options = {
             title: 'Évolution de votre classement',
