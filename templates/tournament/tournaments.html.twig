@@ -1,33 +1,42 @@
-{% extends 'base.html.twig' %}
-
-{% block body %}
+{% extends 'base.html.twig' %} {% block body %}
 
 <div class="justify-center">
   <h1 class="text-3xl text-center font-bold mt-10">Compétitions à venir</h1>
 </div>
 
-  <div class="max-w-7xl mx-auto mt-10">
-    <div class="max-w-7xl mx-auto mt-10 mb-10">
-      {{ include('components/_flash_message.html.twig') }}
-    </div>
-    
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-          {% for key in tournamentsList %}
-            <div class="mx-auto">
-              <div class="max-w-xs cursor-pointer rounded-lg bg-white p-2 shadow duration-150 hover:scale-105 hover:shadow-md">
-                <img class="w-full rounded-lg object-cover object-center" src="https://images.unsplash.com/photo-1567220720374-a67f33b2a6b9?q=80&w=1932&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="product" />
-                <p class="my-4 pl-4 font-bold text-gray-500">{{key.name}}</p>
-                <p class="mb-4 ml-4 text-xl font-semibold text-gray-800">{{key.date|date("d/m/Y", "Europe/Paris")}} au {{key.echeance|date("d/m/Y", "Europe/Paris")}}</p>
-              </div>
-            </div>
-            {% endfor %}  
-        </div>
-
-        <div class="my-auto mt-5">
-          <a href ="{{ path('app_tournament_Form') }}" class="bg-green-700 hover:bg-green-600 text-white font-bold py-2 px-4 rounded mt-5 mb-5">Ajouter</a>
-        </div>
-        
+<div class="max-w-7xl mx-auto mt-10">
+  <div class="max-w-7xl mx-auto mt-10 mb-10">
+    {{ include("components/_flash_message.html.twig") }}
   </div>
 
+  <a
+    href="{{ path('app_tournament_Form') }}"
+    input
+    type="button"
+    class="btn relative bg-green-700 text-black mt-5 p-3 rounded-xl font-bold mb-5"
+    >Ajouter un match</a
+  >
+
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+    {% for key in tournamentsList %}
+    <div class="mx-auto">
+      <div
+        class="max-w-xs cursor-pointer rounded-lg bg-white p-2 shadow duration-150 hover:scale-105 hover:shadow-md"
+      >
+        <img
+          class="w-full rounded-lg object-cover object-center"
+          src="https://images.unsplash.com/photo-1567220720374-a67f33b2a6b9?q=80&w=1932&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+          alt="product"
+        />
+        <p class="my-4 pl-4 font-bold text-gray-500">{{ key.name }}</p>
+        <p class="mb-4 ml-4 text-xl font-semibold text-gray-800">
+          {{key.date|date("d/m/Y", "Europe/Paris")}} au
+          {{key.echeance|date("d/m/Y", "Europe/Paris")}}
+        </p>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
 
 {% endblock %}
