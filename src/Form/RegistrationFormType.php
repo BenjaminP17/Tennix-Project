@@ -22,40 +22,7 @@ class RegistrationFormType extends AbstractType
         $builder
             ->add('email')
             ->add('firstname')  
-            ->add('name')
-            // ->add('ranking', ChoiceType::class, [
-            //     'choices' => [
-            //         '-' => '',
-            //         '40' => '40',
-            //         '30/5' => '30/5',
-            //         '30/4' => '30/4',
-            //         '30/3' => '30/3',
-            //         '30/2' => '30/2',
-            //         '30/1' => '30/1',
-            //         '30' => '30',
-            //         '15/5' => '15/5',
-            //         '15/4' => '15/4',
-            //         '15/3' => '15/3',
-            //         '15/2' => '15/2',
-            //         '15/1' => '15/1',
-            //         '15' => '15',
-            //         '5/6' => '5/6',
-            //         '4/6' => '4/6',
-            //         '3/6' => '3/6',
-            //         '2/6' => '2/6',
-            //         '1/6' => '1/6',
-            //         '0' => '0',
-            //         '-2/6' => '-2/6',
-            //         '-4/6' => '-4/6',
-            //         '-15' => '-15',
-            //         '-30' => '-30',
-            //     ],
-            // ])
-            // ->add('club')
-            // ->add('licence')
-            // ->add('imageFile', VichImageType::class, [
-            //     'label' => 'Image de profil',
-            // ])
+            ->add('name')  
             ->add('plainPassword', RepeatedType::class, [
                 'type' => PasswordType::class,
                 'mapped' => false,

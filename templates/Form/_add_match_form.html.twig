@@ -5,7 +5,7 @@
                     {{ form_errors(matchForm) }}
                     <script src="https://cdn.tailwindcss.com"></script>
 
-                    {{ form_start(matchForm) }}
+                    {{ form_start(matchForm, {'attr': {'novalidate': 'novalidate'}}) }}
                     <div class="grid grid-cols-2 gap-4">
                         <div>
                             {{ form_row(matchForm.competition, {

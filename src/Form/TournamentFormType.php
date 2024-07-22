@@ -31,10 +31,6 @@ class TournamentFormType extends AbstractType
                 ],
             ])
             ->add('echeance')
-            // ->add('user', EntityType::class, [
-            //     'class' => User::class,
-            //     'choice_label' => 'id',
-            // ])
         ;
     }
 

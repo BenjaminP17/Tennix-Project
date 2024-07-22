@@ -7,7 +7,10 @@ use App\Entity\Rencontre;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
 class NewMatchFormType extends AbstractType
@@ -15,8 +18,20 @@ class NewMatchFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('competition')
-            ->add('Adversaire')
+            ->add('competition', TextType::class, [
+                'constraints' => [
+                    new NotBlank([
+                        'message' => 'Renseignez le nom de la compétition',
+                    ]),
+                ],
+            ])
+            ->add('Adversaire', TextType::class, [
+                'constraints' => [
+                    new NotBlank([
+                        'message' => 'Renseignez le nom de l\'adversaire',
+                    ]),
+                ],
+            ])
             ->add('classement', ChoiceType::class, [
                 'choices' => [
                     '-' => '',
@@ -44,6 +59,10 @@ class NewMatchFormType extends AbstractType
                     '-15' => '-15',
                     '-30' => '-30',
                 ],
+                'constraints' => [
+                    new NotBlank(['message' => 'Renseignez le classement'
+                ]),
+    ],
             ])
             ->add('Type', ChoiceType::class, [
                 'choices' => [
@@ -51,25 +70,39 @@ class NewMatchFormType extends AbstractType
                     'Simple' => 'Simple',
                     'Double' => 'Double',
                 ],
+                'constraints' => [
+                    new NotBlank(['message' => 'Ce champ ne peut pas être vide.',
+        ]),
+    ],
             ])
             ->add('saison', ChoiceType::class, [
                 'choices' => [
                     '-' => '-',
                     '2023/2024' => '2023/2024',
                 ],
+                'constraints' => [
+                    new NotBlank(['message' => 'Sélectionnez une saison',
+        ]),
+    ],
             ])
             ->add('resultat', ChoiceType::class, [
                 'choices' => [
                     'Victoire' => 'Victoire',
                     'Défaite' => 'Défaite',
                 ],
+                'constraints' => [
+                    new NotBlank(['message' => 'Renseignez le résultat',
+        ]),
+    ],
             ])
-            ->add('Score')
+            ->add('Score', TextType::class, [
+                'constraints' => [
+                    new NotBlank([
+                        'message' => 'Renseignez le score',
+                    ]),
+                ],
+            ])
             ->add('date')
-//             ->add('user', EntityType::class, [
-//                 'class' => User::class,
-// 'choice_label' => 'id',
-//             ])
         ;
     }
 
