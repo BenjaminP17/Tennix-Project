@@ -35,6 +35,7 @@ class NewMatchFormType extends AbstractType
             ->add('classement', ChoiceType::class, [
                 'choices' => [
                     '-' => '',
+                    'NC'=> 'NC',
                     '40' => '40',
                     '30/5' => '30/5',
                     '30/4' => '30/4',
@@ -102,7 +103,12 @@ class NewMatchFormType extends AbstractType
                     ]),
                 ],
             ])
-            ->add('date')
+            // ->add('date')
+            ->add('date', DateType::class, [
+                'widget' => 'choice',
+                'format' => 'dd MMMM yyyy',
+                'data' => new \DateTime()
+            ]);
         ;
     }
 
