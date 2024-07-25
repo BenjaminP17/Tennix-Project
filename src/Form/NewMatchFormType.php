@@ -103,7 +103,6 @@ class NewMatchFormType extends AbstractType
                     ]),
                 ],
             ])
-            // ->add('date')
             ->add('date', DateType::class, [
                 'widget' => 'choice',
                 'format' => 'dd MMMM yyyy',

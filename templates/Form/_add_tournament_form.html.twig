@@ -1,4 +1,4 @@
-<div class="bg-gray-100 min-h-screen pt-20">
+{# <div class="bg-gray-100 min-h-screen pt-20">
     <div class="flex justify-center items-center mb-5">
         <h1 class="text-2xl font-bold">Ajoutez un tournoi à votre calendrier</h1>
     </div>
@@ -74,4 +74,86 @@
     {{ form_end(tournamentForm) }}
     </form>
     </div>
+</div> #}
+
+<div class="bg-gray-100 min-h-screen flex items-center justify-center py-10">
+    <div class="bg-white p-8 rounded-lg shadow-lg max-w-md w-full">
+        <h1 class="text-3xl font-bold mb-6 text-center text-green-600 shadow-md p-4 rounded-lg bg-green-100">
+            Ajoutez un tournoi à votre calendrier
+        </h1>
+        {{ form_errors(tournamentForm) }}
+
+        <script src="https://cdn.tailwindcss.com"></script>
+
+        {{ form_start(tournamentForm) }}
+        <div class="space-y-6">
+            <div>
+                {{ form_row(tournamentForm.name, {
+                'label': 'Nom',
+                'attr': {
+                    'class': 'w-full px-4 py-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500',
+                    'placeholder': 'Nom du tournoi',
+                },
+                'label_attr': {
+                    'class': 'block text-gray-600 text-sm font-medium mb-1'
+                }
+                }) }}
+            </div>
+            
+            <div>
+                {{ form_row(tournamentForm.date, {
+                'attr': {
+                    'class': 'w-full px-4 py-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500',
+                    'placeholder': 'Date du tournoi',
+                },
+                'label_attr': {
+                    'class': 'block text-gray-600 text-sm font-medium mb-1'
+                }
+                }) }}
+            </div>
+
+            <div>
+                {{ form_row(tournamentForm.type, {
+                'attr': {
+                    'class': 'w-full px-4 py-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500',
+                    'placeholder': 'Type de tournoi',
+                },
+                'label_attr': {
+                    'class': 'block text-gray-600 text-sm font-medium mb-1'
+                }
+                }) }}
+            </div>
+
+            <div>
+                {{ form_row(tournamentForm.saison, {
+                'attr': {
+                    'class': 'w-full px-4 py-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500',
+                    'placeholder': 'Saison',
+                },
+                'label_attr': {
+                    'class': 'block text-gray-600 text-sm font-medium mb-1'
+                }
+                }) }}
+            </div>
+
+            <div>
+                {{ form_row(tournamentForm.echeance, {
+                'attr': {
+                    'class': 'w-full px-4 py-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500',
+                    'placeholder': 'Échéance',
+                },
+                'label_attr': {
+                    'class': 'block text-gray-600 text-sm font-medium mb-1'
+                }
+                }) }}
+            </div>
+        </div>
+
+        <div class="mt-8">
+            <button type="submit" class="w-full p-3 bg-green-700 text-white font-semibold rounded-md shadow-sm hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-500">Ajouter</button>
+        </div>
+
+        {{ form_end(tournamentForm) }}
+    </div>
 </div>
+

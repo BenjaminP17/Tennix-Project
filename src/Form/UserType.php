@@ -21,7 +21,7 @@ class UserType extends AbstractType
             ->add('name')
             ->add('imageFile', VichImageType::class, [
                 'label' => 'Image de profil',
-                'required'=> true,
+                'required'=> false,
             ])
             ->add('ranking', ChoiceType::class, [
                 'choices' => [

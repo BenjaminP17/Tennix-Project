@@ -8,6 +8,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
 class TournamentFormType extends AbstractType
@@ -16,7 +17,11 @@ class TournamentFormType extends AbstractType
     {
         $builder
             ->add('name')
-            ->add('date')
+            ->add('date', DateType::class, [
+                'widget' => 'choice',
+                'format' => 'dd MMMM yyyy',
+                'data' => new \DateTime()
+            ])
             ->add('type', ChoiceType::class, [
                 'choices' => [
                     '-' => '-',
@@ -30,7 +35,11 @@ class TournamentFormType extends AbstractType
                     '2023/2024' => '2023/2024',
                 ],
             ])
-            ->add('echeance')
+            ->add('echeance', DateType::class, [
+                'widget' => 'choice',
+                'format' => 'dd MMMM yyyy',
+                'data' => new \DateTime()
+            ])
         ;
     }
 
