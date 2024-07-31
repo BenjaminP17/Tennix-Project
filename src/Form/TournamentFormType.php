@@ -7,9 +7,11 @@ use App\Entity\Tournament;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Validator\Constraints\Callback;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
 class TournamentFormType extends AbstractType
 {
@@ -20,7 +22,19 @@ class TournamentFormType extends AbstractType
             ->add('date', DateType::class, [
                 'widget' => 'choice',
                 'format' => 'dd MMMM yyyy',
-                'data' => new \DateTime()
+                'data' => new \DateTime(),
+                'constraints' => [
+                    new Callback(function ($date, ExecutionContextInterface $context) {
+                        $form = $context->getObject()->getParent();
+                        $echeance = $form->get('echeance')->getData();
+        
+                        if ($echeance && $date > $echeance) {
+                            $context->buildViolation('La date doit être antérieure à la date d\'échéance.')
+                                ->atPath('date')
+                                ->addViolation();
+                        }
+                    }),
+                ],
             ])
             ->add('type', ChoiceType::class, [
                 'choices' => [
