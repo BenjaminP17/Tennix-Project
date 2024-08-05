@@ -50,63 +50,6 @@
                             }
                         }) }}
                     </div>
-                    {# <div>
-                    {{ form_row(registrationForm.club, {
-                            'attr': {
-                                'class': 'w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500',
-                                'placeholder': 'Entrez votre club',
-                            },
-                            'label_attr': {
-                                'class': 'block text-gray-700 text-sm font-bold mb-2 mt-5'
-                            }
-                        }) }}
-                    </div> #}
-                    {# <div>
-                    {{ form_row(registrationForm.licence, {
-                            'attr': {
-                                'class': 'w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500',
-                                'placeholder': 'Entrez n° de licence',
-                            },
-                            'label_attr': {
-                                'class': 'block text-gray-700 text-sm font-bold mb-2 mt-5'
-                            }
-                        }) }}
-                    </div> #}
-                    {# <div>
-                    {{ form_row(registrationForm.ranking, {
-                        'label': 'Classement',
-                            'attr': {
-                                'class': 'w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500',
-                                'placeholder': 'Entrez votre classement',
-                            },
-                            'label_attr': {
-                                'class': 'block text-gray-700 text-sm font-bold mb-2 mt-5'
-                            }
-                        }) }}
-                    </div> #}
-                    {# <div>
-                        {{ form_row(registrationForm.imageFile, {
-                            'label': 'Image de Profile',
-                                'attr': {
-                                    'class': 'w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500',
-                                },
-                                'label_attr': {
-                                    'class': 'block text-gray-700 text-sm font-bold mb-2 mt-5'
-                                }
-                            }) }}
-                        </div>
-                    <div> #}
-                    {# {{ form_row(registrationForm.plainPassword, {
-                            'label':'Password',
-                            'attr': {
-                                'class': 'w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500',
-                                'placeholder': 'Entrez un mot de passe',
-                            },
-                            'label_attr': {
-                                'class': 'block text-gray-700 text-sm font-bold mb-2 mt-5'
-                            }
-                        }) }}
-                    </div> #}
                     <div>
                         {{ form_row(registrationForm.plainPassword.first, {
                                 'attr': {
@@ -132,24 +75,12 @@
                         </div>
                     </div>
                     
-                    {# {{ form_row(registrationForm.agreeTerms) }}  #}
+
                     
                 {{ form_end(registrationForm) }}
         </form>
     </div>
 </body>
-
-
-
-
-
-    <!-- Bouton d'inscription -->
-    {# <div class="mt-6">
-        <button type="submit" class="w-full p-3 bg-blue-500 text-white rounded-md hover:bg-blue-600">S'inscrire</button>
-    </div> #}
-        
-    
-
 
 
 {% endblock %}
