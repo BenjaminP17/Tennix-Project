@@ -39,7 +39,12 @@ security:
     
     access_control:
     #  ne pas demander la l'authentification sur /dashboard, car deco à chaque fois.
-        # - { path: ^/dashboard, roles: IS_AUTHENTICATED_FULLY }
+        - { path: ^/login, roles: PUBLIC_ACCESS }
+        - { path: ^/register, roles: PUBLIC_ACCESS }
+        - { path: ^/dashboard, roles: ROLE_USER }
+        - { path: ^/tournament, roles: ROLE_USER }
+        - { path: ^/ranking, roles: ROLE_USER }
+        - { path: ^/matchs, roles: ROLE_USER }
         
 
 when@test:
