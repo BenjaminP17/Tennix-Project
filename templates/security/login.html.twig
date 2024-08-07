@@ -1,80 +1,84 @@
 
 
 {% block body %}
+
 <script src="https://cdn.tailwindcss.com"></script>
-<form method="post">
-    {% if error %}
-        <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-    {% endif %}
+<div class="h-screen">
+    <form method="post">
 
-    {% if app.user %}
-        <div class="mb-3">
-            You are logged in as {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}">Logout</a>
-        </div>
-    {% endif %}
+        {% if error %}
+            <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+        {% endif %}
 
-<!-- component -->
-<div class="bg-white dark:bg-gray-900">
-  <div class="flex justify-center h-screen">
-      <div class="hidden bg-cover bg-center lg:block lg:w-2/3" style="background-image: url(https://images.unsplash.com/photo-1622163642998-1ea32b0bbc67?q=80&w=1935&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D)">
-          <div class="flex items-center h-full px-20 bg-gray-900 bg-opacity-40 relative">
-            <div>
-                <h1 class="text-8xl pb-20 font-bold text-gray-300">Votre palmarès <br> de <span class="text-yellow-300">TENNIS</span>, <br> à portée de main.
-                </h1>
+        {% if app.user %}
+            <div class="mb-3">
+                You are logged in as {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}">Logout</a>
+            </div>
+        {% endif %}
+
+
+        <!-- component -->
+        <div class="bg-white dark:bg-gray-900">
+            <div class="flex justify-center h-screen">
+                <div class="hidden bg-cover bg-center lg:block lg:w-2/3" style="background-image: url(https://images.unsplash.com/photo-1622163642998-1ea32b0bbc67?q=80&w=1935&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D)">
+                    <div class="flex items-center h-full px-20 bg-gray-900 bg-opacity-40 relative">
+                        <div>
+                            <h1 class="text-8xl pb-20 font-bold text-gray-300">Votre palmarès <br> de <span class="text-yellow-300">TENNIS</span>, <br> à portée de main.
+                            </h1>
+                        </div>
+                    </div>
+                    
+                </div>
+                
+                <div class="flex items-center w-full max-w-md px-6 mx-auto lg:w-2/6">
+                    <div class="flex-1">
+                        <div class="flex items-center justify-center">
+                            <img class="w-24 h-24" src="{{ asset('images/logo.png') }}" alt="Logo">
+                            </div>
+
+                        <div class="text-center">
+                            <h2 class="text-4xl font-bold text-center text-gray-700 dark:text-white">TennixTracker.</h2>
+                            
+                            <p class="mt-3 text-gray-500 dark:text-gray-300">Connectez-vous à votre compte</p>
+                        </div>
+
+                        <div class="mt-8">
+                            <form>
+                                <div>
+                                    <label for="email" class="block mb-2 text-sm text-gray-600 dark:text-gray-200">Adresse mail</label>
+                                    <input type="email" name="email" value="{{ last_username }}" id="email" placeholder="example@example.com" class="block w-full px-4 py-2 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40" />
+                                </div>
+
+                                <div class="mt-6">
+                                    <div class="flex justify-between mb-2">
+                                        <label for="password" class="text-sm text-gray-600 dark:text-gray-200">Mot de passe</label>
+                                        {# Feature à déployer en V2 #}
+                                        {# <a href="*" class="text-sm text-gray-400 focus:text-blue-500 hover:text-blue-500 hover:underline">Mot de passe oublié ?</a> #}
+                                    </div>
+
+                                    <input type="password" name="password" id="password" placeholder="Votre mot de passe" class="block w-full px-4 py-2 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40" />
+                                    <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+                                </div>
+
+                                <div class="mt-6">
+                                    <button
+                                    type="submit" class="w-full px-4 py-2 tracking-wide text-white transition-colors duration-200 transform bg-green-700 rounded-md hover:bg-green-600 focus:outline-none focus:bg-blue-400 focus:ring focus:ring-blue-300 focus:ring-opacity-50">
+                                        Connexion
+                                    </button>
+                                </div>
+
+                                
+                                <p class="text-gray-500 absolute bottom-2 right-4">Application crée par <a href="http://www.benjaminpelissier.com" class="text-blue-600 focus:outline-none focus:underline hover:underline">Benjamin Pelissier</a>.</p>
+
+                            </form>
+                            {# Feature à deployer en V2 #}
+                            {# <p class="mt-6 text-sm text-center text-gray-400">Créer un compte <a href="{{ path('app_register') }}" class="text-blue-500 focus:outline-none focus:underline hover:underline">ici</a>.</p> #}
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-          
-      </div>
-      
-      <div class="flex items-center w-full max-w-md px-6 mx-auto lg:w-2/6">
-          <div class="flex-1">
-            <div class="flex items-center justify-center">
-                <img class="w-24 h-24" src="{{ asset('images/logo.png') }}" alt="Logo">
-                </div>
 
-              <div class="text-center">
-                  <h2 class="text-4xl font-bold text-center text-gray-700 dark:text-white">TennixTracker.</h2>
-                  
-                  <p class="mt-3 text-gray-500 dark:text-gray-300">Connectez-vous à votre compte</p>
-              </div>
-
-              <div class="mt-8">
-                  <form>
-                      <div>
-                          <label for="email" class="block mb-2 text-sm text-gray-600 dark:text-gray-200">Adresse mail</label>
-                          <input type="email" name="email" value="{{ last_username }}" id="email" placeholder="example@example.com" class="block w-full px-4 py-2 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40" />
-                      </div>
-
-                      <div class="mt-6">
-                          <div class="flex justify-between mb-2">
-                              <label for="password" class="text-sm text-gray-600 dark:text-gray-200">Mot de passe</label>
-                            {# Feature à déployer en V2 #}
-                              {# <a href="*" class="text-sm text-gray-400 focus:text-blue-500 hover:text-blue-500 hover:underline">Mot de passe oublié ?</a> #}
-                          </div>
-
-                          <input type="password" name="password" id="password" placeholder="Votre mot de passe" class="block w-full px-4 py-2 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40" />
-                          <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
-                      </div>
-
-                      <div class="mt-6">
-                          <button
-                          type="submit" class="w-full px-4 py-2 tracking-wide text-white transition-colors duration-200 transform bg-green-700 rounded-md hover:bg-green-600 focus:outline-none focus:bg-blue-400 focus:ring focus:ring-blue-300 focus:ring-opacity-50">
-                              Connexion
-                          </button>
-                      </div>
-
-                      
-                      <p class="text-gray-500 absolute bottom-2 right-4">Application crée par <a href="http://www.benjaminpelissier.com" class="text-blue-600 focus:outline-none focus:underline hover:underline">Benjamin Pelissier</a>.</p>
-
-                  </form>
-                  {# Feature à deployer en V2 #}
-                  {# <p class="mt-6 text-sm text-center text-gray-400">Créer un compte <a href="{{ path('app_register') }}" class="text-blue-500 focus:outline-none focus:underline hover:underline">ici</a>.</p> #}
-              </div>
-          </div>
-      </div>
-  </div>
+    </form>
 </div>
-
-
-</form>
 {% endblock %}
