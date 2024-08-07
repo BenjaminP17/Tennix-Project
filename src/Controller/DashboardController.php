@@ -18,7 +18,7 @@ class DashboardController extends AbstractController
 {
     // Dashboard utilisateur
     #[Route('/dashboard', name: 'dashboard')]
-    public function index(
+    public function showStatsUser(
         UserRepository $userRepo,
         RencontreRepository $rencontreRepository,
         TournamentRepository $tournamentRepo
@@ -60,7 +60,7 @@ class DashboardController extends AbstractController
     
     // Modification des informations de utilisateur connecté
     #[Route('/profil/edit', name: 'edit_profil', methods: ['GET', 'POST'])]
-    public function edit(
+    public function editProfil(
         Request $request,
         EntityManagerInterface $em
     ): Response

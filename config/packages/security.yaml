@@ -45,6 +45,7 @@ security:
         - { path: ^/tournament, roles: ROLE_USER }
         - { path: ^/ranking, roles: ROLE_USER }
         - { path: ^/matchs, roles: ROLE_USER }
+        - { path: ^/profil, roles: ROLE_USER }
         
 
 when@test:
