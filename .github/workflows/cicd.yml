@@ -1,4 +1,4 @@
-name: CI/CD
+name: Intégration Continue
 
 on:
   push:
@@ -13,6 +13,9 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+
+    env:
+      DATABASE_URL: ${{ secrets.DATABASE_URL }}
     
     steps:
     - name: Checkout code
@@ -24,7 +27,7 @@ jobs:
         php-version: '8.1' 
 
     - name: Install Composer dependencies
-      run: composer install --prefer-dist --no-progress --no-suggest
+      run: composer install --prefer-dist --no-progress
 
     - name: Run PHPUnit tests
       run: php bin/phpunit
