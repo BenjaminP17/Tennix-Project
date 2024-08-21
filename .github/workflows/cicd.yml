@@ -15,10 +15,7 @@ jobs:
     runs-on: ubuntu-latest
 
     env:
-      DATABASE_HOST: localhost
-      DATABASE_USER: benjamin
-      DATABASE_PASSWORD: ${{ secrets.CI_DB_PASSWORD_TENNIX }}
-      DATABASE_NAME: tennixdatabase
+      DATABASE_URL: mysql://benjamin:${{ secrets.CI_DB_PASSWORD_TENNIX }}@127.0.0.1:3306/tennixdatabase?charset=utf8mb4
     
     steps:
     - name: Checkout code
