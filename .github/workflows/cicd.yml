@@ -15,7 +15,10 @@ jobs:
     runs-on: ubuntu-latest
 
     env:
-      DATABASE_URL: ${{ secrets.MDP_TENNIX_BDD_LOCAL }}
+      DATABASE_HOST: localhost
+      DATABASE_USER: benjamin
+      DATABASE_PASSWORD: ${{ secrets.CI_DB_PASSWORD_TENNIX }}
+      DATABASE_NAME: tennixdatabase
     
     steps:
     - name: Checkout code
