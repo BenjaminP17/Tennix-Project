@@ -21,10 +21,12 @@ jobs:
           - 3306:3306
         env:
           MYSQL_ROOT_PASSWORD: ${{ secrets.CI_DB_PASSWORD_TENNIX }}
-          MYSQL_DATABASE: tennixdatabase
-          MYSQL_USER: benjamin
-          MYSQL_PASSWORD: ${{ secrets.CI_DB_PASSWORD_TENNIX }}
         options: --health-cmd="mysqladmin ping" --health-interval 10s --health-timeout 5s --health-retries 5
+    env:
+      PouletMayo_Db__Host: localhost
+      PouletMayo_Db__User: benjamin
+      PouletMayo_Db__Password: ${{ secrets.CI_DB_PASSWORD_TENNIX }}
+      PouletMayo_Db__Database: tennixdatabase
 
     steps:
     - name: Checkout code
