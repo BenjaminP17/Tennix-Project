@@ -14,31 +14,25 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
-    services:
-      mysql:
-        image: mysql:8
-        ports:
-          - 3306:3306
-        env:
-          MYSQL_ROOT_PASSWORD: ${{ secrets.CI_DB_PASSWORD_TENNIX }}
-        options: --health-cmd="mysqladmin ping" --health-interval 10s --health-timeout 5s --health-retries 5
-    env:
-      PouletMayo_Db__Host: localhost
-      PouletMayo_Db__User: benjamin
-      PouletMayo_Db__Password: ${{ secrets.CI_DB_PASSWORD_TENNIX }}
-      PouletMayo_Db__Database: tennixdatabase
-
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v3
+      - name: Checkout code
+        uses: actions/checkout@v3
 
-    - name: Set up PHP
-      uses: shivammathur/setup-php@v2
-      with:
-        php-version: '8.1' 
+      - name: Set up PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.1' 
 
-    - name: Install Composer dependencies
-      run: composer install --prefer-dist --no-progress
+      - name: Install Composer dependencies
+        run: composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
 
-    - name: Run PHPUnit tests
-      run: php bin/phpunit
+      - name: Run PHPUnit tests
+        run: php bin/phpunit
+
+      - name: test database
+        run: php bin/console doctrine:schema:validate
+
+      - name: Test database
+        env:
+          DATABASE_URL: mysql://benjamin:${{ secrets.CI_DB_PASSWORD_TENNIX }}@127.0.0.1:3306/tennixdatabase?charset=utf8mb4
+        run: php bin/console doctrine:schema:validate
