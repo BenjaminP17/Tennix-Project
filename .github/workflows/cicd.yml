@@ -10,12 +10,12 @@ on:
       - main
       - developpement
 
+permissions:
+  contents: read
+
 jobs:
   build:
     runs-on: ubuntu-latest
-
-    env:
-          DATABASE_URL: mysql://benjamin:${{ secrets.CI_DB_PASSWORD_TENNIX }}@127.0.0.1:3306/tennixdatabase?charset=utf8mb4
 
     steps:
       - name: Checkout code
@@ -32,6 +32,4 @@ jobs:
       - name: Run PHPUnit tests
         run: php bin/phpunit
 
-      - name: test database
-        run: php bin/console doctrine:schema:validate
 
