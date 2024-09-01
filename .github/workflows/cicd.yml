@@ -1,0 +1,35 @@
+name: Intégration Continue
+
+on:
+  push:
+    branches:
+      - main
+      - developpement
+  pull_request:
+    branches:
+      - main
+      - developpement
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.1' 
+
+      - name: Install Composer dependencies
+        run: composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
+
+      - name: Run PHPUnit tests
+        run: php bin/phpunit
+
+
