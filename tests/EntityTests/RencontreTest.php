@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Tests;
+namespace App\Tests\EntityTests;
 
 use App\Entity\User;
 use App\Entity\Rencontre;

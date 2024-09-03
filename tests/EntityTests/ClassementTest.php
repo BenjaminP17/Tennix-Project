@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Tests\Entity;
+namespace App\Tests\EntityTests;
 
 use App\Entity\Classement;
 use App\Entity\User;

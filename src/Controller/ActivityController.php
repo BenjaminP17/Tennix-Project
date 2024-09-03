@@ -53,7 +53,6 @@ class ActivityController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             
-
             $em->persist($rencontre);
             $em->flush();
 

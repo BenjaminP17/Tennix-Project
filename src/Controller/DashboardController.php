@@ -24,28 +24,15 @@ class DashboardController extends AbstractController
         TournamentRepository $tournamentRepo
     ): Response
     {
-        
-        // Calcul du pourcentage de victoire 
-
+         
         $allUserVictories = count($rencontreRepository->findBy(['user'=> $this->getUser(), 'resultat'=> 'Victoire']));
         $allUserDefeats = count($rencontreRepository->findBy(['user'=> $this->getUser(), 'resultat'=> 'Défaite']));
 
-        $totalMatches = $allUserVictories + $allUserDefeats;
-
-        if ($totalMatches != 0) {
-            $victoryPercentage = ($allUserVictories / $totalMatches) * 100;
-            $formattedPercentage = number_format($victoryPercentage, 1);
-        } else {
-            $formattedPercentage = 0;
-        }
-
-        // Dernière rencontre de l'utilisateur 
-
-        $lastMatch = ($rencontreRepository->findBy(['user'=> $this->getUser()], ['date'=>'DESC'], 1));
-
-        // Prochaine compétition de l'utilisateur 
-
-        $nextTournament = ($tournamentRepo->findBy(['user'=> $this->getUser()]));
+        $user = $this->getUser();
+    
+        $formattedPercentage = $this->userPourcentageVictory($rencontreRepository, $user);
+        $lastMatch = $this->userLastMatch($rencontreRepository, $user);
+        $nextTournament = $this->userNextTournament($tournamentRepo, $user);
 
 
         return $this->render('home/dashboard.html.twig', [
@@ -57,6 +44,36 @@ class DashboardController extends AbstractController
         ]);
     }
 
+    private function userPourcentageVictory(RencontreRepository $rencontreRepository, $user): float
+    {
+
+    $allUserVictories = count($rencontreRepository->findBy(['user'=> $user, 'resultat'=> 'Victoire']));
+    $allUserDefeats = count($rencontreRepository->findBy(['user'=> $user, 'resultat'=> 'Défaite']));
+
+    $totalMatches = $allUserVictories + $allUserDefeats;
+
+    if ($totalMatches != 0) {
+        $victoryPercentage = ($allUserVictories / $totalMatches) * 100;
+        return number_format($victoryPercentage, 1);
+    } else {
+        return 0;
+    }
+
+    }
+
+    private function userLastMatch(RencontreRepository $rencontreRepository, $user)
+    {
+
+    return $rencontreRepository->findBy(['user'=> $user], ['date'=>'DESC'], 1);
+
+    }
+
+    private function userNextTournament(TournamentRepository $tournamentRepo, $user)
+    {
+
+    return $tournamentRepo->findBy(['user'=> $user], ['date'=>'ASC'], 1);
+
+    }
     
     // Modification des informations de utilisateur connecté
     #[Route('/profil/edit', name: 'edit_profil', methods: ['GET', 'POST'])]
