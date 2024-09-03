@@ -44,7 +44,7 @@ class DashboardController extends AbstractController
         ]);
     }
 
-    private function userPourcentageVictory(RencontreRepository $rencontreRepository, $user): float
+    public function userPourcentageVictory(RencontreRepository $rencontreRepository, $user): float
     {
 
     $allUserVictories = count($rencontreRepository->findBy(['user'=> $user, 'resultat'=> 'Victoire']));
@@ -61,14 +61,14 @@ class DashboardController extends AbstractController
 
     }
 
-    private function userLastMatch(RencontreRepository $rencontreRepository, $user)
+    public function userLastMatch(RencontreRepository $rencontreRepository, $user)
     {
 
     return $rencontreRepository->findBy(['user'=> $user], ['date'=>'DESC'], 1);
 
     }
 
-    private function userNextTournament(TournamentRepository $tournamentRepo, $user)
+    public function userNextTournament(TournamentRepository $tournamentRepo, $user)
     {
 
     return $tournamentRepo->findBy(['user'=> $user], ['date'=>'ASC'], 1);
