@@ -60,10 +60,9 @@ class RegistrationController extends AbstractController
 
             return $this->redirectToRoute('app_login');
         }
-            //TODO Feature a deployer dans la V2
-        // return $this->render('registration/register.html.twig', [
-        //     'registrationForm' => $form->createView(),
-        // ]);
+        return $this->render('registration/register.html.twig', [
+            'registrationForm' => $form->createView(),
+        ]);
     }
 
     #[Route('/verify/email', name: 'app_verify_email')]

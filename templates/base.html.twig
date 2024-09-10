@@ -25,9 +25,25 @@
 		<!-- navbar -->
 		<div class="min-h-full">
 
-			{% include 'partials/_navbar.html.twig' %}	
+			{# {% include 'partials/_navbar.html.twig' %}	 #}
 
-			{% include 'partials/_header.html.twig' %}	
+			{# Inclure la navbar seulement si l'utilisateur est connecté #}
+
+			{% if app.user %}
+
+			{% include 'partials/_navbar.html.twig' %}
+
+			{% endif %}
+
+			{# Inclu le header uniquement si l'utilisateur est connecté #}
+
+			{% if app.user %}
+
+			{% include 'partials/_header.html.twig' %}
+
+			{% endif %}
+
+			{# {% include 'partials/_header.html.twig' %}	 #}
 
 			{% block body %}
 					
@@ -37,8 +53,6 @@
 
 	</body>
 
-	{# // <script src="https://cdn.tailwindcss.com"></script> #}
-		
 		{% block footer %}
 		
 		{% include 'partials/_footer.html.twig' %}
