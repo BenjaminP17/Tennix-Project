@@ -33,6 +33,7 @@ class DashboardController extends AbstractController
         $formattedPercentage = $this->userPourcentageVictory($rencontreRepository, $user);
         $lastMatch = $this->userLastMatch($rencontreRepository, $user);
         $nextTournament = $this->userNextTournament($tournamentRepo, $user);
+        // dd($nextTournament);
 
 
         return $this->render('home/dashboard.html.twig', [
@@ -71,7 +72,7 @@ class DashboardController extends AbstractController
     public function userNextTournament(TournamentRepository $tournamentRepo, $user)
     {
 
-    return $tournamentRepo->findBy(['user'=> $user], ['date'=>'ASC'], 1);
+    return $tournamentRepo->findBy(['user'=> $user], ['date'=>'ASC']);
 
     }
     
