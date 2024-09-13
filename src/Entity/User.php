@@ -79,10 +79,10 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, \Serial
     #[ORM\Column(type: 'boolean')]
     private $isVerified = false;
 
-    #[ORM\OneToMany(targetEntity: Rencontre::class, mappedBy: 'user')]
+    #[ORM\OneToMany(targetEntity: Rencontre::class, mappedBy: 'user', cascade: ['remove'])]
     private Collection $rencontre;
 
-    #[ORM\OneToMany(targetEntity: Tournament::class, mappedBy: 'user')]
+    #[ORM\OneToMany(targetEntity: Tournament::class, mappedBy: 'user', cascade: ['remove'])]
     private Collection $tournament;
 
     /**

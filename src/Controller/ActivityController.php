@@ -74,7 +74,6 @@ class ActivityController extends AbstractController
         ): Response
     {
         
-        
         $em->remove($rencontre);
         $em->flush();
 

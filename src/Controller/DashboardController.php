@@ -76,7 +76,6 @@ class DashboardController extends AbstractController
 
     }
     
-    // Modification des informations de utilisateur connecté
     #[Route('/profil/edit', name: 'edit_profil', methods: ['GET', 'POST'])]
     public function editProfil(
         Request $request,
@@ -103,6 +102,23 @@ class DashboardController extends AbstractController
         return $this->render('Form/edit_profil_form.html.twig', [
             'userForm' => $form->createView(),
         ]);
+    }
+
+    #[Route('/profil/delete', name: 'delete_profil')]
+    public function deleteProfil(
+        Request $request,
+        EntityManagerInterface $em
+    ): Response
+    {   
+        $user = $this->getUser();
+        $this->container->get('security.token_storage')->setToken(null);
+
+        $em->remove($user);
+        $em->flush();
+
+        $this->addFlash('success', 'Votre compte utilisateur a bien été supprimé !'); 
+
+        return $this->redirectToRoute('app_login');
     }
 
 }

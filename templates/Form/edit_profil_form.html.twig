@@ -104,6 +104,11 @@
                     
                 {{ form_end(userForm) }}
         </form>
+
+        <a href={{ path('delete_profil', {'id':app.user}) }} class="text-red-500 font-medium hover:text-gray-900 hover:bg-gray-50 block px-4 py-2 text-sm" role="menuitem" tabindex="-1" id="menu-item-0" onclick="return confirm('Êtes-vous sûr de vouloir supprimer votre compte ?');">
+            Supprimer mon compte
+        </a>
+
     </div>
 </body>
 
