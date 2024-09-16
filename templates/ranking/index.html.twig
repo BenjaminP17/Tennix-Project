@@ -11,20 +11,8 @@
         {% if key.user == app.user %}
         function drawChart() {
           var data = google.visualization.arrayToDataTable([
-            // ['Mois', 'Classement'],
-            // ['Janvier',  {{ key.classJanv }}],
-            // ['Février',  {{ key.classFev }}],
-            // ['Mars',  {{ key.classMar }}],
-            // ['Avril',  {{ key.classAvr }}],
-            // ['Mai',  {{ key.classMai }}],
-            // ['Juin',  {{ key.classJui }}],
-            // ['Juillet',  {{ key.classJuil }}],
-            // ['Août',  {{ key.classAout }}],
-            // ['Septembre',  {{ key.classSept }}],
-            // ['Octobre',  {{ key.classOct }}],
-            // ['Novembre',  {{ key.classNov }}],
-            // ['Décembre',  {{ key.classDec }}],
             ['Mois', 'Classement'],
+            // verification qu'une valeur existe, sinon on met null
             ['Janvier',  {{ key.classJanv is not null ? key.classJanv : 'null' }}],
             ['Février',  {{ key.classFev is not null ? key.classFev : 'null' }}],
             ['Mars',  {{ key.classMar is not null ? key.classMar : 'null' }}],
