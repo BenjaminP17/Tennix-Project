@@ -4,9 +4,6 @@
 
 {% block body %}
 
-  {# // <script src="https://cdn.tailwindcss.com"></script> #}
-
-  <!-- contenu -->
 
   <main>
 
@@ -61,8 +58,8 @@
 
           <div class="bg-gray-200 p-4 mb-5 rounded-lg shadow-md overflow-y-scroll max-h-80">
             
-            {% for key in nextTournament %}
-            {# Si la date actuelle est supérieur à echeance, la compétition ne s'affiche pas, on affiche les compétitions non jouées #}
+            {# {% for key in nextTournament %}
+            Si la date actuelle est supérieur à echeance, la compétition ne s'affiche pas, on affiche les compétitions non jouées
             {% if key.echeance|date("U") > "now"|date("U") %}
                 <div class="flex flex-col bg-white p-4 rounded-lg shadow-md mb-4">
                     <p class="text-gray-700 mb-2"><span class="font-semibold text-gray-800">Nom:</span> {{key.name}}</p>
@@ -70,7 +67,23 @@
                     <p class="text-gray-700"><span class="font-semibold text-gray-800">Type:</span> {{key.type}}</p>
                 </div>
             {% endif %}
-            {% endfor %}
+            {% endfor %} #}
+
+              {% if nextTournament != null %}
+                  {% for key in nextTournament %}
+                      {# Si la date actuelle est supérieur à echeance, la compétition ne s'affiche pas, on affiche les compétitions non jouées #}
+                      {% if key.echeance|date("U") > "now"|date("U") %}
+                          <div class="flex flex-col bg-white p-4 rounded-lg shadow-md mb-4">
+                              <p class="text-gray-700 mb-2"><span class="font-semibold text-gray-800">Nom:</span> {{key.name}}</p>
+                              <p class="text-gray-700 mb-2"><span class="font-code text-gray-800">Date:</span> {{ key.date|date("d/m/Y", "Europe/Paris") }} au {{ key.echeance|date("d/m/Y", "Europe/Paris") }} </p>
+                              <p class="text-gray-700"><span class="font-semibold text-gray-800">Type:</span> {{key.type}}</p>
+                          </div>
+                      {% endif %}
+                  {% endfor %}
+              {% else %}
+                  <p class="text-center">Vous n'avez aucune compétition enregistrée.</p>
+              {% endif %}
+          
           </div>
         
         </div>
@@ -121,6 +134,8 @@
         <div class="mx-auto max-w-7xl px-4 py-6 border-b border-gray-300">
           <h2 class="tracking-tight text-2xl font-bold "> Dernier match </h2>
         </div>
+
+        {% if lastMatch != null %}
         {% for key in lastMatch %}
         <div class="bg-white p-4 md:mt-10">
           <div class="flex justify-between mb-2">
@@ -149,6 +164,9 @@
             <div class="text-green-600 font-bold {% if key.resultat == 'Victoire'%}text-green-500{% elseif key.resultat == 'Défaite' %}text-red-500{% endif %}">{{key.resultat}}</div>
           </div>
           {% endfor %}
+          {% else %}
+                  <p class="text-center pt-5">Vous n'avez aucune rencontre enregistrée.</p>
+          {% endif %}
         </div>
         
       </div>
