@@ -24,16 +24,17 @@ class DashboardController extends AbstractController
         TournamentRepository $tournamentRepo
     ): Response
     {
-         
+        
+        $user = $this->getUser();
+        
         $allUserVictories = count($rencontreRepository->findBy(['user'=> $this->getUser(), 'resultat'=> 'Victoire']));
+
         $allUserDefeats = count($rencontreRepository->findBy(['user'=> $this->getUser(), 'resultat'=> 'Défaite']));
 
-        $user = $this->getUser();
-    
         $formattedPercentage = $this->userPourcentageVictory($rencontreRepository, $user);
         $lastMatch = $this->userLastMatch($rencontreRepository, $user);
         $nextTournament = $this->userNextTournament($tournamentRepo, $user);
-        // dd($nextTournament);
+        
 
 
         return $this->render('home/dashboard.html.twig', [

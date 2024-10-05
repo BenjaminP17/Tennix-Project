@@ -21,21 +21,6 @@ class RencontreRepository extends ServiceEntityRepository
         parent::__construct($registry, Rencontre::class);
     }
 
-//    /**
-//     * @return Rencontre[] Returns an array of Rencontre objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('r')
-//            ->andWhere('r.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('r.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
-
     // Liste des rencontres par dates, ordre décroissant
    public function findAllByDateDESC(): array
    {
@@ -47,5 +32,36 @@ class RencontreRepository extends ServiceEntityRepository
        ;
    }
 
+    // public function findByYear($year)
+    // {
+    //     return $this->createQueryBuilder('r')
+    //         ->where('EXTRACT(YEAR FROM r.date) = :year')
+    //         ->setParameter('year', $year)
+    //         ->orderBy('r.date', 'ASC')
+    //         ->getQuery()
+    //         ->getResult();
+    // } 
+
+    public function findByYear($year)
+    {
+        return $this->createQueryBuilder('r')
+            ->where('YEAR(r.date) = :year')
+            ->setParameter('year', $year)
+            ->orderBy('r.date', 'DESC')
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function findByCurrentYear()
+{
+    $currentYear = date('Y');
+
+    return $this->createQueryBuilder('r')
+        ->where('YEAR(r.date) = :year')
+        ->setParameter('year', $currentYear)
+        ->orderBy('r.date', 'DESC')
+        ->getQuery()
+        ->getResult();
+}
     
 }

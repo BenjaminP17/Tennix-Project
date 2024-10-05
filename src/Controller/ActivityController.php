@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Rencontre;
+use App\Form\ShowByYearType;
 use App\Form\NewMatchFormType;
 use App\Repository\RencontreRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -15,27 +16,61 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class ActivityController extends AbstractController
 {
     // Matchs affichés par dates décroissantes
+    // #[Route('/matchs', name: 'app_matchs', methods: ['GET'])]
+    // public function userAllMatchs(
+    //     RencontreRepository $RencontreRepository,
+    //     PaginatorInterface $paginator,
+    //     Request $request
+    // ): Response
+    // {
+    //     $data = $RencontreRepository->findAllByDateDESC();
+    //     $rencontres = $paginator->paginate(
+    //     $data,
+    //     $request->query->getInt('page', 1)
+    //     );
+        
+    //     return $this->render('activity/matchs.html.twig', [
+    //         'rencontres'=> $rencontres,
+    //     ]);
+    // }
+
     #[Route('/matchs', name: 'app_matchs', methods: ['GET'])]
-    public function index(
-        RencontreRepository $RencontreRepository,
-        PaginatorInterface $paginator,
-        Request $request
+    public function allMatchsUserCurrentAndSelectedYear(
+    RencontreRepository $RencontreRepository,
+    PaginatorInterface $paginator,
+    Request $request
     ): Response
     {
-        $data = $RencontreRepository->findAllByDateDESC();
-        $rencontres = $paginator->paginate(
+    // Création du formulaire
+    $form = $this->createForm(ShowByYearType::class);
+    $form->handleRequest($request);
+
+    // Si une année est sélectionnée
+    if ($form->isSubmitted() && $form->isValid()) {
+        $year = $form->get('year')->getData();
+        // Récupérer les rencontres filtrées par l'année
+        $data = $RencontreRepository->findByYear($year);
+    } else {
+        // Si aucune année sélectionnée, récupérer toutes les rencontres
+        $data = $RencontreRepository->findByCurrentYear();
+    }
+
+    $rencontres = $paginator->paginate(
         $data,
         $request->query->getInt('page', 1)
-        );
-        
-        return $this->render('activity/matchs.html.twig', [
-            'rencontres'=> $rencontres,
-        ]);
+    );
+
+    return $this->render('activity/matchs.html.twig', [
+        'rencontres' => $rencontres,
+        'form' => $form->createView(), 
+    ]);
     }
+
+
 
     // Ajouter un match au palmarès de l'utilisateur connecté
     #[Route('/matchs/ajout', name: 'app_matchs_add')]
-    public function add (
+    public function add(
         Request $request,
         EntityManagerInterface $em
         ): Response
