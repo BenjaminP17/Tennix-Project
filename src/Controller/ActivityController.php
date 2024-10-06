@@ -57,7 +57,7 @@ class ActivityController extends AbstractController
 
     $rencontres = $paginator->paginate(
         $data,
-        $request->query->getInt('page', 1)
+        $request->query->getInt('page', 1), 7
     );
 
     return $this->render('activity/matchs.html.twig', [

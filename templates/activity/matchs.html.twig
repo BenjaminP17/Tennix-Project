@@ -6,17 +6,7 @@
     <h1 class="text-3xl text-center font-bold mt-10">Palmarès</h1>
 </div>
 
-<!--Dropdown Year Select-->
-
-{# {{ form_start(form) }}
-    {{ form_row(form.year) }}
-    <button type="submit">Filter</button>    
-{{ form_end(form) }} #}
-
-
 <div class="max-w-7xl mx-auto overflow-auto">
-
-    
 
     {{ include('components/_flash_message.html.twig') }}
 
@@ -62,7 +52,7 @@
                 </thead>
                 <tbody class="divide-y divide-gray-200 bg-white">
                     {% for rencontre in rencontres %}
-                    <!-- affichage des matchs de l'utilisateur connecté --> 
+                    
                     {% if rencontre.user == app.user %}
                     <tr>
                         <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-semibold text-gray-900 sm:pl-6">{{ rencontre.date|date("d/m/Y", "Europe/Paris") }}</td>
@@ -94,7 +84,6 @@
                                         </a>
                                     </div>
                                     <div class="" role="none">
-                                        <!-- Supprime un match -->
                                         <a href={{ path('app_matchs_delete', {'id':rencontre.id}) }} class="text-gray-500 font-medium hover:text-gray-900 hover:bg-gray-50 block px-4 py-2 text-sm" role="menuitem" tabindex="-1" id="menu-item-0" onclick="return confirm('Voulez-vous supprimer cet enregistrement ?');">
                                             Supprimer
                                         </a>
@@ -111,7 +100,7 @@
     </div>
 
     <!-- Pagination -->
-    <div class="navigation flex justify-center mt-5">
+    <div class="navigation flex justify-center mt-5 mb-5">
         {{ knp_pagination_render(rencontres) }}
     </div>
  
