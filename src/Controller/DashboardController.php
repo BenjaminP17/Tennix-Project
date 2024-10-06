@@ -27,18 +27,25 @@ class DashboardController extends AbstractController
         
         $user = $this->getUser();
         
-        $allUserVictories = count($rencontreRepository->findBy(['user'=> $this->getUser(), 'resultat'=> 'Victoire']));
+        // $allUserVictories = count($rencontreRepository->findBy(['user'=> $this->getUser(), 'resultat'=> 'Victoire']));
+
+        $allUserVictoriesCurrentYear = $rencontreRepository->AllVictoriesCurrentYear();
+
+        // dd($allUserVictoriesCurrentYear);
 
         $allUserDefeats = count($rencontreRepository->findBy(['user'=> $this->getUser(), 'resultat'=> 'Défaite']));
 
         $formattedPercentage = $this->userPourcentageVictory($rencontreRepository, $user);
+
         $lastMatch = $this->userLastMatch($rencontreRepository, $user);
+
         $nextTournament = $this->userNextTournament($tournamentRepo, $user);
         
 
 
         return $this->render('home/dashboard.html.twig', [
-            'victoires' => $allUserVictories,
+            // 'victoires' => $allUserVictories,
+            'victoires' => $allUserVictoriesCurrentYear,
             'défaites' => $allUserDefeats,
             'pourcentage' => $formattedPercentage,
             'lastMatch' => $lastMatch,
@@ -49,31 +56,43 @@ class DashboardController extends AbstractController
     public function userPourcentageVictory(RencontreRepository $rencontreRepository, $user): float
     {
 
-    $allUserVictories = count($rencontreRepository->findBy(['user'=> $user, 'resultat'=> 'Victoire']));
-    $allUserDefeats = count($rencontreRepository->findBy(['user'=> $user, 'resultat'=> 'Défaite']));
+        // $allUserVictories = count($rencontreRepository->findBy(['user'=> $user, 'resultat'=> 'Victoire']));
 
-    $totalMatches = $allUserVictories + $allUserDefeats;
+        $allUserVictoriesCurrentYear = $rencontreRepository->AllVictoriesCurrentYear();
 
-    if ($totalMatches != 0) {
-        $victoryPercentage = ($allUserVictories / $totalMatches) * 100;
-        return number_format($victoryPercentage, 1);
-    } else {
-        return 0;
-    }
+        $allUserDefeats = count($rencontreRepository->findBy(['user'=> $user, 'resultat'=> 'Défaite']));
+
+        // $totalMatches = $allUserVictories + $allUserDefeats;
+
+        $totalMatches = $allUserVictoriesCurrentYear + $allUserDefeats;
+
+        // if ($totalMatches != 0) {
+        //     $victoryPercentage = ($allUserVictories / $totalMatches) * 100;
+        //     return number_format($victoryPercentage, 1);
+        // } else {
+        //     return 0;
+        // }
+
+        if ($totalMatches != 0) {
+            $victoryPercentage = ($allUserVictoriesCurrentYear / $totalMatches) * 100;
+            return number_format($victoryPercentage, 1);
+        } else {
+            return 0;
+        }
 
     }
 
     public function userLastMatch(RencontreRepository $rencontreRepository, $user)
     {
 
-    return $rencontreRepository->findBy(['user'=> $user], ['date'=>'DESC'], 1);
+        return $rencontreRepository->findBy(['user'=> $user], ['date'=>'DESC'], 1);
 
     }
 
     public function userNextTournament(TournamentRepository $tournamentRepo, $user)
     {
 
-    return $tournamentRepo->findBy(['user'=> $user], ['date'=>'ASC']);
+        return $tournamentRepo->findBy(['user'=> $user], ['date'=>'ASC']);
 
     }
     
