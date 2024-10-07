@@ -8,25 +8,25 @@
 import './styles/app.css';
 
         // affiche la popup au clik de la navbar sur desktop
-        const photo = document.getElementById('photo');
-        const menu = document.getElementById('menu1');
+        // const photo = document.getElementById('photo');
+        // const menu = document.getElementById('menu1');
 
-        photo.addEventListener('click', () => {
-            if (menu.style.display === 'none') {
-                menu.style.display = 'block';
-            } else {
-                menu.style.display = 'none';
-            }
-        });
+        // photo.addEventListener('click', () => {
+        //     if (menu.style.display === 'none') {
+        //         menu.style.display = 'block';
+        //     } else {
+        //         menu.style.display = 'none';
+        //     }
+        // });
 
         // déroule le menu sur mobile
-        const button = document.getElementById('btn1');
-        const menu2 = document.getElementById('mobile-menu');
+        // const button = document.getElementById('btn1');
+        // const menu2 = document.getElementById('mobile-menu');
 
-        button.addEventListener('click', () => {
-            if (menu2.style.display === 'none') {
-                menu2.style.display = 'block';
-            } else {
-                menu2.style.display = 'none';
-            }
-        });
+        // button.addEventListener('click', () => {
+        //     if (menu2.style.display === 'none') {
+        //         menu2.style.display = 'block';
+        //     } else {
+        //         menu2.style.display = 'none';
+        //     }
+        // });

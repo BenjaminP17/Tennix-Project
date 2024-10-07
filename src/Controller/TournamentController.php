@@ -60,4 +60,21 @@ class TournamentController extends AbstractController
     }
 
 
+    // Affichage des tournois par date, ordre décroissant. 
+    #[Route('/tournament/delete', name: 'app_tournament_delete')]
+    public function deleteTournament(
+        Tournament $Tournament,
+        TournamentRepository $tournamentRepo,
+        Request $request
+    ): Response
+    {
+        $em->remove($Tournament);
+        $em->flush();
+
+        $this->addFlash('success', 'Votre tournoi à bien été supprimé');
+
+        return $this->redirectToRoute('app_tournament');
+
+    }
+
 }
