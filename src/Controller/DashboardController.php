@@ -31,9 +31,9 @@ class DashboardController extends AbstractController
 
         $allUserVictoriesCurrentYear = $rencontreRepository->AllVictoriesCurrentYear();
 
-        // dd($allUserVictoriesCurrentYear);
+        // $allUserDefeats = count($rencontreRepository->findBy(['user'=> $this->getUser(), 'resultat'=> 'Défaite']));
 
-        $allUserDefeats = count($rencontreRepository->findBy(['user'=> $this->getUser(), 'resultat'=> 'Défaite']));
+        $allUserDefeatsCurrentYear = $rencontreRepository->AllDefeatsCurrentYear();
 
         $formattedPercentage = $this->userPourcentageVictory($rencontreRepository, $user);
 
@@ -46,7 +46,8 @@ class DashboardController extends AbstractController
         return $this->render('home/dashboard.html.twig', [
             // 'victoires' => $allUserVictories,
             'victoires' => $allUserVictoriesCurrentYear,
-            'défaites' => $allUserDefeats,
+            // 'défaites' => $allUserDefeats,
+            'défaites' => $allUserDefeatsCurrentYear,
             'pourcentage' => $formattedPercentage,
             'lastMatch' => $lastMatch,
             'nextTournament' => $nextTournament,
@@ -60,11 +61,13 @@ class DashboardController extends AbstractController
 
         $allUserVictoriesCurrentYear = $rencontreRepository->AllVictoriesCurrentYear();
 
-        $allUserDefeats = count($rencontreRepository->findBy(['user'=> $user, 'resultat'=> 'Défaite']));
+        // $allUserDefeats = count($rencontreRepository->findBy(['user'=> $user, 'resultat'=> 'Défaite']));
+
+        $allUserDefeatsCurrentYear = $rencontreRepository->AllDefeatsCurrentYear();
 
         // $totalMatches = $allUserVictories + $allUserDefeats;
 
-        $totalMatches = $allUserVictoriesCurrentYear + $allUserDefeats;
+        $totalMatches = $allUserVictoriesCurrentYear + $allUserDefeatsCurrentYear;
 
         // if ($totalMatches != 0) {
         //     $victoryPercentage = ($allUserVictories / $totalMatches) * 100;

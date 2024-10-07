@@ -72,17 +72,18 @@ class RencontreRepository extends ServiceEntityRepository
 
     public function AllDefeatsCurrentYear()
     {
-        $currentYear = (new \DateTime())->format('Y'); 
+        $currentYear = (new \DateTime())->format('Y');  
 
-        $allUserVictories = count($rencontreRepository->createQueryBuilder('r')
-            ->where('r.user = :user')
-            ->andWhere('r.resultat = :resultat')
+        return $this->createQueryBuilder('r')
+            ->select('COUNT(r.id) AS defeatCount')
+            ->where('r.resultat = :result')  
             ->andWhere('YEAR(r.date) = :currentYear')
-            ->setParameter('user', $this->getUser())
-            ->setParameter('resultat', 'Défaite')
+            ->setParameter('result', 'Défaite')
             ->setParameter('currentYear', $currentYear)
             ->getQuery()
-            ->getResult());
+            ->getSingleScalarResult();
 
     }
+
+    
 }
