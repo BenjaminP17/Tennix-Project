@@ -59,13 +59,13 @@ class TournamentController extends AbstractController
         ]);
     }
 
-    #[Route('/tournament/delete', name: 'app_tournament_delete')]
+    #[Route('/tournament/delete/{id}', name: 'app_tournament_delete')]
     public function deleteTournament(
-        Tournament $Tournament,
+        Tournament $tournament,
         EntityManagerInterface $em
     ): Response
     {
-        $em->remove($Tournament);
+        $em->remove($tournament);
         $em->flush();
 
         $this->addFlash('success', 'Votre tournoi à bien été supprimé');
