@@ -85,5 +85,20 @@ class RencontreRepository extends ServiceEntityRepository
 
     }
 
+    public function AllMatchsCurrentYear()
+
+    {
+        $currentYear = (new \DateTime())->format('Y');
+
+        return $this->createQueryBuilder('r')
+            ->select('COUNT(r.id) AS matchPlayed')
+            ->Where('YEAR(r.date) = :currentYear')
+            ->setParameter('currentYear', $currentYear)
+            ->getQuery()
+            ->getSingleScalarResult();
+
+
+    }
+
     
 }

@@ -59,13 +59,10 @@ class TournamentController extends AbstractController
         ]);
     }
 
-
-    // Affichage des tournois par date, ordre décroissant. 
     #[Route('/tournament/delete', name: 'app_tournament_delete')]
     public function deleteTournament(
         Tournament $Tournament,
-        TournamentRepository $tournamentRepo,
-        Request $request
+        EntityManagerInterface $em
     ): Response
     {
         $em->remove($Tournament);

@@ -33,6 +33,10 @@ class DashboardController extends AbstractController
 
         // $allUserDefeats = count($rencontreRepository->findBy(['user'=> $this->getUser(), 'resultat'=> 'Défaite']));
 
+        $allUserMatchsPlayedCurrentYear = $rencontreRepository->AllMatchsCurrentYear();
+
+        // dd($allUserMatchsPlayedCurrentYear);
+
         $allUserDefeatsCurrentYear = $rencontreRepository->AllDefeatsCurrentYear();
 
         $formattedPercentage = $this->userPourcentageVictory($rencontreRepository, $user);
@@ -51,6 +55,7 @@ class DashboardController extends AbstractController
             'pourcentage' => $formattedPercentage,
             'lastMatch' => $lastMatch,
             'nextTournament' => $nextTournament,
+            'allMatchs' => $allUserMatchsPlayedCurrentYear
         ]);
     }
 
