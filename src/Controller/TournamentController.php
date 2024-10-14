@@ -15,15 +15,19 @@ class TournamentController extends AbstractController
 {
     // Affichage des tournois par date, ordre décroissant. 
     #[Route('/tournament', name: 'app_tournament')]
-    public function index(
+    public function showTournaments(
         TournamentRepository $tournamentRepo,
         Request $request
     ): Response
     {
+        $currentDate = new \dateTime();
+        // dd($currentDate);
+
         $tournamentsList = ($tournamentRepo->findBy(['user'=> $this->getUser()], ['date'=>'ASC']));
 
         return $this->render('tournament/tournaments.html.twig', [
             'tournamentsList' => $tournamentsList,
+            'currentDate' => $currentDate
         ]);
     }
 

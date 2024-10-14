@@ -9,50 +9,26 @@
     {{ include("components/_flash_message.html.twig") }}
   </div>
 
-  <a
-    href="{{ path('app_tournament_Form') }}"
-    input
-    type="button"
+  <a href="{{ path('app_tournament_Form') }}" type="button"
     class="btn relative bg-green-700 text-black mt-5 p-3 rounded-xl font-bold mb-5"
     >Ajouter une compétition</a>
-
-  {# <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-2">
     {% for key in tournamentsList %}
     <div class="mx-auto">
-      
-      <div class="max-w-xs cursor-pointer rounded-lg bg-white p-2 shadow duration-150 hover:scale-105 hover:shadow-md">
-        
-        <img
-          class="w-full rounded-lg object-cover object-center"
-          src="https://images.unsplash.com/photo-1567220720374-a67f33b2a6b9?q=80&w=1932&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-          alt="product"
-        />
-        <button class="text-xl align-center cursor-pointer alert-del">&times;</button>
-        <p class="my-4 pl-4 font-bold text-gray-500">{{ key.name }}</p>
-        <p class="mb-4 ml-4 text-xl font-semibold text-gray-800">
-          {{key.date|date("d/m/Y", "Europe/Paris")}} au
-          {{key.echeance|date("d/m/Y", "Europe/Paris")}}
-        </p>
-      </div>
-    </div>
-    {% endfor %}
-  </div> #}
-
-  <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-    {% for key in tournamentsList %}
-    <div class="mx-auto">
-      
       <div class="relative max-w-xs cursor-pointer rounded-lg bg-white p-2 shadow duration-150 hover:scale-105 hover:shadow-md">
-        
         <img
           class="w-full rounded-lg object-cover object-center"
           src="https://images.unsplash.com/photo-1567220720374-a67f33b2a6b9?q=80&w=1932&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-          alt="product"
-        />
-        {# <button href={{ path('app_tournament_delete', {'id':key.id}) }} class="absolute top-2 right-2 text-xl cursor-pointer alert-del pr-2" onclick="return confirm('Voulez-vous supprimer cet enregistrement ?');">&times;</button> #}
+          alt="product"/>
         <a href="{{ path('app_tournament_delete', {'id':key.id}) }}" class="absolute top-2 right-2 text-xl cursor-pointer alert-del pr-2" onclick="return confirm('Voulez-vous supprimer cet enregistrement ?');">&times;</a>
-
         <p class="my-4 pl-4 font-bold text-gray-500">{{ key.name }}</p>
+
+        {% if key.date > currentDate %}
+        <p class="my-4 pl-4 font-bold text-green-600">A venir</p>
+        {% elseif currentDate > key.echeance %}
+        <p class="my-4 pl-4 font-bold text-red-600">Terminé</p>
+        {% endif %}
+
         <p class="mb-4 ml-4 text-xl font-semibold text-gray-800">
           {{key.date|date("d/m/Y", "Europe/Paris")}} au
           {{key.echeance|date("d/m/Y", "Europe/Paris")}}
