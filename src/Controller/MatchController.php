@@ -13,27 +13,8 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
-class ActivityController extends AbstractController
+class MatchController extends AbstractController
 {
-    // Matchs affichés par dates décroissantes
-    // #[Route('/matchs', name: 'app_matchs', methods: ['GET'])]
-    // public function userAllMatchs(
-    //     RencontreRepository $RencontreRepository,
-    //     PaginatorInterface $paginator,
-    //     Request $request
-    // ): Response
-    // {
-    //     $data = $RencontreRepository->findAllByDateDESC();
-    //     $rencontres = $paginator->paginate(
-    //     $data,
-    //     $request->query->getInt('page', 1)
-    //     );
-        
-    //     return $this->render('activity/matchs.html.twig', [
-    //         'rencontres'=> $rencontres,
-    //     ]);
-    // }
-
     #[Route('/matchs', name: 'app_matchs', methods: ['GET'])]
     public function allMatchsUserCurrentAndSelectedYear(
     RencontreRepository $RencontreRepository,
@@ -60,17 +41,15 @@ class ActivityController extends AbstractController
         $request->query->getInt('page', 1), 7
     );
 
-    return $this->render('activity/matchs.html.twig', [
+    return $this->render('match/matchs.html.twig', [
         'rencontres' => $rencontres,
         'form' => $form->createView(), 
     ]);
     }
 
 
-
-    // Ajouter un match au palmarès de l'utilisateur connecté
     #[Route('/matchs/ajout', name: 'app_matchs_add')]
-    public function add(
+    public function addMatch(
         Request $request,
         EntityManagerInterface $em
         ): Response
@@ -101,9 +80,9 @@ class ActivityController extends AbstractController
         ]);
     }
 
-    // Supprimer un match
+    
     #[Route('/matchs/supprimer/{id}', name: 'app_matchs_delete')]
-    public function delete (
+    public function deleteMatch (
         Rencontre $rencontre,
         EntityManagerInterface $em
         ): Response
@@ -120,7 +99,7 @@ class ActivityController extends AbstractController
 
     // Modifier un match dans le palmarès
     #[Route('/matchs/edit/{id}', name: 'app_matchs_edit')]
-    public function edit (
+    public function editMatch (
         Rencontre $rencontre,
         Request $request,
         EntityManagerInterface $em

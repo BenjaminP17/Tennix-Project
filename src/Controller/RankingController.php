@@ -11,17 +11,12 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class RankingController extends AbstractController
 {
     #[Route('/ranking', name: 'app_ranking')]
-    public function index(
+    public function showRanking(
         ClassementRepository $classRepo
     ): Response
     {
 
-        // Récupération de l'évolution du classements de l'utilisateur sur l'année
-
         $classementList = ($classRepo->findBy(['user'=> $this->getUser()]));
-
-        // dd($classementList);
-
 
         return $this->render('ranking/index.html.twig', [
             'classementList' => $classementList,

@@ -21,7 +21,6 @@ class TournamentController extends AbstractController
     ): Response
     {
         $currentDate = new \dateTime();
-        // dd($currentDate);
 
         $tournamentsList = ($tournamentRepo->findBy(['user'=> $this->getUser()], ['date'=>'ASC']));
 
@@ -33,7 +32,7 @@ class TournamentController extends AbstractController
 
     // Ajout d'un tournoi au calendrier de l'utilisateur 
     #[Route('/tournament/ajout', name: 'app_tournament_Form')]
-    public function add(
+    public function addTournament(
         Request $request,
         EntityManagerInterface $em
     ): Response
