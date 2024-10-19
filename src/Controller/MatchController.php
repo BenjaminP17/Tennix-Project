@@ -30,7 +30,7 @@ class MatchController extends AbstractController
     if ($form->isSubmitted() && $form->isValid()) {
         $year = $form->get('year')->getData();
         // Récupérer les rencontres filtrées par l'année
-        $data = $RencontreRepository->findByYear($year);
+        $data = $RencontreRepository->findBySelectedYear($year);
     } else {
         // Si aucune année sélectionnée, récupérer toutes les rencontres
         $data = $RencontreRepository->findByCurrentYear();

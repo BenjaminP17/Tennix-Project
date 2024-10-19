@@ -21,4 +21,28 @@ class TournamentRepository extends ServiceEntityRepository
         parent::__construct($registry, Tournament::class);
     }
 
+
+    public function findBySelectedYear($year)
+    {
+        return $this->createQueryBuilder('r')
+            ->where('YEAR(r.date) = :year')
+            ->setParameter('year', $year)
+            ->orderBy('r.date', 'DESC')
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function findByCurrentYear()
+    {
+
+    $currentYear = date('Y');
+
+    return $this->createQueryBuilder('r')
+        ->where('YEAR(r.date) = :year')
+        ->setParameter('year', $currentYear)
+        ->orderBy('r.date', 'DESC')
+        ->getQuery()
+        ->getResult();
+    }
+
 }

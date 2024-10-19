@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %} {% block body %}
 
 <div class="justify-center">
-  <h1 class="text-3xl text-center font-bold mt-10">Mes Compétitions de l'année</h1>
+  <h1 class="text-3xl text-center font-bold mt-10">Mes Compétitions</h1>
 </div>
 
 <div class="max-w-7xl mx-auto mt-10 mb-10">
@@ -9,9 +9,28 @@
     {{ include("components/_flash_message.html.twig") }}
   </div>
 
+  <div class="flex justify-between items-center w-full mt-5">
   <a href="{{ path('app_tournament_Form') }}" type="button"
     class="btn relative bg-green-700 text-black mt-5 p-3 rounded-xl font-bold mb-5"
     >Ajouter une compétition</a>
+
+    <div class="w-40 mr-5">
+      {{ form_start(form, {'attr': {'class': 'space-y-4'}}) }}
+      <div class="mb-4">
+          {{ form_widget(form.year, {
+              'attr': {
+                  'class': 'mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm',
+                  'onchange': 'this.form.submit();' 
+              },
+              'placeholder': 'Année'
+          }) }}
+          {{ form_errors(form.year, {'attr': {'class': 'text-red-600 text-sm'}}) }}
+      </div>
+  
+      {{ form_end(form) }}
+  </div>
+</div>
+
   <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-2">
     {% for key in tournamentsList %}
     <div class="mx-auto">

@@ -21,7 +21,6 @@ class RencontreRepository extends ServiceEntityRepository
         parent::__construct($registry, Rencontre::class);
     }
 
-    // Liste des rencontres par dates, ordre décroissant
    public function findAllByDateDESC(): array
    {
        return $this->createQueryBuilder('r')
@@ -32,7 +31,7 @@ class RencontreRepository extends ServiceEntityRepository
        ;
    }
 
-    public function findByYear($year)
+    public function findBySelectedYear($year)
     {
         return $this->createQueryBuilder('r')
             ->where('YEAR(r.date) = :year')
