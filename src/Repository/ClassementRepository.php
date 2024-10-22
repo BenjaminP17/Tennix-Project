@@ -21,28 +21,39 @@ class ClassementRepository extends ServiceEntityRepository
         parent::__construct($registry, Classement::class);
     }
 
-    //    /**
-    //     * @return Classement[] Returns an array of Classement objects
-    //     */
-    //    public function findByExampleField($value): array
-    //    {
-    //        return $this->createQueryBuilder('c')
-    //            ->andWhere('c.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->orderBy('c.id', 'ASC')
-    //            ->setMaxResults(10)
-    //            ->getQuery()
-    //            ->getResult()
-    //        ;
-    //    }
+    public function findBySelectedYear($year)
+    {
+        return $this->createQueryBuilder('r')
+            ->where('YEAR(r.date) = :year')
+            ->setParameter('year', $year)
+            ->orderBy('r.date', 'DESC')
+            ->getQuery()
+            ->getResult();
+    }
 
-    //    public function findOneBySomeField($value): ?Classement
-    //    {
-    //        return $this->createQueryBuilder('c')
-    //            ->andWhere('c.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->getQuery()
-    //            ->getOneOrNullResult()
-    //        ;
-    //    }
+    public function findByCurrentYear()
+    {
+
+    $currentYear = date('Y');
+
+    return $this->createQueryBuilder('r')
+        ->where('YEAR(r.date) = :year')
+        ->setParameter('year', $currentYear)
+        ->orderBy('r.date', 'DESC')
+        ->getQuery()
+        ->getResult();
+    }
+
+    public function findByCurrentMonth()
+    {
+    $currentMonth = date('m');
+
+    return $this->createQueryBuilder('r')
+        ->select('r.ranking')
+        ->where('MONTH(r.date) = :month')
+        ->setParameter('month', $currentMonth)
+        ->getQuery()
+        ->getResult();
+    }
+
 }

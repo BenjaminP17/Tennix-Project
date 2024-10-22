@@ -54,7 +54,22 @@ class RencontreRepository extends ServiceEntityRepository
         ->getResult();
     }
     
-    public function AllVictoriesCurrentYear()
+   
+    // public function AllVictoriesCurrentYear()
+    // {
+    //     $currentYear = (new \DateTime())->format('Y');  
+
+    //     return $this->createQueryBuilder('r')
+    //         ->select('COUNT(r.id) AS victoryCount')
+    //         ->where('r.resultat = :result')  
+    //         ->andWhere('YEAR(r.date) = :currentYear')
+    //         ->setParameter('result', 'Victoire')
+    //         ->setParameter('currentYear', $currentYear)
+    //         ->getQuery()
+    //         ->getSingleScalarResult();
+    // }
+
+    public function AllVictoriesCurrentYear($user)
     {
         $currentYear = (new \DateTime())->format('Y');  
 
@@ -62,14 +77,15 @@ class RencontreRepository extends ServiceEntityRepository
             ->select('COUNT(r.id) AS victoryCount')
             ->where('r.resultat = :result')  
             ->andWhere('YEAR(r.date) = :currentYear')
+            ->andWhere('r.user = :user')
             ->setParameter('result', 'Victoire')
             ->setParameter('currentYear', $currentYear)
+            ->setParameter('user', $user)
             ->getQuery()
             ->getSingleScalarResult();
-
     }
 
-    public function AllDefeatsCurrentYear()
+    public function AllDefeatsCurrentYear($user)
     {
         $currentYear = (new \DateTime())->format('Y');  
 
@@ -77,14 +93,16 @@ class RencontreRepository extends ServiceEntityRepository
             ->select('COUNT(r.id) AS defeatCount')
             ->where('r.resultat = :result')  
             ->andWhere('YEAR(r.date) = :currentYear')
+            ->andWhere('r.user = :user')
             ->setParameter('result', 'Défaite')
             ->setParameter('currentYear', $currentYear)
+            ->setParameter('user', $user)
             ->getQuery()
             ->getSingleScalarResult();
 
     }
 
-    public function AllMatchsCurrentYear()
+    public function AllMatchsCurrentYear($user)
 
     {
         $currentYear = (new \DateTime())->format('Y');
@@ -92,7 +110,9 @@ class RencontreRepository extends ServiceEntityRepository
         return $this->createQueryBuilder('r')
             ->select('COUNT(r.id) AS matchPlayed')
             ->Where('YEAR(r.date) = :currentYear')
+            ->andWhere('r.user = :user')
             ->setParameter('currentYear', $currentYear)
+            ->setParameter('user', $user)
             ->getQuery()
             ->getSingleScalarResult();
 

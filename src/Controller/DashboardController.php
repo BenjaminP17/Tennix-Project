@@ -7,6 +7,7 @@ use App\Form\UserType;
 use App\Entity\Rencontre;
 use App\Repository\UserRepository;
 use App\Repository\RencontreRepository;
+use App\Repository\ClassementRepository;
 use App\Repository\TournamentRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -21,23 +22,20 @@ class DashboardController extends AbstractController
     public function showStatsUser(
         UserRepository $userRepo,
         RencontreRepository $rencontreRepository,
-        TournamentRepository $tournamentRepo
+        TournamentRepository $tournamentRepo,
+        ClassementRepository $classementRepository
     ): Response
     {
         
         $user = $this->getUser();
-        
-        // $allUserVictories = count($rencontreRepository->findBy(['user'=> $this->getUser(), 'resultat'=> 'Victoire']));
 
-        $allUserVictoriesCurrentYear = $rencontreRepository->AllVictoriesCurrentYear();
+        $currentRank = $this->userCurrentRank($classementRepository, $user);
 
-        // $allUserDefeats = count($rencontreRepository->findBy(['user'=> $this->getUser(), 'resultat'=> 'Défaite']));
+        $allUserVictoriesCurrentYear = $rencontreRepository->AllVictoriesCurrentYear($user);
 
-        $allUserMatchsPlayedCurrentYear = $rencontreRepository->AllMatchsCurrentYear();
+        $allUserMatchsPlayedCurrentYear = $rencontreRepository->AllMatchsCurrentYear($user);
 
-        // dd($allUserMatchsPlayedCurrentYear);
-
-        $allUserDefeatsCurrentYear = $rencontreRepository->AllDefeatsCurrentYear();
+        $allUserDefeatsCurrentYear = $rencontreRepository->AllDefeatsCurrentYear($user);
 
         $formattedPercentage = $this->userPourcentageVictory($rencontreRepository, $user);
 
@@ -48,38 +46,25 @@ class DashboardController extends AbstractController
 
 
         return $this->render('home/dashboard.html.twig', [
-            // 'victoires' => $allUserVictories,
             'victoires' => $allUserVictoriesCurrentYear,
-            // 'défaites' => $allUserDefeats,
             'défaites' => $allUserDefeatsCurrentYear,
             'pourcentage' => $formattedPercentage,
             'lastMatch' => $lastMatch,
             'nextTournament' => $nextTournament,
-            'allMatchs' => $allUserMatchsPlayedCurrentYear
+            'allMatchs' => $allUserMatchsPlayedCurrentYear,
+            'currentRank' => $currentRank
         ]);
     }
 
-    public function userPourcentageVictory(RencontreRepository $rencontreRepository, $user): float
+    public function userPourcentageVictory(RencontreRepository $rencontreRepository): float
     {
+        $user = $this->getUser();
+        
+        $allUserVictoriesCurrentYear = $rencontreRepository->AllVictoriesCurrentYear($user);
 
-        // $allUserVictories = count($rencontreRepository->findBy(['user'=> $user, 'resultat'=> 'Victoire']));
-
-        $allUserVictoriesCurrentYear = $rencontreRepository->AllVictoriesCurrentYear();
-
-        // $allUserDefeats = count($rencontreRepository->findBy(['user'=> $user, 'resultat'=> 'Défaite']));
-
-        $allUserDefeatsCurrentYear = $rencontreRepository->AllDefeatsCurrentYear();
-
-        // $totalMatches = $allUserVictories + $allUserDefeats;
+        $allUserDefeatsCurrentYear = $rencontreRepository->AllDefeatsCurrentYear($user);
 
         $totalMatches = $allUserVictoriesCurrentYear + $allUserDefeatsCurrentYear;
-
-        // if ($totalMatches != 0) {
-        //     $victoryPercentage = ($allUserVictories / $totalMatches) * 100;
-        //     return number_format($victoryPercentage, 1);
-        // } else {
-        //     return 0;
-        // }
 
         if ($totalMatches != 0) {
             $victoryPercentage = ($allUserVictoriesCurrentYear / $totalMatches) * 100;
@@ -92,16 +77,17 @@ class DashboardController extends AbstractController
 
     public function userLastMatch(RencontreRepository $rencontreRepository, $user)
     {
-
         return $rencontreRepository->findBy(['user'=> $user], ['date'=>'DESC'], 1);
-
     }
 
     public function userNextTournament(TournamentRepository $tournamentRepo, $user)
     {
-
         return $tournamentRepo->findBy(['user'=> $user], ['date'=>'ASC']);
+    }
 
+    public function userCurrentRank(ClassementRepository $classementRepository, $user)
+    {
+        return $classementRepository->findBy(['user'=> $user], ['date'=>'DESC'], 1);
     }
     
     #[Route('/profil/edit', name: 'edit_profil', methods: ['GET', 'POST'])]

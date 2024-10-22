@@ -12,13 +12,17 @@ class RankingController extends AbstractController
 {
     #[Route('/ranking', name: 'app_ranking')]
     public function showRanking(
-        ClassementRepository $classRepo
+        ClassementRepository $classementRepository
     ): Response
     {
 
-        $classementList = ($classRepo->findBy(['user'=> $this->getUser()]));
+        // $classementList = ($classRepo->findBy(['user'=> $this->getUser()]));
 
-        return $this->render('ranking/index.html.twig', [
+        $classementList = $classementRepository->findByCurrentYear();
+
+        // dd($classementList);
+
+        return $this->render('ranking/rank.html.twig', [
             'classementList' => $classementList,
         ]);
     }
