@@ -1,60 +1,152 @@
 {% extends 'base.html.twig' %} {% block body %}
-<div>
-  <script
-    type="text/javascript"
-    src="https://www.gstatic.com/charts/loader.js"
-  ></script>
-  <script type="text/javascript">
-    google.charts.load('current', {'packages':['corechart']});
-    google.charts.setOnLoadCallback(drawChart);
 
-    {% for key in classementList %}
-    {% if key.user == app.user %}
-    function drawChart() {
-      var data = google.visualization.arrayToDataTable([
-        ['Mois', 'Classement'],
-        ['Janvier',  {{ key.classJanv is not null ? key.classJanv : 'null' }}],
-        ['Février',  {{ key.classFev is not null ? key.classFev : 'null' }}],
-        ['Mars',  {{ key.classMar is not null ? key.classMar : 'null' }}],
-        ['Avril',  {{ key.classAvr is not null ? key.classAvr : 'null' }}],
-        ['Mai',  {{ key.classMai is not null ? key.classMai : 'null' }}],
-        ['Juin',  {{ key.classJui is not null ? key.classJui : 'null' }}],
-        ['Juillet',  {{ key.classJuil is not null ? key.classJuil : 'null' }}],
-        ['Août',  {{ key.classAout is not null ? key.classAout : 'null' }}],
-        ['Septembre',  {{ key.classSept is not null ? key.classSept : 'null' }}],
-        ['Octobre',  {{ key.classOct is not null ? key.classOct : 'null' }}],
-        ['Novembre',  {{ key.classNov is not null ? key.classNov : 'null' }}],
-        ['Décembre',  {{ key.classDec is not null ? key.classDec : 'null' }}],
-      ]);
-    {% endif %}
-    {% endfor %}
-
-      var options = {
-        title: 'Évolution de votre classement',
-        legend: { position: 'bottom' },
-        vAxis: {
-        ticks: [
-          {v:0, f:'40'},
-          {v:1, f:'30/5'},
-          {v:2, f:'30/4'},
-          {v:3, f:'30/3'},
-          {v:4, f:'30/2'},
-          {v:5, f:'30/1'},
-          {v:6, f:'30'},
-          {v:7, f:'15/5'},
-          {v:8, f:'15/4'},
-        ] 
-        },
-      };
-
-      var chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
-
-      chart.draw(data, options);
-    }
-  </script>
+<div class="mx-auto max-w-6xl relative flex flex-col rounded-xl bg-white bg-clip-border text-gray-700 shadow-md mt-5">
+  <div class="relative mx-4 mt-4 flex flex-col gap-4 overflow-hidden rounded-none bg-transparent bg-clip-border text-gray-700 shadow-none md:flex-row md:items-center">
+    <div class="w-max rounded-lg bg-gray-900 p-5 text-white">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke-width="1.5"
+        stroke="currentColor"
+        aria-hidden="true"
+        class="h-6 w-6"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          d="M6.429 9.75L2.25 12l4.179 2.25m0-4.5l5.571 3 5.571-3m-11.142 0L2.25 7.5 12 2.25l9.75 5.25-4.179 2.25m0 0L21.75 12l-4.179 2.25m0 0l4.179 2.25L12 21.75 2.25 16.5l4.179-2.25m11.142 0l-5.571 3-5.571-3"
+        ></path>
+      </svg>
+    </div>
+    <div>
+      <h6 class="block font-sans text-base font-semibold leading-relaxed tracking-normal text-blue-gray-900 antialiased">
+        Classement
+      </h6>
+      <p class="block max-w-sm font-sans text-sm font-normal leading-normal text-gray-700 antialiased">
+        Visualisez l'évolution de votre classement sur l'année en cours.
+      </p>
+    </div>
+  </div>
+  <div class="pt-6 px-2 pb-0">
+    <div id="bar-chart"></div>
+  </div>
 </div>
-<div>
-  <div id="curve_chart" class="max-w-7xl mx-auto h-screen mt-5 mb-5"></div>
-</div>
+
+<script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+<script>
+const chartConfig = {
+  series: [
+    {
+      name: "Classement",
+      data: [
+      {{ allRankCurrentYear[0].value | default('null') }},
+      {{ allRankCurrentYear[1].value | default('null') }},
+      {{ allRankCurrentYear[2].value | default('null') }},
+      {{ allRankCurrentYear[3].value | default('null') }},
+      {{ allRankCurrentYear[4].value | default('null') }},
+      {{ allRankCurrentYear[5].value | default('null') }},
+      {{ allRankCurrentYear[6].value | default('null') }},
+      {{ allRankCurrentYear[7].value | default('null') }}, 
+      {{ allRankCurrentYear[8].value | default('null') }}, 
+      {{ allRankCurrentYear[9].value | default('null') }}, 
+      {{ allRankCurrentYear[10].value | default('null') }}, 
+      {{ allRankCurrentYear[11].value | default('null') }},
+    ],
+      
+    },
+  ],
+  chart: {
+    type: "bar",
+    height: 240,
+    toolbar: {
+      show: false,
+    },
+  },
+  title: {
+    show: "Suivi de votre classement",
+  },
+  dataLabels: {
+    enabled: false,
+  },
+  colors: ["#15803d"],
+  plotOptions: {
+    bar: {
+      columnWidth: "40%",
+      borderRadius: 2,
+    },
+  },
+  xaxis: {
+    axisTicks: {
+      show: false,
+    },
+    axisBorder: {
+      show: false,
+    },
+    labels: {
+      style: {
+        colors: "#616161",
+        fontSize: "12px",
+        fontFamily: "inherit",
+        fontWeight: 400,
+      },
+    },
+    categories: [
+      "Janvier",
+      "Février",
+      "Mars",
+      "Avril",
+      "Mai",
+      "Juin",
+      "Juillet",
+      "Août",
+      "Septembre",
+      "Octobre",
+      "Novembre",
+      "Décembre"
+    ],
+  },
+  yaxis: {
+    labels: {
+      formatter: function (value) {
+        const rankings = ["40","30/5", "30/4", "30/3", "30/2", "30/1","30","15/5", "15/4", "15/3", "15/2", "15/1", "15", 
+        "5/6", "4/6", "3/6", "2/6", "1/6","0"
+        ];
+        return rankings[value - 0]; // Ajuste les valeurs en fonction de ton tableau
+      },
+      style: {
+        colors: "#616161",
+        fontSize: "12px",
+        fontFamily: "inherit",
+        fontWeight: 400,
+      },
+    },
+  },
+  grid: {
+    show: true,
+    borderColor: "#dddddd",
+    strokeDashArray: 5,
+    xaxis: {
+      lines: {
+        show: true,
+      },
+    },
+    padding: {
+      top: 5,
+      right: 20,
+    },
+  },
+  fill: {
+    opacity: 0.8,
+  },
+  tooltip: {
+    theme: "dark",
+  },
+};
+ 
+const chart = new ApexCharts(document.querySelector("#bar-chart"), chartConfig);
+ 
+chart.render();
+</script>
 
 {% endblock %}

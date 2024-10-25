@@ -15,15 +15,13 @@ class RankingController extends AbstractController
         ClassementRepository $classementRepository
     ): Response
     {
+        $user = $this->getUser();
 
-        // $classementList = ($classRepo->findBy(['user'=> $this->getUser()]));
+        $allRankCurrentYear = $classementRepository->findByCurrentYear($user);
 
-        $classementList = $classementRepository->findByCurrentYear();
-
-        // dd($classementList);
-
-        return $this->render('ranking/rank.html.twig', [
-            'classementList' => $classementList,
+        return $this->render(
+            'ranking/rank.html.twig', [
+            'allRankCurrentYear' => $allRankCurrentYear
         ]);
     }
 }

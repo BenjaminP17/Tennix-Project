@@ -31,27 +31,18 @@ class ClassementRepository extends ServiceEntityRepository
             ->getResult();
     }
 
-    public function findByCurrentYear()
-    {
 
+    public function findByCurrentYear($user)
+    {
     $currentYear = date('Y');
 
-    return $this->createQueryBuilder('r')
-        ->where('YEAR(r.date) = :year')
+    return $this->createQueryBuilder('v')
+        ->select('v.value') 
+        ->where('v.user = :user')
+        ->andWhere('YEAR(v.date) = :year')
         ->setParameter('year', $currentYear)
-        ->orderBy('r.date', 'DESC')
-        ->getQuery()
-        ->getResult();
-    }
-
-    public function findByCurrentMonth()
-    {
-    $currentMonth = date('m');
-
-    return $this->createQueryBuilder('r')
-        ->select('r.ranking')
-        ->where('MONTH(r.date) = :month')
-        ->setParameter('month', $currentMonth)
+        ->setParameter('user', $user)
+        ->orderBy('v.date', 'ASC')
         ->getQuery()
         ->getResult();
     }
