@@ -6,14 +6,15 @@
     <h1 class="text-3xl text-center font-bold mt-10">Rencontres jouées</h1>
 </div>
 
-<div class="max-w-7xl mx-auto overflow-auto">
+<div class="max-w-7xl mx-auto">
 
     {{ include('components/_flash_message.html.twig') }}
 
     <div class="flex justify-between items-center w-full mt-5">
-        <a href ="{{ path('app_matchs_add') }}" class="btn text-black p-3 rounded-xl font-bold">
-            Ajouter un match
-        </a>
+
+        <a href ="{{ path('app_matchs_add') }}" class=" ml-5 mb-5 bg-white hover:bg-gray-100 text-gray-800 px-3 py-2 border border-gray-300 rounded-md shadow-sm">
+            + Match
+          </a>
     
         <div class="w-40 mr-5">
             {{ form_start(form, {'attr': {'class': 'space-y-4'}}) }}
@@ -33,11 +34,10 @@
         
     </div>
     
-
-    <div class="inline-block min-w-full py-2 align-middle">
-        <div class="overflow-hidden shadow ring-1 ring-black ring-opacity-5 md:rounded-lg">
+        <div class="relative overflow-x-auto shadow rounded-lg mx-2 mt-5">
             <table class="min-w-full divide-y divide-gray-300">
-                <thead class="bg-green-700">
+                <thead class="bg-green-500">
+    
                     <tr>
                         <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">Date</th>
                         <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900">Compétition</th>
@@ -97,14 +97,16 @@
                 </tbody>
             </table>
         </div>
-    </div>
+    
 
-    <!-- Pagination -->
+    
+ 
+</div>
+
+<!-- Pagination -->
     <div class="navigation flex justify-center mt-5 mb-5">
         {{ knp_pagination_render(rencontres) }}
     </div>
- 
-</div>
 
 <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.8.2/dist/alpine.min.js" defer></script>
   
