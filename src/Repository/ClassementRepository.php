@@ -32,19 +32,38 @@ class ClassementRepository extends ServiceEntityRepository
     }
 
 
-    public function findByCurrentYear($user)
-    {
-    $currentYear = date('Y');
+    // public function findByCurrentYearAndMonth($user)
+    // {
 
-    return $this->createQueryBuilder('v')
-        ->select('v.value') 
-        ->where('v.user = :user')
-        ->andWhere('YEAR(v.date) = :year')
-        ->setParameter('year', $currentYear)
-        ->setParameter('user', $user)
-        ->orderBy('v.date', 'ASC')
-        ->getQuery()
-        ->getResult();
+    //     $currentYear = date('Y');
+        
+    //     return $this->createQueryBuilder('v')
+    //         ->select('v.value') 
+    //         ->where('v.user = :user')
+    //         ->andWhere('YEAR(v.date) = :year')
+    //         ->setParameter('year', $currentYear)
+    //         ->setParameter('user', $user)
+    //         ->orderBy('MONTH(v.date)', 'ASC')
+    //         ->addOrderBy('v.date', 'ASC')
+    //         ->getQuery()
+    //         ->getResult();
+    // }
+
+    public function findByCurrentYearAndMonth($user, $month)
+    {
+
+        $currentYear = date('Y');
+        
+        return $this->createQueryBuilder('v')
+            ->select('v.value') 
+            ->where('v.user = :user')
+            ->andWhere('YEAR(v.date) = :year')
+            ->andWhere('MONTH(v.date) = :month')
+            ->setParameter('year', $currentYear)
+            ->setParameter('user', $user)
+            ->setParameter('month', $month)
+            ->getQuery()
+            ->getResult();
     }
 
 }

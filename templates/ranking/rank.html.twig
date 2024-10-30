@@ -4,6 +4,14 @@
   <h1 class="text-3xl text-center font-bold mt-10">Classement</h1>
 </div>
 
+
+{{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
+    {{ form_widget(form) }}
+    <div class="mt-6">
+      <button type="submit" class="bg-green-800 text-black rounded-md">Ajouter</button>
+  </div>
+{{ form_end(form) }}
+
 <div class="mx-auto max-w-6xl relative flex flex-col rounded-xl bg-white bg-clip-border text-gray-700 shadow-md mt-10">
   <div class="relative mx-4 mt-4 flex flex-col gap-4 overflow-hidden rounded-none bg-transparent bg-clip-border text-gray-700 shadow-none md:flex-row md:items-center">
     {# <div class="w-max rounded-lg bg-gray-900 p-5 text-white">
@@ -44,19 +52,20 @@ const chartConfig = {
     {
       name: "Classement",
       data: [
-      {{ allRankCurrentYear[0].value | default('null') }},
-      {{ allRankCurrentYear[1].value | default('null') }},
-      {{ allRankCurrentYear[2].value | default('null') }},
-      {{ allRankCurrentYear[3].value | default('null') }},
-      {{ allRankCurrentYear[4].value | default('null') }},
-      {{ allRankCurrentYear[5].value | default('null') }},
-      {{ allRankCurrentYear[6].value | default('null') }},
-      {{ allRankCurrentYear[7].value | default('null') }}, 
-      {{ allRankCurrentYear[8].value | default('null') }}, 
-      {{ allRankCurrentYear[9].value | default('null') }}, 
-      {{ allRankCurrentYear[10].value | default('null') }}, 
-      {{ allRankCurrentYear[11].value | default('null') }},
-    ],
+      // {{ januaryRank[0].value | default('null')}},
+        {{ monthlyRanks[1][0].value | default('null') }},
+        {{ monthlyRanks[2][0].value | default('null') }},
+        {{ monthlyRanks[3][0].value | default('null')}},
+        {{ monthlyRanks[4][0].value | default('null') }},
+        {{ monthlyRanks[5][0].value | default('null') }},
+        {{ monthlyRanks[6][0].value | default('null') }},
+        {{ monthlyRanks[7][0].value | default('null') }},
+        {{ monthlyRanks[8][0].value | default('null')}},
+        {{ monthlyRanks[9][0].value | default('null') }},
+        {{ monthlyRanks[10][0].value | default('null') }},
+        {{ monthlyRanks[11][0].value | default('null') }},
+        {{ monthlyRanks[12][0].value | default('null') }},
+      ],
       
     },
   ],
@@ -116,7 +125,7 @@ const chartConfig = {
         const rankings = ["40","30/5", "30/4", "30/3", "30/2", "30/1","30","15/5", "15/4", "15/3", "15/2", "15/1", "15", 
         "5/6", "4/6", "3/6", "2/6", "1/6","0", "-2/6", "-4/6", "-15"
         ];
-        return rankings[value - 0]; // Ajuste les valeurs en fonction de ton tableau
+        return rankings[value - 1]; // Ajuste les valeurs en fonction de ton tableau
       },
       style: {
         colors: "#616161",
