@@ -17,7 +17,7 @@ class Classement
     #[ORM\ManyToOne(inversedBy: 'classement')]
     private ?User $user = null;
 
-    #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
+    #[ORM\Column(type: Types::DATE_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $date = null;
 
     #[ORM\Column(length: 10, nullable: true)]
