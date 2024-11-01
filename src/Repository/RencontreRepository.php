@@ -21,22 +21,6 @@ class RencontreRepository extends ServiceEntityRepository
         parent::__construct($registry, Rencontre::class);
     }
 
-//    /**
-//     * @return Rencontre[] Returns an array of Rencontre objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('r')
-//            ->andWhere('r.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('r.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
-
-    // Liste des rencontres par dates, ordre décroissant
    public function findAllByDateDESC(): array
    {
        return $this->createQueryBuilder('r')
@@ -46,6 +30,94 @@ class RencontreRepository extends ServiceEntityRepository
            ->getResult();
        ;
    }
+
+    public function findBySelectedYear($year)
+    {
+        return $this->createQueryBuilder('r')
+            ->where('YEAR(r.date) = :year')
+            ->setParameter('year', $year)
+            ->orderBy('r.date', 'DESC')
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function findByCurrentYear()
+    {
+
+    $currentYear = date('Y');
+
+    return $this->createQueryBuilder('r')
+        ->where('YEAR(r.date) = :year')
+        ->setParameter('year', $currentYear)
+        ->orderBy('r.date', 'DESC')
+        ->getQuery()
+        ->getResult();
+    }
+    
+   
+    // public function AllVictoriesCurrentYear()
+    // {
+    //     $currentYear = (new \DateTime())->format('Y');  
+
+    //     return $this->createQueryBuilder('r')
+    //         ->select('COUNT(r.id) AS victoryCount')
+    //         ->where('r.resultat = :result')  
+    //         ->andWhere('YEAR(r.date) = :currentYear')
+    //         ->setParameter('result', 'Victoire')
+    //         ->setParameter('currentYear', $currentYear)
+    //         ->getQuery()
+    //         ->getSingleScalarResult();
+    // }
+
+    public function AllVictoriesCurrentYear($user)
+    {
+        $currentYear = (new \DateTime())->format('Y');  
+
+        return $this->createQueryBuilder('r')
+            ->select('COUNT(r.id) AS victoryCount')
+            ->where('r.resultat = :result')  
+            ->andWhere('YEAR(r.date) = :currentYear')
+            ->andWhere('r.user = :user')
+            ->setParameter('result', 'Victoire')
+            ->setParameter('currentYear', $currentYear)
+            ->setParameter('user', $user)
+            ->getQuery()
+            ->getSingleScalarResult();
+    }
+
+    public function AllDefeatsCurrentYear($user)
+    {
+        $currentYear = (new \DateTime())->format('Y');  
+
+        return $this->createQueryBuilder('r')
+            ->select('COUNT(r.id) AS defeatCount')
+            ->where('r.resultat = :result')  
+            ->andWhere('YEAR(r.date) = :currentYear')
+            ->andWhere('r.user = :user')
+            ->setParameter('result', 'Défaite')
+            ->setParameter('currentYear', $currentYear)
+            ->setParameter('user', $user)
+            ->getQuery()
+            ->getSingleScalarResult();
+
+    }
+
+    public function AllMatchsCurrentYear($user)
+
+    {
+        $currentYear = (new \DateTime())->format('Y');
+
+        return $this->createQueryBuilder('r')
+            ->select('COUNT(r.id) AS matchPlayed')
+            ->Where('YEAR(r.date) = :currentYear')
+            ->andWhere('r.user = :user')
+            ->setParameter('currentYear', $currentYear)
+            ->setParameter('user', $user)
+            ->getQuery()
+            ->getSingleScalarResult();
+
+
+    }
 
     
 }

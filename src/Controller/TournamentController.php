@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Tournament;
+use App\Form\ShowByYearType;
 use App\Form\TournamentFormType;
 use App\Repository\TournamentRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -15,21 +16,39 @@ class TournamentController extends AbstractController
 {
     // Affichage des tournois par date, ordre décroissant. 
     #[Route('/tournament', name: 'app_tournament')]
-    public function index(
-        TournamentRepository $tournamentRepo,
+    public function showTournamentsCurrentAndSelectedYear(
+        TournamentRepository $TournamentRepository,
         Request $request
     ): Response
     {
-        $tournamentsList = ($tournamentRepo->findBy(['user'=> $this->getUser()], ['date'=>'ASC']));
+        $currentDate = new \dateTime();
+
+        // $tournamentsList = ($tournamentRepo->findBy(['user'=> $this->getUser()], ['date'=>'ASC']));
+
+       
+        $form = $this->createForm(ShowByYearType::class);
+        $form->handleRequest($request);
+
+        
+        if ($form->isSubmitted() && $form->isValid()) {
+            $year = $form->get('year')->getData();
+            
+            $tournamentsList = $TournamentRepository->findBySelectedYear($year);
+        } else {
+            
+            $tournamentsList = $TournamentRepository->findByCurrentYear();
+        }
 
         return $this->render('tournament/tournaments.html.twig', [
             'tournamentsList' => $tournamentsList,
+            'currentDate' => $currentDate,
+            'form' => $form->createView(),
         ]);
     }
 
     // Ajout d'un tournoi au calendrier de l'utilisateur 
     #[Route('/tournament/ajout', name: 'app_tournament_Form')]
-    public function add(
+    public function addTournament(
         Request $request,
         EntityManagerInterface $em
     ): Response
@@ -59,5 +78,19 @@ class TournamentController extends AbstractController
         ]);
     }
 
+    #[Route('/tournament/delete/{id}', name: 'app_tournament_delete')]
+    public function deleteTournament(
+        Tournament $tournament,
+        EntityManagerInterface $em
+    ): Response
+    {
+        $em->remove($tournament);
+        $em->flush();
+
+        $this->addFlash('success', 'Votre tournoi à bien été supprimé');
+
+        return $this->redirectToRoute('app_tournament');
+
+    }
 
 }

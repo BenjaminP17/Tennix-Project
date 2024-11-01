@@ -3,19 +3,41 @@
 {% block body %}
 
 <div class="justify-center">
-    <h1 class="text-3xl text-center font-bold mt-10">Palmarès</h1>
+    <h1 class="text-3xl text-center font-bold mt-10">Rencontres jouées</h1>
 </div>
 
-<div class="max-w-7xl mx-auto overflow-auto">
+<div class="max-w-7xl mx-auto">
 
     {{ include('components/_flash_message.html.twig') }}
 
-    <a href ="{{ path('app_matchs_add') }}" input type="button" class="btn relative bg-green-700 text-black mt-5 p-3 rounded-xl font-bold">Ajouter un match</a>
+    <div class="flex justify-between items-center w-full mt-5">
 
-    <div class="inline-block min-w-full py-2 align-middle">
-        <div class="overflow-hidden shadow ring-1 ring-black ring-opacity-5 md:rounded-lg">
+        <a href ="{{ path('app_matchs_add') }}" class=" ml-5 mb-5 bg-white hover:bg-gray-100 text-gray-800 px-3 py-2 border border-gray-300 rounded-md shadow-sm">
+            + Match
+          </a>
+    
+        <div class="w-40 mr-5">
+            {{ form_start(form, {'attr': {'class': 'space-y-4'}}) }}
+            <div class="mb-4">
+                {{ form_widget(form.year, {
+                    'attr': {
+                        'class': 'mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm',
+                        'onchange': 'this.form.submit();' 
+                    },
+                    'placeholder': 'Année'
+                }) }}
+                {{ form_errors(form.year, {'attr': {'class': 'text-red-600 text-sm'}}) }}
+            </div>
+        
+            {{ form_end(form) }}
+        </div>
+        
+    </div>
+    
+        <div class="relative overflow-x-auto shadow rounded-lg mx-2 mt-5">
             <table class="min-w-full divide-y divide-gray-300">
-                <thead class="bg-green-700">
+                <thead class="bg-green-500">
+    
                     <tr>
                         <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">Date</th>
                         <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900">Compétition</th>
@@ -30,7 +52,7 @@
                 </thead>
                 <tbody class="divide-y divide-gray-200 bg-white">
                     {% for rencontre in rencontres %}
-                    {# affichage des matchs de l'utilisateur connecté #}
+                    
                     {% if rencontre.user == app.user %}
                     <tr>
                         <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-semibold text-gray-900 sm:pl-6">{{ rencontre.date|date("d/m/Y", "Europe/Paris") }}</td>
@@ -62,7 +84,6 @@
                                         </a>
                                     </div>
                                     <div class="" role="none">
-                                        {# Supprime un match #}
                                         <a href={{ path('app_matchs_delete', {'id':rencontre.id}) }} class="text-gray-500 font-medium hover:text-gray-900 hover:bg-gray-50 block px-4 py-2 text-sm" role="menuitem" tabindex="-1" id="menu-item-0" onclick="return confirm('Voulez-vous supprimer cet enregistrement ?');">
                                             Supprimer
                                         </a>
@@ -76,15 +97,18 @@
                 </tbody>
             </table>
         </div>
-    </div>
+    
 
-    {# pagination #}
-    <div class="navigation flex justify-center mt-5">
-        {{ knp_pagination_render(rencontres) }}
-    </div>
+    
  
 </div>
+
+<!-- Pagination -->
+    <div class="navigation flex justify-center mt-5 mb-5">
+        {{ knp_pagination_render(rencontres) }}
+    </div>
 
 <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.8.2/dist/alpine.min.js" defer></script>
   
 {% endblock %}
+

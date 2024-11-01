@@ -21,28 +21,49 @@ class ClassementRepository extends ServiceEntityRepository
         parent::__construct($registry, Classement::class);
     }
 
-    //    /**
-    //     * @return Classement[] Returns an array of Classement objects
-    //     */
-    //    public function findByExampleField($value): array
-    //    {
-    //        return $this->createQueryBuilder('c')
-    //            ->andWhere('c.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->orderBy('c.id', 'ASC')
-    //            ->setMaxResults(10)
-    //            ->getQuery()
-    //            ->getResult()
-    //        ;
-    //    }
+    public function findBySelectedYear($year)
+    {
+        return $this->createQueryBuilder('r')
+            ->where('YEAR(r.date) = :year')
+            ->setParameter('year', $year)
+            ->orderBy('r.date', 'DESC')
+            ->getQuery()
+            ->getResult();
+    }
 
-    //    public function findOneBySomeField($value): ?Classement
-    //    {
-    //        return $this->createQueryBuilder('c')
-    //            ->andWhere('c.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->getQuery()
-    //            ->getOneOrNullResult()
-    //        ;
-    //    }
+
+    // public function findByCurrentYearAndMonth($user)
+    // {
+
+    //     $currentYear = date('Y');
+        
+    //     return $this->createQueryBuilder('v')
+    //         ->select('v.value') 
+    //         ->where('v.user = :user')
+    //         ->andWhere('YEAR(v.date) = :year')
+    //         ->setParameter('year', $currentYear)
+    //         ->setParameter('user', $user)
+    //         ->orderBy('MONTH(v.date)', 'ASC')
+    //         ->addOrderBy('v.date', 'ASC')
+    //         ->getQuery()
+    //         ->getResult();
+    // }
+
+    public function findByCurrentYearAndMonth($user, $month)
+    {
+
+        $currentYear = date('Y');
+        
+        return $this->createQueryBuilder('v')
+            ->select('v.value') 
+            ->where('v.user = :user')
+            ->andWhere('YEAR(v.date) = :year')
+            ->andWhere('MONTH(v.date) = :month')
+            ->setParameter('year', $currentYear)
+            ->setParameter('user', $user)
+            ->setParameter('month', $month)
+            ->getQuery()
+            ->getResult();
+    }
+
 }
