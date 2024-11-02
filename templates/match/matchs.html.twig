@@ -10,18 +10,23 @@
 
     {{ include('components/_flash_message.html.twig') }}
 
-    <div class="flex justify-between items-center w-full mt-5">
-
-        <a href ="{{ path('app_matchs_add') }}" class=" ml-5 mb-5 bg-white hover:bg-gray-100 text-gray-800 px-3 py-2 border border-gray-300 rounded-md shadow-sm">
+    <div class="max-w-7xl mx-auto mt-10 mb-10">
+        <div class="max-w-7xl mx-auto mt-10 mb-10">
+          {{ include("components/_flash_message.html.twig") }}
+        </div>
+      
+        <div class="flex justify-between items-center w-full mt-5">
+        
+          <a href ="{{ path('app_matchs_add') }}" class=" ml-5 mb-5 bg-white hover:bg-gray-100 text-gray-800 px-3 py-2 border border-gray-300 rounded-md shadow-sm">
             + Match
           </a>
-    
-        <div class="w-40 mr-5">
+      
+          <div class="w-40 mr-5 mb-5">
             {{ form_start(form, {'attr': {'class': 'space-y-4'}}) }}
-            <div class="mb-4">
+            <div>
                 {{ form_widget(form.year, {
                     'attr': {
-                        'class': 'mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm',
+                        'class': 'block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm',
                         'onchange': 'this.form.submit();' 
                     },
                     'placeholder': 'Année'
@@ -31,13 +36,13 @@
         
             {{ form_end(form) }}
         </div>
-        
-    </div>
+      </div>
+
+    
     
         <div class="relative overflow-x-auto shadow rounded-lg mx-2 mt-5">
             <table class="min-w-full divide-y divide-gray-300">
-                <thead class="bg-green-500">
-    
+                <thead class="bg-green-700">
                     <tr>
                         <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">Date</th>
                         <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900">Compétition</th>
