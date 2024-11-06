@@ -38,8 +38,7 @@ class MatchController extends AbstractController
 
     $rencontres = $paginator->paginate(
         $data,
-        $request->query->getInt('page', 1), 7
-    );
+        $request->query->getInt('page', 1), 10);
 
     return $this->render('match/matchs.html.twig', [
         'rencontres' => $rencontres,

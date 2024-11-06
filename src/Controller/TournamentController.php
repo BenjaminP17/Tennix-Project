@@ -23,6 +23,10 @@ class TournamentController extends AbstractController
     {
         $currentDate = new \dateTime();
 
+        $user = $this->getUser();
+
+        // dd($user);
+
         // $tournamentsList = ($tournamentRepo->findBy(['user'=> $this->getUser()], ['date'=>'ASC']));
 
        
@@ -33,10 +37,10 @@ class TournamentController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $year = $form->get('year')->getData();
             
-            $tournamentsList = $TournamentRepository->findBySelectedYear($year);
+            $tournamentsList = $TournamentRepository->findBySelectedYear($year, $user);
         } else {
             
-            $tournamentsList = $TournamentRepository->findByCurrentYear();
+            $tournamentsList = $TournamentRepository->findByCurrentYear($user);
         }
 
         return $this->render('tournament/tournaments.html.twig', [
