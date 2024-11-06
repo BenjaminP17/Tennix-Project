@@ -22,6 +22,8 @@ class MatchController extends AbstractController
     Request $request
     ): Response
     {
+
+    $user = $this->getUser();
     // Création du formulaire
     $form = $this->createForm(ShowByYearType::class);
     $form->handleRequest($request);
@@ -30,15 +32,16 @@ class MatchController extends AbstractController
     if ($form->isSubmitted() && $form->isValid()) {
         $year = $form->get('year')->getData();
         // Récupérer les rencontres filtrées par l'année
-        $data = $RencontreRepository->findBySelectedYear($year);
+        $data = $RencontreRepository->findBySelectedYear($year, $user);
     } else {
         // Si aucune année sélectionnée, récupérer toutes les rencontres
-        $data = $RencontreRepository->findByCurrentYear();
+        $data = $RencontreRepository->findByCurrentYear($user);
     }
 
     $rencontres = $paginator->paginate(
         $data,
         $request->query->getInt('page', 1), 10);
+        // dd($data);
 
     return $this->render('match/matchs.html.twig', [
         'rencontres' => $rencontres,

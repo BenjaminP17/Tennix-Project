@@ -24,11 +24,6 @@ class TournamentController extends AbstractController
         $currentDate = new \dateTime();
 
         $user = $this->getUser();
-
-        // dd($user);
-
-        // $tournamentsList = ($tournamentRepo->findBy(['user'=> $this->getUser()], ['date'=>'ASC']));
-
        
         $form = $this->createForm(ShowByYearType::class);
         $form->handleRequest($request);
