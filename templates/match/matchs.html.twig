@@ -11,6 +11,7 @@
     {{ include('components/_flash_message.html.twig') }}
 
     <div class="max-w-7xl mx-auto mt-10 mb-10">
+
         <div class="max-w-7xl mx-auto mt-10 mb-10">
           {{ include("components/_flash_message.html.twig") }}
         </div>
@@ -21,11 +22,9 @@
             + Match
           </a> #}
 
-          
-
             <!-- Modal toggle -->
-            <button data-modal-target="default-modal" data-modal-toggle="default-modal" class="block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button">
-                Toggle modal
+            <button data-modal-target="default-modal" data-modal-toggle="default-modal" class="ml-5 block text-black bg-green-100 hover:bg-green-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center" type="button">
+                Ajouter
             </button>
             
             <!-- Main modal -->
@@ -36,7 +35,7 @@
                         <!-- Modal header -->
                         <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
                             <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
-                                Terms of Service
+                                Enregistrer un match
                             </h3>
                             <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="default-modal">
                                 <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
@@ -46,43 +45,143 @@
                             </button>
                         </div>
                         <!-- Modal body -->
-                        <div class="p-4 md:p-5 space-y-4">
-                            <p class="text-base leading-relaxed text-gray-500 dark:text-gray-400">
-                                With less than a month to go before the European Union enacts new consumer privacy laws for its citizens, companies around the world are updating their terms of service agreements to comply.
-                            </p>
-                            <p class="text-base leading-relaxed text-gray-500 dark:text-gray-400">
-                                The European Union’s General Data Protection Regulation (G.D.P.R.) goes into effect on May 25 and is meant to ensure a common set of data rights in the European Union. It requires organizations to notify users as soon as possible of high-risk data breaches that could personally affect them.
-                            </p>
-                        </div>
-                        <!-- Modal footer -->
-                        <div class="flex items-center p-4 md:p-5 border-t border-gray-200 rounded-b dark:border-gray-600">
-                            <button data-modal-hide="default-modal" type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">I accept</button>
-                            <button data-modal-hide="default-modal" type="button" class="py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">Decline</button>
+                        
+                            <div class="max-h-screen flex items-center justify-center bg-gray-100">
+                                <div class="p-8 max-w-md w-full">
+
+                                    {{ form_errors(matchForm) }}
+                                    
+                            
+                                    {{ form_start(matchForm, {'attr': {'novalidate': 'novalidate'}}) }}
+                                    <div class="grid grid-cols-2 gap-4">
+                                        <div>
+                                            {{ form_row(matchForm.competition, {
+                                                'label': 'Compétition',
+                                                'attr': {
+                                                    'class': 'w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500',
+                                                    'placeholder': 'Nom du tournoi',
+                                                },
+                                                'label_attr': {
+                                                    'class': 'block text-gray-700 text-sm font-bold mb-2'
+                                                }
+                                            }) }}
+                                        </div>
+                                        <div>
+                                            {{ form_row(matchForm.saison, {
+                                                'attr': {
+                                                    'class': 'w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500',
+                                                    'placeholder': 'Saison',
+                                                },
+                                                'label_attr': {
+                                                    'class': 'block text-gray-700 text-sm font-bold mb-2'
+                                                }
+                                            }) }}
+                                        </div>
+                                        <div>
+                                            {{ form_row(matchForm.Adversaire, {
+                                                'attr': {
+                                                    'class': 'w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500',
+                                                    'placeholder': 'Adversaire',
+                                                },
+                                                'label_attr': {
+                                                    'class': 'block text-gray-700 text-sm font-bold mb-2'
+                                                }
+                                            }) }}
+                                        </div>
+                                        <div>
+                                            {{ form_row(matchForm.classement, {
+                                                'label': 'Classement',
+                                                'attr': {
+                                                    'class': 'w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500',
+                                                    'placeholder': 'Classement',
+                                                },
+                                                'label_attr': {
+                                                    'class': 'block text-gray-700 text-sm font-bold mb-2'
+                                                }
+                                            }) }}
+                                        </div>
+                                    </div>
+                                    <div class="grid grid-cols-2 gap-4 mt-4">
+                                        <div>
+                                            {{ form_row(matchForm.Type, {
+                                                'attr': {
+                                                    'class': 'w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500',
+                                                    'placeholder': 'Type de rencontre',
+                                                },
+                                                'label_attr': {
+                                                    'class': 'block text-gray-700 text-sm font-bold mb-2'
+                                                }
+                                            }) }}
+                                        </div>
+                                        <div>
+                                            {{ form_row(matchForm.resultat, {
+                                                'label': 'Résultat',
+                                                'attr': {
+                                                    'class': 'w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500',
+                                                    'placeholder': 'Résultat',
+                                                },
+                                                'label_attr': {
+                                                    'class': 'block text-gray-700 text-sm font-bold mb-2'
+                                                }
+                                            }) }}
+                                        </div>
+                                    </div>
+                                    <div class="mt-4">
+                                        {{ form_row(matchForm.Score, {
+                                            'attr': {
+                                                'class': 'w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500',
+                                                'placeholder': 'Score',
+                                            },
+                                            'label_attr': {
+                                                'class': 'block text-gray-700 text-sm font-bold mb-2'
+                                            }
+                                        }) }}
+                                    </div>
+                                    <div class="mt-4">
+                                        {{ form_row(matchForm.date, {
+                                            'attr': {
+                                                'class': 'w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500',
+                                                'placeholder': 'Date',
+                                            },
+                                            'label_attr': {
+                                                'class': 'block text-gray-700 text-sm font-bold mb-2'
+                                            }
+                                        }) }}
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                            
+                            <!-- Modal footer -->
+                            {# <div class="flex items-center p-4 md:p-5 border-t border-gray-200 rounded-b dark:border-gray-600">
+                                <button data-modal-hide="default-modal" type="button" class="text-black bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">I accept</button>
+                            </div> #}
+                            <div class="flex items-center p-4 md:p-5 border-t border-gray-200 rounded-b dark:border-gray-600">
+                                <button type="submit" class="text-black bg-green-100 hover:bg-green-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">Enregistrer</button>
+                            </div>
+                            {{ form_end(matchForm) }}
                         </div>
                     </div>
                 </div>
-            </div>
-  
-  
-          <div class="w-40 mr-5 mb-5">
-            {{ form_start(form, {'attr': {'class': 'space-y-4'}}) }}
-            <div>
-                {{ form_widget(form.year, {
-                    'attr': {
-                        'class': 'block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm',
-                        'onchange': 'this.form.submit();' 
-                    },
-                    'placeholder': 'Année'
-                }) }}
-                {{ form_errors(form.year, {'attr': {'class': 'text-red-600 text-sm'}}) }}
-            </div>
-        
-            {{ form_end(form) }}
-        </div>
-      </div>
+                        
 
-    
-    
+                                <div class="w-40 mr-5 mb-5">
+                                    {{ form_start(form, {'attr': {'class': 'space-y-4'}}) }}
+                                    <div>
+                                        {{ form_widget(form.year, {
+                                            'attr': {
+                                                'class': 'block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm',
+                                                'onchange': 'this.form.submit();' 
+                                            },
+                                            'placeholder': 'Année'
+                                        }) }}
+                                        {{ form_errors(form.year, {'attr': {'class': 'text-red-600 text-sm'}}) }}
+                                    </div>
+                                
+                                    {{ form_end(form) }}
+                                </div>
+                            </div>
+
         <div class="relative overflow-x-auto shadow rounded-lg mx-2 mt-5">
             <table class="min-w-full divide-y divide-gray-300">
                 <thead class="bg-green-700">
@@ -145,10 +244,6 @@
                 </tbody>
             </table>
         </div>
-    
-
-    
- 
 </div>
 
 <!-- Pagination -->
