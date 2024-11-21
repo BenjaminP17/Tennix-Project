@@ -14,11 +14,12 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class TournamentController extends AbstractController
 {
-    // Affichage des tournois par date, ordre décroissant. 
+    
     #[Route('/tournament', name: 'app_tournament')]
     public function showTournamentsCurrentAndSelectedYear(
         TournamentRepository $TournamentRepository,
-        Request $request
+        Request $request,
+        EntityManagerInterface $em
     ): Response
     {
         $currentDate = new \dateTime();
@@ -38,30 +39,14 @@ class TournamentController extends AbstractController
             $tournamentsList = $TournamentRepository->findByCurrentYear($user);
         }
 
-        return $this->render('tournament/tournaments.html.twig', [
-            'tournamentsList' => $tournamentsList,
-            'currentDate' => $currentDate,
-            'form' => $form->createView(),
-        ]);
-    }
-
-    // Ajout d'un tournoi au calendrier de l'utilisateur 
-    #[Route('/tournament/ajout', name: 'app_tournament_Form')]
-    public function addTournament(
-        Request $request,
-        EntityManagerInterface $em
-    ): Response
-    {   
         $tournament = new Tournament();
-
-        $user = $this->getUser();
 
         $tournament->setUser($user);
 
-        $form = $this->createForm(TournamentFormType::class, $tournament);
-        $form->handleRequest($request);
+        $tournamentForm = $this->createForm(TournamentFormType::class, $tournament);
+        $tournamentForm->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
+        if ($tournamentForm->isSubmitted() && $tournamentForm->isValid()) {
             
 
             $em->persist($tournament);
@@ -72,10 +57,45 @@ class TournamentController extends AbstractController
             return $this->redirectToRoute('app_tournament');
         }
 
-        return $this->render('Form/_add_tournament_form.html.twig', [
-            'tournamentForm' => $form->createView(),
+        return $this->render('tournament/tournaments.html.twig', [
+            'tournamentsList' => $tournamentsList,
+            'currentDate' => $currentDate,
+            'form' => $form->createView(),
+            'tournamentForm' => $tournamentForm->createView(),
         ]);
     }
+
+    
+    // #[Route('/tournament/ajout', name: 'app_tournament_Form')]
+    // public function addTournament(
+    //     Request $request,
+    //     EntityManagerInterface $em
+    // ): Response
+    // {   
+    //     $tournament = new Tournament();
+
+    //     $user = $this->getUser();
+
+    //     $tournament->setUser($user);
+
+    //     $form = $this->createForm(TournamentFormType::class, $tournament);
+    //     $form->handleRequest($request);
+
+    //     if ($form->isSubmitted() && $form->isValid()) {
+            
+
+    //         $em->persist($tournament);
+    //         $em->flush();
+
+    //         $this->addFlash('success', 'Compétition ajoutée à votre calendrier');
+
+    //         return $this->redirectToRoute('app_tournament');
+    //     }
+
+    //     return $this->render('Form/_add_tournament_form.html.twig', [
+    //         'tournamentForm' => $form->createView(),
+    //     ]);
+    // }
 
     #[Route('/tournament/delete/{id}', name: 'app_tournament_delete')]
     public function deleteTournament(
