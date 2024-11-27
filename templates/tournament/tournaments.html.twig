@@ -43,8 +43,6 @@
                           
                           {{ form_errors(tournamentForm) }}
 
-                          <script src="https://cdn.tailwindcss.com"></script>
-
                           {{ form_start(tournamentForm) }}
                           <div class="space-y-6">
                               <div>
@@ -121,7 +119,7 @@
           </div>
       </div>
 
-    <div class="w-40 mr-5 mb-5">
+    <div class="w-40 mr-5">
       {{ form_start(form, {'attr': {'class': 'space-y-4'}}) }}
       <div>
           {{ form_widget(form.year, {
