@@ -24,6 +24,7 @@ class AddNewRankType extends AbstractType
         ->add('date', ChoiceType::class, [
             'label' => ' ',
             'choices' => [
+                '-' => '',
                 'janvier' => new DateTime($currentYear . '-01-01'),
                 'février' => new DateTime($currentYear . '-02-01'),
                 'mars' => new DateTime($currentYear . '-03-01'),

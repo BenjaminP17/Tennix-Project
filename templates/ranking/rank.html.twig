@@ -5,205 +5,289 @@
 </div>
 
 <div class="max-w-7xl mx-auto">
-
   <div class="max-w-7xl mx-auto mt-10 mb-10">
-    <!-- Modal toggle -->
-  <button data-modal-target="default-modal" data-modal-toggle="default-modal" class="ml-5 block text-black bg-green-100 hover:bg-green-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center" type="button">
-    Ajouter
-  </button>
-  
     <div class="flex justify-between items-center w-full mt-5">
+    <!-- Modal toggle -->
+    <button
+      data-modal-target="default-modal"
+      data-modal-toggle="default-modal"
+      class="ml-5 block text-black bg-green-100 hover:bg-green-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+      type="button"
+    >
+      Ajouter
+    </button>
+
+    
       <!-- Main modal -->
-  <div id="default-modal" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
-    <div class="relative p-4 w-full max-w-2xl max-h-full">
-        <!-- Modal content -->
-        <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+      <div
+        id="default-modal"
+        tabindex="-1"
+        aria-hidden="true"
+        class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full"
+      >
+        <div class="relative p-4 w-full max-w-2xl max-h-full">
+          <!-- Modal content -->
+          <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
             <!-- Modal header -->
-            <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
-                <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
-                    Enregistrer un classement
-                </h3>
-                <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="default-modal">
-                    <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
-                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
-                    </svg>
-                    <span class="sr-only">Close modal</span>
-                </button>
+            <div
+              class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600"
+            >
+              <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
+                Enregistrer un classement
+              </h3>
+              <button
+                type="button"
+                class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
+                data-modal-hide="default-modal"
+              >
+                <svg
+                  class="w-3 h-3"
+                  aria-hidden="true"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 14 14"
+                >
+                  <path
+                    stroke="currentColor"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"
+                  />
+                </svg>
+                <span class="sr-only">Close modal</span>
+              </button>
             </div>
             <!-- Modal body -->
             <div class="p-4 md:p-5 space-y-4">
               <div class="grid grid-cols-2 gap-4">
                 {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
+                <div>
+                  {{ form_row(form.date, {
+                        'label': 'Mois',
+                        'attr': {
+                            'class': ' px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500',
+                            'placeholder': 'Nom du tournoi',
+                        },
+                        'label_attr': {
+                            'class': 'block text-gray-700 text-sm font-bold mb-2'
+                        }
+                    }) }}
+                </div>
+                <div>
+                  {{ form_row(form.value, {
+                      'label': 'Classement',
+                      'attr': {
+                          'class': 'px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500',
+                          'placeholder': 'Nom du tournoi',
+                      },
+                      'label_attr': {
+                          'class': 'block text-gray-700 text-sm font-bold mb-2'
+                      }
+                  }) }}
+                </div>
                 {{ form_widget(form) }}
               </div>
-            </div>  
+            </div>
             <!-- Modal footer -->
-            <div class="flex items-center p-4 md:p-5 border-t border-gray-200 rounded-b dark:border-gray-600">
-              <button type="submit" class="text-black bg-green-100 hover:bg-green-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">Enregistrer</button>
+            <div
+              class="flex items-center p-4 md:p-5 border-t border-gray-200 rounded-b dark:border-gray-600"
+            >
+              <button
+                type="submit"
+                class="text-black bg-green-100 hover:bg-green-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+              >
+                Enregistrer
+              </button>
+            </div>
+            {{ form_end(form) }}
           </div>
-          {{ form_end(form) }}
         </div>
-    </div>
-</div>
-    </div>
+      </div>
 
-  
+      <div class="w-40 mr-5">
+        {{ form_start(selectYearForm, {'attr': {'class': 'space-y-4'}}) }}
+        <div>
+          {{
+            form_widget(selectYearForm.year, {
+              attr: {
+                class:
+                  "block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm",
+                onchange: "this.form.submit();"
+              },
+              placeholder: "Année"
+            })
+          }}
+          {{ form_errors(selectYearForm.year, {'attr': {'class': 'text-red-600 text-sm'
+          }}) }}
+        </div>
 
-
-  <div class="mx-auto max-w-6xl relative flex flex-col rounded-xl bg-white bg-clip-border text-gray-700 shadow-md mt-10">
-    <div class="relative mx-4 mt-4 flex flex-col gap-4 overflow-hidden rounded-none bg-transparent bg-clip-border text-gray-700 shadow-none md:flex-row md:items-center">
-      {# <div class="w-max rounded-lg bg-gray-900 p-5 text-white">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke-width="1.5"
-          stroke="currentColor"
-          aria-hidden="true"
-          class="h-6 w-6"
-        >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            d="M6.429 9.75L2.25 12l4.179 2.25m0-4.5l5.571 3 5.571-3m-11.142 0L2.25 7.5 12 2.25l9.75 5.25-4.179 2.25m0 0L21.75 12l-4.179 2.25m0 0l4.179 2.25L12 21.75 2.25 16.5l4.179-2.25m11.142 0l-5.571 3-5.571-3"
-          ></path>
-        </svg>
-      </div> #}
-      <div>
-        {# <h6 class="block font-sans text-base font-semibold leading-relaxed tracking-normal text-blue-gray-900 antialiased">
-          Classement
-        </h6> #}
-        <p class="block max-w-sm font-sans text-sm font-normal leading-normal text-gray-700 antialiased">
-          Visualisez l'évolution de votre classement sur l'année en cours.
-        </p>
+        {{ form_end(form) }}
       </div>
     </div>
-    <div class="pt-6 px-2 pb-0">
-      <div id="bar-chart"></div>
+
+    <div
+      class="mx-auto max-w-6xl relative flex flex-col rounded-xl bg-white bg-clip-border text-gray-700 shadow-md mt-10"
+    >
+      <div
+        class="relative mx-4 mt-4 flex flex-col gap-4 overflow-hidden rounded-none bg-transparent bg-clip-border text-gray-700 shadow-none md:flex-row md:items-center"
+      >
+        {#
+        <div class="w-max rounded-lg bg-gray-900 p-5 text-white">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+            aria-hidden="true"
+            class="h-6 w-6"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M6.429 9.75L2.25 12l4.179 2.25m0-4.5l5.571 3 5.571-3m-11.142 0L2.25 7.5 12 2.25l9.75 5.25-4.179 2.25m0 0L21.75 12l-4.179 2.25m0 0l4.179 2.25L12 21.75 2.25 16.5l4.179-2.25m11.142 0l-5.571 3-5.571-3"
+            ></path>
+          </svg>
+        </div>
+        #}
+        <div>
+          {#
+          <h6
+            class="block font-sans text-base font-semibold leading-relaxed tracking-normal text-blue-gray-900 antialiased"
+          >
+            Classement
+          </h6>
+          #}
+          <p
+            class="block max-w-sm font-sans text-sm font-normal leading-normal text-gray-700 antialiased"
+          >
+            Visualisez l'évolution de votre classement sur l'année en cours.
+          </p>
+        </div>
+      </div>
+      <div class="pt-6 px-2 pb-0">
+        <div id="bar-chart"></div>
+      </div>
     </div>
-  </div>
 
-  <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
-  <script>
-  const chartConfig = {
-    series: [
-      {
-        name: "Classement",
-        data: [
-        // {{ januaryRank[0].value | default('null')}},
-          {{ monthlyRanks[1][0].value | default('null') }},
-          {{ monthlyRanks[2][0].value | default('null') }},
-          {{ monthlyRanks[3][0].value | default('null')}},
-          {{ monthlyRanks[4][0].value | default('null') }},
-          {{ monthlyRanks[5][0].value | default('null') }},
-          {{ monthlyRanks[6][0].value | default('null') }},
-          {{ monthlyRanks[7][0].value | default('null') }},
-          {{ monthlyRanks[8][0].value | default('null')}},
-          {{ monthlyRanks[9][0].value | default('null') }},
-          {{ monthlyRanks[10][0].value | default('null') }},
-          {{ monthlyRanks[11][0].value | default('null') }},
-          {{ monthlyRanks[12][0].value | default('null') }},
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    <script>
+      const chartConfig = {
+        series: [
+          {
+            name: "Classement",
+            data: [
+            // {{ januaryRank[0].value | default('null')}},
+              {{ monthlyRanks[1][0].value | default('null') }},
+              {{ monthlyRanks[2][0].value | default('null') }},
+              {{ monthlyRanks[3][0].value | default('null')}},
+              {{ monthlyRanks[4][0].value | default('null') }},
+              {{ monthlyRanks[5][0].value | default('null') }},
+              {{ monthlyRanks[6][0].value | default('null') }},
+              {{ monthlyRanks[7][0].value | default('null') }},
+              {{ monthlyRanks[8][0].value | default('null')}},
+              {{ monthlyRanks[9][0].value | default('null') }},
+              {{ monthlyRanks[10][0].value | default('null') }},
+              {{ monthlyRanks[11][0].value | default('null') }},
+              {{ monthlyRanks[12][0].value | default('null') }},
+            ],
+
+          },
         ],
-        
-      },
-    ],
-    chart: {
-      type: "bar",
-      height: 240,
-      toolbar: {
-        show: false,
-      },
-    },
-    title: {
-      show: "Suivi de votre classement",
-    },
-    dataLabels: {
-      enabled: false,
-    },
-    colors: ["#15803d"],
-    plotOptions: {
-      bar: {
-        columnWidth: "40%",
-        borderRadius: 2,
-      },
-    },
-    xaxis: {
-      axisTicks: {
-        show: false,
-      },
-      axisBorder: {
-        show: false,
-      },
-      labels: {
-        style: {
-          colors: "#616161",
-          fontSize: "12px",
-          fontFamily: "inherit",
-          fontWeight: 400,
+        chart: {
+          type: "bar",
+          height: 240,
+          toolbar: {
+            show: false,
+          },
         },
-      },
-      categories: [
-        "Janvier",
-        "Février",
-        "Mars",
-        "Avril",
-        "Mai",
-        "Juin",
-        "Juillet",
-        "Août",
-        "Septembre",
-        "Octobre",
-        "Novembre",
-        "Décembre"
-      ],
-    },
-    yaxis: {
-      labels: {
-        formatter: function (value) {
-          const rankings = ["40","30/5", "30/4", "30/3", "30/2", "30/1","30","15/5", "15/4", "15/3", "15/2", "15/1", "15", 
-          "5/6", "4/6", "3/6", "2/6", "1/6","0", "-2/6", "-4/6", "-15"
-          ];
-          return rankings[value - 1]; // Ajuste les valeurs en fonction de ton tableau
+        title: {
+          show: "Suivi de votre classement",
         },
-        style: {
-          colors: "#616161",
-          fontSize: "12px",
-          fontFamily: "inherit",
-          fontWeight: 400,
+        dataLabels: {
+          enabled: false,
         },
-      },
-    },
-    grid: {
-      show: true,
-      borderColor: "#dddddd",
-      strokeDashArray: 5,
-      xaxis: {
-        lines: {
+        colors: ["#15803d"],
+        plotOptions: {
+          bar: {
+            columnWidth: "40%",
+            borderRadius: 2,
+          },
+        },
+        xaxis: {
+          axisTicks: {
+            show: false,
+          },
+          axisBorder: {
+            show: false,
+          },
+          labels: {
+            style: {
+              colors: "#616161",
+              fontSize: "12px",
+              fontFamily: "inherit",
+              fontWeight: 400,
+            },
+          },
+          categories: [
+            "Janvier",
+            "Février",
+            "Mars",
+            "Avril",
+            "Mai",
+            "Juin",
+            "Juillet",
+            "Août",
+            "Septembre",
+            "Octobre",
+            "Novembre",
+            "Décembre"
+          ],
+        },
+        yaxis: {
+          labels: {
+            formatter: function (value) {
+              const rankings = ["40","30/5", "30/4", "30/3", "30/2", "30/1","30","15/5", "15/4", "15/3", "15/2", "15/1", "15",
+              "5/6", "4/6", "3/6", "2/6", "1/6","0", "-2/6", "-4/6", "-15"
+              ];
+              return rankings[value - 1]; // Ajuste les valeurs en fonction de ton tableau
+            },
+            style: {
+              colors: "#616161",
+              fontSize: "12px",
+              fontFamily: "inherit",
+              fontWeight: 400,
+            },
+          },
+        },
+        grid: {
           show: true,
+          borderColor: "#dddddd",
+          strokeDashArray: 5,
+          xaxis: {
+            lines: {
+              show: true,
+            },
+          },
+          padding: {
+            top: 5,
+            right: 20,
+          },
         },
-      },
-      padding: {
-        top: 5,
-        right: 20,
-      },
-    },
-    fill: {
-      opacity: 0.8,
-    },
-    tooltip: {
-      theme: "dark",
-    },
-  };
-  
-  const chart = new ApexCharts(document.querySelector("#bar-chart"), chartConfig);
-  
-  chart.render();
-  </script>
+        fill: {
+          opacity: 0.8,
+        },
+        tooltip: {
+          theme: "dark",
+        },
+      };
+
+      const chart = new ApexCharts(document.querySelector("#bar-chart"), chartConfig);
+
+      chart.render();
+    </script>
   </div>
-
-  
 </div>
-
-
 
 {% endblock %}
