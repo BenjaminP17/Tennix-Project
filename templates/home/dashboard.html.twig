@@ -25,10 +25,10 @@
             <div class="w-full text-center mt-20">
               <div class="flex justify-center lg:pt-4 pt-8 pb-0">
                 <div class="p-3 text-center">
-                  {% for key in currentRank %}
-                  <span class="text-xl font-bold block tracking-wide text-slate-700">Retraité</span>
-                  {% endfor %}
-                  <span class="text-sm text-slate-400">Classement</span>
+        
+                    <span class="text-xl font-bold block tracking-wide text-slate-700">{{ranksMapping[currentRank[0].value] | default('-') }}</span>
+                  
+                    <span class="text-sm text-slate-400">Classement</span>
                 </div>
                 
                 {# {{app.user.ranking}}  #}

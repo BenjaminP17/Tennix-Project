@@ -69,7 +69,7 @@ class RankingController extends AbstractController
             return $this->redirectToRoute('app_ranking');
 
         }
-        
+
         return $this->render(
             'ranking/rank.html.twig', [
             'monthlyRanks' => $monthlyRanks,

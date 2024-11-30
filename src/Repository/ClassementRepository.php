@@ -53,4 +53,23 @@ class ClassementRepository extends ServiceEntityRepository
             ->getResult();
     }
 
+    
+
+    public function currentRank($user)
+    {
+        $currentYear = date('Y'); 
+        $currentMonth = date('m'); 
+
+        return $this->createQueryBuilder('v')
+            ->select('v.value')
+            ->where('v.user = :user')
+            ->andWhere('YEAR(v.date) = :year')
+            ->andWhere('MONTH(v.date) = :month')
+            ->setParameter('year', $currentYear)
+            ->setParameter('month', $currentMonth)
+            ->setParameter('user', $user)
+            ->getQuery()
+            ->getResult();
+    }
+
 }
