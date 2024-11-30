@@ -72,4 +72,16 @@ class ClassementRepository extends ServiceEntityRepository
             ->getResult();
     }
 
+
+    public function highestRank($user)
+    {
+        return $this->createQueryBuilder('v')
+            ->select('MAX(v.value)')
+            ->where('v.user = :user')
+            ->setParameter('user', $user)
+            ->getQuery()
+            ->getResult();
+
+    }
+
 }

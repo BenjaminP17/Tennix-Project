@@ -67,6 +67,10 @@ class DashboardController extends AbstractController
         ];
 
         $currentRank = $classementRepository->currentRank($user);
+        $highestRank = $classementRepository->highestRank($user);
+
+        // dd($highestRank);
+        // dd($currentRank);
 
         return $this->render('home/dashboard.html.twig', [
             'victoires' => $allUserVictoriesCurrentYear,
@@ -76,7 +80,9 @@ class DashboardController extends AbstractController
             'nextTournament' => $nextTournament,
             'allMatchs' => $allUserMatchsPlayedCurrentYear,
             'currentRank' => $currentRank,
-            'ranksMapping' => $ranksMapping 
+            'highestRank' => $highestRank,
+            'ranksMapping' => $ranksMapping
+            
         ]);
     }
 
