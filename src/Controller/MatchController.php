@@ -15,72 +15,62 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class MatchController extends AbstractController
 {
-    #[Route('/matchs', name: 'app_matchs', methods: ['GET'])]
-    public function allMatchsUserCurrentAndSelectedYear(
+    #[Route('/matchs', name: 'app_matchs', methods: ['GET','POST'])]
+    public function ShowAllMatchsUserAndAdd(
     RencontreRepository $RencontreRepository,
     PaginatorInterface $paginator,
-    Request $request
+    Request $request,
+    EntityManagerInterface $em
     ): Response
     {
-    // Création du formulaire
+
+    $user = $this->getUser();
+    // Sélection par année
     $form = $this->createForm(ShowByYearType::class);
     $form->handleRequest($request);
 
-    // Si une année est sélectionnée
+    
     if ($form->isSubmitted() && $form->isValid()) {
         $year = $form->get('year')->getData();
-        // Récupérer les rencontres filtrées par l'année
-        $data = $RencontreRepository->findBySelectedYear($year);
+        
+        $data = $RencontreRepository->findBySelectedYear($year, $user);
     } else {
-        // Si aucune année sélectionnée, récupérer toutes les rencontres
-        $data = $RencontreRepository->findByCurrentYear();
+        
+        $data = $RencontreRepository->findByCurrentYear($user);
     }
 
     $rencontres = $paginator->paginate(
         $data,
-        $request->query->getInt('page', 1), 7
-    );
+        $request->query->getInt('page', 1), 10);
+
+    //Création d'une rencontre    
+    $rencontre = new Rencontre();
+
+    $user = $this->getUser();
+
+    $rencontre->setUser($user);
+
+    $addMatchform = $this->createForm(NewMatchFormType::class, $rencontre);
+    $addMatchform->handleRequest($request);
+
+    if ($addMatchform->isSubmitted() && $addMatchform->isValid()) {
+        
+        $em->persist($rencontre);
+        $em->flush();
+
+        $this->addFlash('success', 'Votre match est désormais consultable dans votre palmarès');
+
+        return $this->redirectToRoute('app_matchs');
+    }
 
     return $this->render('match/matchs.html.twig', [
         'rencontres' => $rencontres,
         'form' => $form->createView(), 
+        'matchForm' => $addMatchform->createView(),
     ]);
     }
 
 
-    #[Route('/matchs/ajout', name: 'app_matchs_add')]
-    public function addMatch(
-        Request $request,
-        EntityManagerInterface $em
-        ): Response
-    {
-        $rencontre = new Rencontre();
-
-        $user = $this->getUser();
-
-        $rencontre->setUser($user);
-
-        $form = $this->createForm(NewMatchFormType::class, $rencontre);
-        $form->handleRequest($request);
-
-        
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            
-            $em->persist($rencontre);
-            $em->flush();
-
-            $this->addFlash('success', 'Votre match est désormais consultable dans votre palmarès');
-
-            return $this->redirectToRoute('app_matchs');
-        }
-
-        return $this->render('Form/_add_match_form.html.twig', [
-            'matchForm' => $form->createView(),
-        ]);
-    }
-
-    
     #[Route('/matchs/supprimer/{id}', name: 'app_matchs_delete')]
     public function deleteMatch (
         Rencontre $rencontre,

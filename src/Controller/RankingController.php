@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Classement;
 use App\Form\AddNewRankType;
+use App\Form\ShowByYearType;
 use App\Repository\ClassementRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -22,11 +23,34 @@ class RankingController extends AbstractController
     {
         $user = $this->getUser();
 
-        $monthlyRanks = [];
-        for ($month = 1; $month <= 12; $month++) {
-            $monthlyRanks[$month] = $classementRepository->findByCurrentYearAndMonth($user, $month);
+        // $monthlyRanks = [];
+        // for ($month = 1; $month <= 12; $month++) {
+        //     $monthlyRanks[$month] = $classementRepository->findByCurrentYearAndMonth($user, $month);
+        // }
+
+        $selectYearForm = $this->createForm(ShowByYearType::class);
+        $selectYearForm->handleRequest($request);
+
+        
+        if ($selectYearForm->isSubmitted() && $selectYearForm->isValid()) {
+            $year = $selectYearForm->get('year')->getData();
+            
+            $monthlyRanks = [];
+            for ($month = 1; $month <= 12; $month++) {
+                $monthlyRanks[$month] = $classementRepository->findBySelectedYear($year, $user, $month);
+            }
+
+        } else {
+            
+            $monthlyRanks = [];
+            for ($month = 1; $month <= 12; $month++) {
+                $monthlyRanks[$month] = $classementRepository->findByCurrentYearAndMonth($user, $month);
+            }
         }
 
+        
+
+        //Form ajout de classement
         $classement = new Classement();
 
         $form = $this->createForm(AddNewRankType::class, $classement);
@@ -45,11 +69,12 @@ class RankingController extends AbstractController
             return $this->redirectToRoute('app_ranking');
 
         }
-        
+
         return $this->render(
             'ranking/rank.html.twig', [
             'monthlyRanks' => $monthlyRanks,
-            'form' => $form->createView()
+            'form' => $form->createView(),
+            'selectYearForm' => $selectYearForm->createView(),
         ]);
 
     }

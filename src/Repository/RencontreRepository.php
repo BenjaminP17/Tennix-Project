@@ -31,24 +31,28 @@ class RencontreRepository extends ServiceEntityRepository
        ;
    }
 
-    public function findBySelectedYear($year)
+    public function findBySelectedYear($year, $user)
     {
         return $this->createQueryBuilder('r')
             ->where('YEAR(r.date) = :year')
+            ->andwhere('r.user = :user')
             ->setParameter('year', $year)
+            ->setParameter('user', $user)
             ->orderBy('r.date', 'DESC')
             ->getQuery()
             ->getResult();
     }
 
-    public function findByCurrentYear()
+    public function findByCurrentYear($user)
     {
 
     $currentYear = date('Y');
 
     return $this->createQueryBuilder('r')
         ->where('YEAR(r.date) = :year')
+        ->andwhere('r.user = :user')
         ->setParameter('year', $currentYear)
+        ->setParameter('user', $user)
         ->orderBy('r.date', 'DESC')
         ->getQuery()
         ->getResult();

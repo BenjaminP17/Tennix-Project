@@ -21,33 +21,20 @@ class ClassementRepository extends ServiceEntityRepository
         parent::__construct($registry, Classement::class);
     }
 
-    public function findBySelectedYear($year)
+    public function findBySelectedYear($year, $user, $month)
     {
         return $this->createQueryBuilder('r')
             ->where('YEAR(r.date) = :year')
+            ->andwhere('r.user = :user')
+            ->andWhere('MONTH(r.date) = :month')
             ->setParameter('year', $year)
+            ->setParameter('user', $user)
+            ->setParameter('month', $month)
             ->orderBy('r.date', 'DESC')
             ->getQuery()
             ->getResult();
     }
 
-
-    // public function findByCurrentYearAndMonth($user)
-    // {
-
-    //     $currentYear = date('Y');
-        
-    //     return $this->createQueryBuilder('v')
-    //         ->select('v.value') 
-    //         ->where('v.user = :user')
-    //         ->andWhere('YEAR(v.date) = :year')
-    //         ->setParameter('year', $currentYear)
-    //         ->setParameter('user', $user)
-    //         ->orderBy('MONTH(v.date)', 'ASC')
-    //         ->addOrderBy('v.date', 'ASC')
-    //         ->getQuery()
-    //         ->getResult();
-    // }
 
     public function findByCurrentYearAndMonth($user, $month)
     {
@@ -64,6 +51,37 @@ class ClassementRepository extends ServiceEntityRepository
             ->setParameter('month', $month)
             ->getQuery()
             ->getResult();
+    }
+
+    
+
+    public function currentRank($user)
+    {
+        $currentYear = date('Y'); 
+        $currentMonth = date('m'); 
+
+        return $this->createQueryBuilder('v')
+            ->select('v.value')
+            ->where('v.user = :user')
+            ->andWhere('YEAR(v.date) = :year')
+            ->andWhere('MONTH(v.date) = :month')
+            ->setParameter('year', $currentYear)
+            ->setParameter('month', $currentMonth)
+            ->setParameter('user', $user)
+            ->getQuery()
+            ->getResult();
+    }
+
+
+    public function highestRank($user)
+    {
+        return $this->createQueryBuilder('v')
+            ->select('MAX(v.value)')
+            ->where('v.user = :user')
+            ->setParameter('user', $user)
+            ->getQuery()
+            ->getResult();
+
     }
 
 }

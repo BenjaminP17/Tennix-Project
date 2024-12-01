@@ -18,24 +18,26 @@ class AddNewRankType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
+        $currentYear = date('Y');
+
         $builder
         ->add('date', ChoiceType::class, [
             'label' => ' ',
             'choices' => [
-                'janvier' => new DateTime('2024-01-01'),
-                'Février' => new DateTime('2024-02-01'),
-                'Mars' => new DateTime('2024-03-01'),
-                'Avril' => new DateTime('2024-04-01'),
-                'Mai' => new DateTime('2024-05-01'),
-                'Juin' => new DateTime('2024-06-01'),
-                'Juillet' => new DateTime('2024-07-01'),
-                'Août' => new DateTime('2024-08-01'),
-                'Septembre' => new DateTime('2024-09-01'),
-                'Octobre' => new DateTime('2024-10-01'),
-                'Novembre' => new DateTime('2024-11-01'),
-                'Décembre' => new DateTime('2024-12-01'),
+                '-' => '',
+                'janvier' => new DateTime($currentYear . '-01-01'),
+                'février' => new DateTime($currentYear . '-02-01'),
+                'mars' => new DateTime($currentYear . '-03-01'),
+                'avril' => new DateTime($currentYear . '-04-01'),
+                'mai' => new DateTime($currentYear . '-05-01'),
+                'juin' => new DateTime($currentYear . '-06-01'),
+                'juillet' => new DateTime($currentYear . '-07-01'),
+                'août' => new DateTime($currentYear . '-08-01'),
+                'septembre' => new DateTime($currentYear . '-09-01'),
+                'octobre' => new DateTime($currentYear . '-10-01'),
+                'novembre' => new DateTime($currentYear . '-11-01'),
+                'décembre' => new DateTime($currentYear . '-12-01'),
             ],
-            
             
         ])
         ->add('value', ChoiceType::class, [
