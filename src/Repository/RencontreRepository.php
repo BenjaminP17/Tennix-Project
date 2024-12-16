@@ -123,5 +123,20 @@ class RencontreRepository extends ServiceEntityRepository
 
     }
 
+    public function getAllUserMatchsResults($user)
+    {
+        $currentYear = (new \DateTime())->format('Y');
+
+        return $this->createQueryBuilder('r')
+            ->select('r.resultat')
+            ->Where('YEAR(r.date) = :currentYear')
+            ->andWhere('r.user = :user')
+            ->setParameter('currentYear', $currentYear)
+            ->setParameter('user', $user)
+            ->orderBy('r.date', 'DESC')
+            ->getQuery()
+            ->getResult();
+    }
+
     
 }

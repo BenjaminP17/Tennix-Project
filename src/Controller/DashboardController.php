@@ -41,6 +41,10 @@ class DashboardController extends AbstractController
 
         $nextTournament = $this->userNextTournament($tournamentRepo, $user);
 
+        $consecutivesVictories = $this->countConsecutivesVictories($rencontreRepository, $user);
+
+        dd($consecutivesVictories);
+
         $ranksMapping = [
             1 => '40',
             2 => '30/5',
@@ -68,9 +72,6 @@ class DashboardController extends AbstractController
 
         $currentRank = $classementRepository->currentRank($user);
         $highestRank = $classementRepository->highestRank($user);
-
-        // dd($highestRank);
-        // dd($currentRank);
 
         return $this->render('home/dashboard.html.twig', [
             'victoires' => $allUserVictoriesCurrentYear,
@@ -119,6 +120,28 @@ class DashboardController extends AbstractController
     {
         return $classementRepository->findBy(['user'=> $user], ['date'=>'DESC'], 1);
     }
+
+
+    private function countConsecutivesVictories (RencontreRepository $rencontreRepository, $user)
+    {
+        $allUserMatchsResultsCurrentYear = $rencontreRepository->getAllUserMatchsResults($user);
+      
+        $consecutiveWins = 0;
+
+        foreach ($allUserMatchsResultsCurrentYear as $result) {
+            if ($result['resultat'] === 'Victoire') {
+                $consecutiveWins++;
+            } else {
+                // Arrêter le comptage dès qu'une autre valeur apparaît
+                break;
+            }
+        }
+    
+        return $consecutiveWins;
+        
+    }
+
+
     
     #[Route('/profil/edit', name: 'edit_profil', methods: ['GET', 'POST'])]
     public function editProfil(
