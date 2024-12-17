@@ -43,7 +43,7 @@ class DashboardController extends AbstractController
 
         $consecutivesVictories = $this->countConsecutivesVictories($rencontreRepository, $user);
 
-        dd($consecutivesVictories);
+        // dd($consecutivesVictories);
 
         $ranksMapping = [
             1 => '40',
@@ -82,7 +82,8 @@ class DashboardController extends AbstractController
             'allMatchs' => $allUserMatchsPlayedCurrentYear,
             'currentRank' => $currentRank,
             'highestRank' => $highestRank,
-            'ranksMapping' => $ranksMapping
+            'ranksMapping' => $ranksMapping,
+            'consecutivesVictories' => $consecutivesVictories
             
         ]);
     }
