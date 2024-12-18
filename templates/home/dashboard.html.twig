@@ -54,7 +54,7 @@
 
           </div>
 
-          <h2 class="text-2xl font-semibold mb-2 text-gray-800 text-center mb-5">Prochaine(s) Compétition(s)</h2>
+          <h2 class="text-2xl font-semibold mb-5 text-gray-800 text-center">Prochaine(s) Compétition(s)</h2>
 
           <div class="bg-gray-200 p-4 mb-5 rounded-lg shadow-md overflow-y-scroll max-h-80">
               {% if nextTournament != null %}
@@ -78,10 +78,10 @@
       </div>
 
       <!-- 2eme bloc - Stats -->
-      <div class="md:col-span-1 shadow-lg rounded-xl bg-white shadow-lg md:mt-10">
+      <div class="md:col-span-1 shadow-lg rounded-xl bg-white md:mt-10">
 
         <div class="mx-auto max-w-7xl px-4 py-6">
-          <h2 class="tracking-tight text-2xl font-bold"> Stats </h2>
+          <h2 class="tracking-tight text-2xl font-bold">Stats</h2>
         </div>
 
         <!-- circular bar  -->
@@ -94,13 +94,13 @@
                 <svg class="w-32 h-32 transform translate-x-1 translate-y-1" x-cloak aria-hidden="true">
                   <circle class="text-gray-300" stroke-width="10" stroke="currentColor" fill="transparent" r="50"
                     cx="60" cy="60" />
-                  <circle class="text-blue-600" stroke-width="10" :stroke-dasharray="circumference"
+                  <circle class="text-green-600" stroke-width="10" :stroke-dasharray="circumference"
                     :stroke-dashoffset="circumference - percent / 100 * circumference" stroke-linecap="round"
                     stroke="currentColor" fill="transparent" r="50" cx="60" cy="60" />
                 </svg>
-                <span class="absolute text-2xl text-blue-700" x-text="`${percent}%`"></span>
+                <span class="absolute text-2xl text-green-600" x-text="`${percent}%`"></span>
               </div>
-              <p class="ml-10 font-medium text-gray-600">% de victoire</p>
+              <p class="ml-10 font-medium text-gray-600">% de victoires</p>
             </div>
           </div>
 
@@ -140,38 +140,38 @@
       </div>
 
       <!-- 3eme bloc - dernière rencontre -->
-      <div class="md:col-span-1 shadow-lg rounded-xl bg-white shadow-lg">
+      <div class="md:col-span-1 shadow-lg rounded-xl bg-white">
         
         <div class="mx-auto max-w-7xl px-4 py-6 border-b border-gray-300">
-          <h2 class="tracking-tight text-2xl font-bold "> Dernier match </h2>
+          <h2 class="tracking-tight text-2xl font-bold">Dernier match</h2>
         </div>
 
         {% if lastMatch != null %}
         {% for key in lastMatch %}
         <div class="bg-white p-4 md:mt-10">
-          <div class="flex justify-between mb-2">
-            <div class="text-gray-600 underline">{{ key.date|date("d/m/Y", "Europe/Paris") }}</div>
-          </div>
-          <div class="flex justify-between  mb-2">
-            <div class="text-gray-600">Tournoi :</div>
+          {# <div class="flex justify-between mb-2">
+            <div class="text-gray-600">{{ key.date|date("d/m/Y", "Europe/Paris") }}</div>
+          </div> #}
+          <div class="flex justify-between mb-2 bg-gray-50 px-2">
+            <div class="text-gray-600">Tournoi</div>
             <div class="text-gray-800 font-bold">{{key.competition}}</div>
           </div>
           
-          <div class="flex justify-between  mb-2">
-            <div class="text-gray-600">Adversaire :</div>
+          <div class="flex justify-between mb-2  px-2">
+            <div class="text-gray-600">Adversaire</div>
             <div class="text-gray-800 font-bold">{{key.Adversaire}}</div>
           </div>
           
-          <div class="flex justify-between  mb-2">
-            <div class="text-gray-600">Classement :</div>
+          <div class="flex justify-between mb-2 bg-gray-50 px-2">
+            <div class="text-gray-600">Classement</div>
             <div class="text-gray-800 font-bold">{{key.classement}}</div>
           </div>
-          <div class="flex justify-between  mb-2">
-            <div class="text-gray-600">Score :</div>
+          <div class="flex justify-between mb-2  px-2">
+            <div class="text-gray-600">Score</div>
             <div class="text-gray-800 font-bold">{{key.score}}</div>
           </div>
-          <div class="flex justify-between  mb-2">
-            <div class="text-gray-600">Résultat :</div>
+          <div class="flex justify-between mb-2 bg-gray-50 px-2">
+            <div class="text-gray-600">Résultat</div>
             <div class="text-green-600 font-bold {% if key.resultat == 'Victoire'%}text-green-500{% elseif key.resultat == 'Défaite' %}text-red-500{% endif %}">{{key.resultat}}</div>
           </div>
           {% endfor %}
