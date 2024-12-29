@@ -88,11 +88,6 @@
 
       <!-- 2eme bloc - Stats -->
       <div class="md:col-span-1 shadow-lg rounded-xl bg-white md:mt-10">
-
-        {# <div class="mx-auto max-w-7xl px-4 py-6">
-          <h2 class="tracking-tight text-2xl font-bold">Stats</h2>
-        </div> #}
-
         <div class="mx-auto max-w-7xl px-4 py-6">
           <h2 class="flex items-center tracking-tight text-2xl font-bold">
             Stats
@@ -159,11 +154,6 @@
 
       <!-- 3eme bloc - dernière rencontre -->
       <div class="md:col-span-1 shadow-lg rounded-xl bg-white">
-        
-        {# <div class="mx-auto max-w-7xl px-4 py-6 border-b border-gray-300">
-          <h2 class="tracking-tight text-2xl font-bold">Dernier match</h2>
-        </div> #}
-
         <div class="mx-auto max-w-7xl px-4 py-6 border-b border-gray-300">
           <h2 class="flex items-center tracking-tight text-2xl font-bold">
             Dernier Match
@@ -175,7 +165,7 @@
 
         {% if lastMatch != null %}
         {% for key in lastMatch %}
-        <div class="bg-white p-4 md:mt-10">
+        <div class="bg-white p-8 rounded-xl md:mt-10">
           {# <div class="flex justify-between mb-2">
             <div class="text-gray-600">{{ key.date|date("d/m/Y", "Europe/Paris") }}</div>
           </div> #}
@@ -212,7 +202,5 @@
     </div>
   </main>
 </div>
-
-
 
 {% endblock %}
