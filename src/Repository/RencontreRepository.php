@@ -58,21 +58,6 @@ class RencontreRepository extends ServiceEntityRepository
         ->getResult();
     }
     
-   
-    // public function AllVictoriesCurrentYear()
-    // {
-    //     $currentYear = (new \DateTime())->format('Y');  
-
-    //     return $this->createQueryBuilder('r')
-    //         ->select('COUNT(r.id) AS victoryCount')
-    //         ->where('r.resultat = :result')  
-    //         ->andWhere('YEAR(r.date) = :currentYear')
-    //         ->setParameter('result', 'Victoire')
-    //         ->setParameter('currentYear', $currentYear)
-    //         ->getQuery()
-    //         ->getSingleScalarResult();
-    // }
-
     public function AllVictoriesCurrentYear($user)
     {
         $currentYear = (new \DateTime())->format('Y');  
@@ -121,6 +106,21 @@ class RencontreRepository extends ServiceEntityRepository
             ->getSingleScalarResult();
 
 
+    }
+
+    public function getAllUserMatchsResults($user)
+    {
+        $currentYear = (new \DateTime())->format('Y');
+
+        return $this->createQueryBuilder('r')
+            ->select('r.resultat')
+            ->Where('YEAR(r.date) = :currentYear')
+            ->andWhere('r.user = :user')
+            ->setParameter('currentYear', $currentYear)
+            ->setParameter('user', $user)
+            ->orderBy('r.date', 'DESC')
+            ->getQuery()
+            ->getResult();
     }
 
     
