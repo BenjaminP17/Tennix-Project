@@ -43,8 +43,6 @@ class DashboardController extends AbstractController
 
         $consecutivesVictories = $this->countConsecutivesVictories($rencontreRepository, $user);
 
-        // dd($consecutivesVictories);
-
         $ranksMapping = [
             1 => '40',
             2 => '30/5',
@@ -68,10 +66,13 @@ class DashboardController extends AbstractController
             20 => '-2/6',
             21 => '-4/6',
             22 => '-15',
+            23 => '-30',
         ];
 
         $currentRank = $classementRepository->currentRank($user);
         $highestRank = $classementRepository->highestRank($user);
+
+        // dd($highestRank);
 
         return $this->render('home/dashboard.html.twig', [
             'victoires' => $allUserVictoriesCurrentYear,
