@@ -49,25 +49,28 @@ class RankingController extends AbstractController
         }
 
         
-
-        //Form ajout de classement
         $classement = new Classement();
 
         $form = $this->createForm(AddNewRankType::class, $classement);
         $form->handleRequest($request);
 
-        
         if ($form->isSubmitted() && $form->isValid()) {
-            
-            $user = $this->getUser(); 
+            $user = $this->getUser();
+            $existingClassement = $classementRepository->findOneBy([
+            'user' => $user,
+            'date' => $classement->getDate(),
+            ]);
 
+            if ($existingClassement) {
+            $this->addFlash('error', 'Classement pour ce mois déjà enregistré');
+            } else {
             $classement->setUser($user);
-            
+
             $em->persist($classement);
             $em->flush();
 
             return $this->redirectToRoute('app_ranking');
-
+            }
         }
 
         return $this->render(
