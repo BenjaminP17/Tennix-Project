@@ -23,11 +23,6 @@ class RankingController extends AbstractController
     {
         $user = $this->getUser();
 
-        // $monthlyRanks = [];
-        // for ($month = 1; $month <= 12; $month++) {
-        //     $monthlyRanks[$month] = $classementRepository->findByCurrentYearAndMonth($user, $month);
-        // }
-
         $selectYearForm = $this->createForm(ShowByYearType::class);
         $selectYearForm->handleRequest($request);
 
@@ -49,25 +44,28 @@ class RankingController extends AbstractController
         }
 
         
-
-        //Form ajout de classement
         $classement = new Classement();
 
         $form = $this->createForm(AddNewRankType::class, $classement);
         $form->handleRequest($request);
 
-        
         if ($form->isSubmitted() && $form->isValid()) {
-            
-            $user = $this->getUser(); 
+            $user = $this->getUser();
+            $existingClassement = $classementRepository->findOneBy([
+            'user' => $user,
+            'date' => $classement->getDate(),
+            ]);
 
+            if ($existingClassement) {
+            $this->addFlash('error', 'Classement déjà enregistré pour ce mois');
+            } else {
             $classement->setUser($user);
-            
+
             $em->persist($classement);
             $em->flush();
 
             return $this->redirectToRoute('app_ranking');
-
+            }
         }
 
         return $this->render(

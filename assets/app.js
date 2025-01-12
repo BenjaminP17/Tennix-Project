@@ -29,3 +29,12 @@ button.addEventListener('click', () => {
         menu2.style.display = 'none';
     }
 });
+
+//Fermeture de la fenêtre "classement déjà renseigné"
+
+const close = document.getElementById('close');
+const window = document.getElementById('window');
+
+close.addEventListener('click', () => {
+    window.style.display = 'none';
+});
