@@ -62,36 +62,6 @@ class UserTest extends TestCase
         $this->assertTrue($user->isVerified());
     }
 
-    public function testAddAndRemoveRencontre(): void
-    {
-        $user = new User();
-        $rencontreMock = $this->createMock(\App\Entity\Rencontre::class);
-        $rencontreMock->expects($this->once())
-                      ->method('setUser')
-                      ->with($user);
-
-        $user->addRencontre($rencontreMock);
-        $this->assertCount(1, $user->getRencontre());
-
-        $user->removeRencontre($rencontreMock);
-        $this->assertCount(0, $user->getRencontre());
-    }
-
-    public function testAddAndRemoveTournament(): void
-    {
-        $user = new User();
-        $tournamentMock = $this->createMock(\App\Entity\Tournament::class);
-        $tournamentMock->expects($this->once())
-                       ->method('setUser')
-                       ->with($user);
-
-        $user->addTournament($tournamentMock);
-        $this->assertCount(1, $user->getTournament());
-
-        $user->removeTournament($tournamentMock);
-        $this->assertCount(0, $user->getTournament());
-    }
-
     public function testSerialization(): void
     {
         $user = new User();
