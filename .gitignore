@@ -8,6 +8,8 @@
 /public/bundles/
 /var/
 /vendor/
+/public/images/user/*
+
 ###< symfony/framework-bundle ###
 
 ###> phpunit/phpunit ###
