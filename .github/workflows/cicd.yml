@@ -26,6 +26,12 @@ jobs:
         with:
           php-version: "8.1"
 
+      - name: Copy .env.test to .env
+        run: cp .env.test .env
+
+      - name: Clear Symfony cache
+        run: php bin/console cache:clear
+
       - name: Install Composer dependencies
         run: composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
 
