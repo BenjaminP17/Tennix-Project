@@ -12,14 +12,14 @@ use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\HttpFoundation\File\File;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 use Symfony\Component\Validator\Constraints as Assert;
-use Serializable;
+
 
 
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[Vich\Uploadable]
 #[UniqueEntity(fields: ['email'], message: 'There is already an account with this email')]
-class User implements UserInterface, PasswordAuthenticatedUserInterface, \Serializable
+class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -345,24 +345,20 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, \Serial
         return $this->imageSize;
     }
 
-    // permet de corriger l'erreur : "file/file is not allowed"
-    // ne pas oublier d'ajouter Serializable à la class user (en haut de la page, ligne 19)
-    public function serialize(): string
+    public function __serialize(): array
     {
-        return serialize([
-            $this->id,
-            $this->email,
-            $this->password,
-        ]);
+        return [
+            'id' => $this->id,
+            'email' => $this->email,
+            'password' => $this->password,
+        ];
     }
-    
-    public function unserialize(string $serialized): void
+
+    public function __unserialize(array $data): void
     {
-        [
-            $this->id,
-            $this->email,
-            $this->password,
-        ] = unserialize($serialized);
+        $this->id = $data['id'];
+        $this->email = $data['email'];
+        $this->password = $data['password'];
     }
 
     /**
